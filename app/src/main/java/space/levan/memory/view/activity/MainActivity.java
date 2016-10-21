@@ -97,10 +97,10 @@ public class MainActivity extends AppCompatActivity implements OnGetBookInfoList
             if(intentResult.getContents() == null) {
                 Toast.makeText(this,"内容为空", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(this,"扫描成功",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"扫描成功",Toast.LENGTH_SHORT).show();
                 // ScanResult 为 获取到的字符串
                 String ScanResult = intentResult.getContents();
-                Toast.makeText(this, ScanResult , Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, ScanResult , Toast.LENGTH_SHORT).show();
 
                 bookInfoImplement.getBookInfo(ScanResult, this);
             }
@@ -126,6 +126,6 @@ public class MainActivity extends AppCompatActivity implements OnGetBookInfoList
     @Override
     public void onGetInfoFailure(String response)
     {
-
+        Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
     }
 }

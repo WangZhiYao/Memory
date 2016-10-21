@@ -49,7 +49,7 @@ public class GetBookInfo implements GetBookInfoImplement {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
             {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
-                listener.onGetInfoFailure("");
+                listener.onGetInfoFailure("没有查询到此书的相关信息，请手动输入");
             }
         });
     }
