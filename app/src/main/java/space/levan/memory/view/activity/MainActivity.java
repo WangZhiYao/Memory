@@ -1,12 +1,13 @@
 package space.levan.memory.view.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -22,7 +23,7 @@ import space.levan.memory.bean.Book2;
 import space.levan.memory.dao.BookDao;
 import space.levan.memory.implement.GetBookInfoImplement;
 import space.levan.memory.model.OnGetBookInfoListener;
-import space.levan.memory.util.GetBookInfo;
+import space.levan.memory.model.GetBookInfo;
 
 /**
  * 主界面
@@ -31,6 +32,8 @@ import space.levan.memory.util.GetBookInfo;
  */
 public class MainActivity extends AppCompatActivity implements OnGetBookInfoListener {
 
+    @Bind(R.id.iv_image)
+    ImageView mIvImage;
     @Bind(R.id.et_bookName)
     EditText mEtBookName;
     @Bind(R.id.et_bookAuthor)
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements OnGetBookInfoList
 
                 customScan();
                 break;
+
             case R.id.btn_insert:
                 String bookName = mEtBookName.getText().toString();
                 String bookAuthor = mEtBookAuthor.getText().toString();
@@ -121,10 +125,23 @@ public class MainActivity extends AppCompatActivity implements OnGetBookInfoList
         mEtBookName.setText(strings[0]);
         mEtBookAuthor.setText(strings[1]);
         mEtBookPublisher.setText(strings[2]);
+        bookInfoImplement.getBookImg(strings[3], this);
     }
 
     @Override
     public void onGetInfoFailure(String response)
+    {
+        Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onGetImgSuccess(Bitmap bitmap)
+    {
+        mIvImage.setImageBitmap(bitmap);
+    }
+
+    @Override
+    public void onGetImgFailure(String response)
     {
         Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
     }

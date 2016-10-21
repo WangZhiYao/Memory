@@ -15,6 +15,7 @@ import com.loopj.android.http.RequestParams;
 public class Client {
 
     private static AsyncHttpClient client =new AsyncHttpClient();
+    private static AsyncHttpClient httpsClient = new AsyncHttpClient(true, 80, 443);
 
     static
     {
@@ -48,7 +49,7 @@ public class Client {
     //下载数据使用，会返回byte数据
     public static void get(String uString, BinaryHttpResponseHandler bHandler)
     {
-        client.get(uString, bHandler);
+        httpsClient.get(uString, bHandler);
     }
 
     public static AsyncHttpClient getClient()

@@ -11,4 +11,5 @@ import space.levan.memory.model.OnGetBookInfoListener;
 public interface GetBookInfoImplement {
 
     void getBookInfo(String urlString, OnGetBookInfoListener listener);
+    void getBookImg(String urlString, OnGetBookInfoListener listener);
 }

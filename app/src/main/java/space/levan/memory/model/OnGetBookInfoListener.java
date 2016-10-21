@@ -1,5 +1,7 @@
 package space.levan.memory.model;
 
+import android.graphics.Bitmap;
+
 /**
  * 获取图书信息listener
  *
@@ -10,4 +12,6 @@ public interface OnGetBookInfoListener {
 
     void onGetInfoSuccess(String response);
     void onGetInfoFailure(String response);
+    void onGetImgSuccess(Bitmap bitmap);
+    void onGetImgFailure(String response);
 }
