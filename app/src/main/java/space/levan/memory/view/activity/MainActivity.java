@@ -12,26 +12,24 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
-import java.io.IOException;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import space.levan.memory.R;
-import space.levan.memory.bean.Book;
+import space.levan.memory.bean.Book2;
 import space.levan.memory.dao.BookDao;
-import space.levan.memory.util.HtmlParse;
+import space.levan.memory.implement.GetBookInfoImplement;
+import space.levan.memory.model.OnGetBookInfoListener;
+import space.levan.memory.util.GetBookInfo;
 
 /**
  * 主界面
  *
  * Created by WangZhiYao on 2016/10/20.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnGetBookInfoListener {
 
     @Bind(R.id.et_bookName)
     EditText mEtBookName;
@@ -40,8 +38,9 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.et_bookPublisher)
     EditText mEtBookPublisher;
 
-    private List<Book> bookList;
-    private BookDao bookDao;
+    private List<Book2> mBook2List;
+    private GetBookInfoImplement bookInfoImplement;
+    private BookDao mBookDao;
 
     @OnClick({R.id.btn_bookURL, R.id.btn_insert})
     public void onClick(View view)
@@ -49,21 +48,7 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId())
         {
             case R.id.btn_bookURL:
-                //String bookURL = mEtBookURL.getText().toString().trim();
-                //String bookURL = "http://product.dangdang.com/1900596580.html";
-                //try{
-                //    Document document = Jsoup.connect(bookURL).userAgent("Mozilla").get();
-                //    Log.w("WZY",document.getElementsByTag("meta").get(1).attr("content") + "," +
-                //    document.select("img[wsrc$=.jpg]").attr("wsrc") + ",");
 
-
-                //} catch (IOException e) {
-                //    e.printStackTrace();
-                //}
-                //Document doc = Jsoup.parse("<html><head><meta http-equiv=\"refresh\" " +
-                //        "content=\"0;url=http://www.abc.com/event\"/></head></html>");
-                //String content = doc.getElementsByTag("meta").get(0).attr("content");
-                //Log.w("WZY", content.split("=")[1]);
                 customScan();
                 break;
             case R.id.btn_insert:
@@ -71,9 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 String bookAuthor = mEtBookAuthor.getText().toString();
                 String bookPublisher = mEtBookPublisher.getText().toString();
 
-                Book book = new Book(bookName, bookAuthor, bookPublisher);
-                bookDao.insert(book);
-                //bookList.add(book);
+                Book2 mBook2 = new Book2(bookName, bookAuthor, bookPublisher);
+
+                Log.w("WZY", mBook2.getTitle() + mBook2.getAuthor() + mBook2.getPublisher());
+                mBookDao.insert(mBook2);
+                mBook2List.add(mBook2);
                 break;
         }
     }
@@ -85,18 +72,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                .detectDiskReads().detectDiskWrites().detectNetwork()
-                .penaltyLog().build());
-        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                .detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
-                .penaltyLog().penaltyDeath().build());
+        bookInfoImplement = new GetBookInfo();
+        mBookDao = new BookDao(this);
 
-        bookDao = new BookDao(this);
-        bookList = bookDao.queryAll();
-        for (Book list : bookList)
+        mBook2List = mBookDao.queryAll();
+        for (Book2 list : mBook2List)
         {
-            Log.w("onMainAct", list.getBookName() +","+ list.getBookAuthor() + "," + list.getBookPublisher());
+            Log.w("onMainAct", list.getTitle() +","+ list.getAuthor() + "," + list.getPublisher());
         }
     }
 
@@ -104,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     {
         new IntentIntegrator(this)
                 .setOrientationLocked(false)
-                .setCaptureActivity(ScanActivity.class) // 设置自定义的activity是CustomActivity
+                .setCaptureActivity(ScanActivity.class)
                 .initiateScan(); // 初始化扫描
     }
 
@@ -119,9 +101,31 @@ public class MainActivity extends AppCompatActivity {
                 // ScanResult 为 获取到的字符串
                 String ScanResult = intentResult.getContents();
                 Toast.makeText(this, ScanResult , Toast.LENGTH_SHORT).show();
+
+                bookInfoImplement.getBookInfo(ScanResult, this);
             }
         } else {
             super.onActivityResult(requestCode,resultCode,data);
         }
+    }
+
+    @Override
+    public void onGetInfoSuccess(String response)
+    {
+        String[] strings = response.split(",");
+
+        for (int i = 0; i < strings.length; i++)
+        {
+            Log.w("WZY", strings[i]);
+        }
+        mEtBookName.setText(strings[0]);
+        mEtBookAuthor.setText(strings[1]);
+        mEtBookPublisher.setText(strings[2]);
+    }
+
+    @Override
+    public void onGetInfoFailure(String response)
+    {
+
     }
 }
