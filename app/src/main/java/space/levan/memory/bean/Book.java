@@ -58,6 +58,14 @@ public class Book {
         super();
     }
 
+    public Book(String bookName, String bookAuthor, String bookPublisher)
+    {
+        super();
+        this.bookName = bookName;
+        this.bookAuthor = bookAuthor;
+        this.bookPublisher = bookPublisher;
+    }
+
     public Book(Long id, String bookName, String bookAuthor, String bookPublisher)
     {
         super();
