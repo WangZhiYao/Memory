@@ -24,18 +24,19 @@ import space.levan.memory.R;
 public class ScanActivity extends AppCompatActivity
         implements DecoratedBarcodeView.TorchListener {
 
-    @BindView(R.id.btn_switch)
+   /*@BindView(R.id.btn_switch)
     Button mBtSwitch;
     @BindView(R.id.dbv_custom)
-    DecoratedBarcodeView mDbvCustom;
+    DecoratedBarcodeView mDbvCustom;*/
 
+    private DecoratedBarcodeView mDbvCustom;
+    private Button mBtSwitch;
     private CaptureManager captureManager;
     private boolean isLightOn = false;
 
     // 点击切换闪光灯
     @OnClick(R.id.btn_switch)
-    public void onClick()
-    {
+    public void onClick() {
         if (isLightOn) {
             mDbvCustom.setTorchOff();
         } else {
@@ -44,17 +45,18 @@ public class ScanActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
         ButterKnife.bind(this);
 
+
+        mDbvCustom = (DecoratedBarcodeView) findViewById(R.id.dbv_custom);
+        mBtSwitch = (Button) findViewById(R.id.btn_switch);
         mDbvCustom.setTorchListener(this);
 
         // 如果没有闪光灯功能，就去掉相关按钮
-        if (!hasFlash())
-        {
+        if (!hasFlash()) {
             mBtSwitch.setVisibility(View.GONE);
         }
 
@@ -66,57 +68,49 @@ public class ScanActivity extends AppCompatActivity
 
     // torch 手电筒
     @Override
-    public void onTorchOn()
-    {
+    public void onTorchOn() {
         Toast.makeText(this, "torch on", Toast.LENGTH_LONG).show();
         isLightOn = true;
     }
 
     @Override
-    public void onTorchOff()
-    {
+    public void onTorchOff() {
         Toast.makeText(this, "torch off", Toast.LENGTH_LONG).show();
         isLightOn = false;
     }
 
     // 判断是否有闪光灯功能
-    private boolean hasFlash()
-    {
+    private boolean hasFlash() {
         return getApplicationContext().getPackageManager()
                 .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
         captureManager.onPause();
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         captureManager.onResume();
     }
 
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
         captureManager.onDestroy();
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState)
-    {
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
         captureManager.onSaveInstanceState(outState);
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         return mDbvCustom.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
     }
 }

@@ -7,4 +7,7 @@
     <dimen name="login_margin_horizontal">64dp</dimen>
     <integer name="home_span_count">2</integer>
     <integer name="gallery_span_count">3</integer>
+
+    <dimen name="app_bar_height">240dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

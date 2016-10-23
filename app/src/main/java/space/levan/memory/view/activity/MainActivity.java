@@ -1,18 +1,9 @@
 package space.levan.memory.view.activity;
 
-import android.animation.ValueAnimator;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.util.LogWriter;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,22 +12,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.PopupWindow;
+import android.widget.Toast;
 
-import com.journeyapps.barcodescanner.CaptureActivity;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import space.levan.memory.R;
-import space.levan.memory.utils.common.KeyBoardUtils;
-import space.levan.memory.utils.common.ScreenUtils;
-import space.levan.memory.view.holder.SearchViewHolder;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private PopupWindow mPopupWindow;
-    private SearchViewHolder holder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -106,6 +90,7 @@ public class MainActivity extends BaseActivity
         if (id == R.id.action_search)
         {
             //showSearchView();
+            customScan();
             return true;
         }
 
@@ -120,8 +105,11 @@ public class MainActivity extends BaseActivity
         switch (item.getItemId())
         {
             case R.id.nav_camera:
+                //customScan();
                 break;
             case R.id.nav_gallery:
+                Intent i = new Intent(MainActivity.this, BookDetailActivity.class);
+                startActivity(i);
                 break;
             case R.id.nav_slideshow:
                 break;
@@ -136,5 +124,30 @@ public class MainActivity extends BaseActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void customScan()
+    {
+        new IntentIntegrator(this)
+                .setOrientationLocked(false)
+                .setCaptureActivity(ScanActivity.class) // 设置自定义的activity是CustomActivity
+                .initiateScan(); // 初始化扫描
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
+        if(intentResult != null) {
+            if(intentResult.getContents() == null) {
+                Toast.makeText(this,"内容为空", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this,"扫描成功",Toast.LENGTH_LONG).show();
+                // ScanResult 为 获取到的字符串
+                String ScanResult = intentResult.getContents();
+                Toast.makeText(this, ScanResult , Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            super.onActivityResult(requestCode,resultCode,data);
+        }
     }
 }
