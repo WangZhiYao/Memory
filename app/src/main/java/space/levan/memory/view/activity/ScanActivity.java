@@ -12,23 +12,21 @@ import android.widget.Toast;
 import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import space.levan.memory.R;
 
 /**
- * 二维码扫描
- *
- * Created by WangZhiYao on 2016/10/21.
+ * Created by WangZhiYao on 2016/10/22.
  */
 
 public class ScanActivity extends AppCompatActivity
         implements DecoratedBarcodeView.TorchListener {
 
-    @Bind(R.id.btn_switch)
+    @BindView(R.id.btn_switch)
     Button mBtSwitch;
-    @Bind(R.id.dbv_custom)
+    @BindView(R.id.dbv_custom)
     DecoratedBarcodeView mDbvCustom;
 
     private CaptureManager captureManager;

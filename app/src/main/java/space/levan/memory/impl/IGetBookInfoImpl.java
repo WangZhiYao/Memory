@@ -1,4 +1,4 @@
-package space.levan.memory.implement;
+package space.levan.memory.impl;
 
 import space.levan.memory.model.OnGetBookInfoListener;
 
@@ -8,7 +8,7 @@ import space.levan.memory.model.OnGetBookInfoListener;
  * Created by WangZhiYao on 2016/10/21.
  */
 
-public interface GetBookInfoImplement {
+public interface IGetBookInfoImpl {
 
     void getBookInfo(String urlString, OnGetBookInfoListener listener);
     void getBookImg(String urlString, OnGetBookInfoListener listener);

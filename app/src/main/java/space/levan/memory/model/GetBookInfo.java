@@ -14,8 +14,7 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 import space.levan.memory.api.MemoryApi;
 import space.levan.memory.bean.Book;
-import space.levan.memory.implement.GetBookInfoImplement;
-import space.levan.memory.model.OnGetBookInfoListener;
+import space.levan.memory.impl.IGetBookInfoImpl;
 
 /**
  * 利用豆瓣API查询ISBN码对应图书信息
@@ -23,7 +22,7 @@ import space.levan.memory.model.OnGetBookInfoListener;
  * Created by WangZhiYao on 2016/10/20.
  */
 
-public class GetBookInfo implements GetBookInfoImplement {
+public class GetBookInfo implements IGetBookInfoImpl {
 
     private Book book;
 

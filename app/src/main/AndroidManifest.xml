@@ -3,20 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="space.levan.memory">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-
-
-
     <application
+        android:name=".BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.MainActivity">
+        android:theme="@style/Theme.AppCompat.DayNight">
+        <activity
+            android:name=".view.activity.SplashActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:theme="@style/AppTheme.DayNight.NoActionBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,10 +22,21 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.activity.ScanActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.DayNight.NoActionBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+        </activity>
+
+        <activity
+            android:name=".view.activity.ScanActivity"
+            android:theme="@style/AppTheme.DayNight.NoActionBar"
             android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation"/>
+            tools:replace="screenOrientation" >
+        </activity>
+
     </application>
 
 </manifest>

@@ -1,148 +1,140 @@
 package space.levan.memory.view.activity;
 
+import android.animation.ValueAnimator;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.util.LogWriter;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.PopupWindow;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
+import com.journeyapps.barcodescanner.CaptureActivity;
 
-import java.util.List;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import space.levan.memory.R;
-import space.levan.memory.bean.Book2;
-import space.levan.memory.dao.BookDao;
-import space.levan.memory.implement.GetBookInfoImplement;
-import space.levan.memory.model.OnGetBookInfoListener;
-import space.levan.memory.model.GetBookInfo;
+import space.levan.memory.utils.common.KeyBoardUtils;
+import space.levan.memory.utils.common.ScreenUtils;
+import space.levan.memory.view.holder.SearchViewHolder;
 
-/**
- * 主界面
- *
- * Created by WangZhiYao on 2016/10/20.
- */
-public class MainActivity extends AppCompatActivity implements OnGetBookInfoListener {
+public class MainActivity extends BaseActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-    @Bind(R.id.iv_image)
-    ImageView mIvImage;
-    @Bind(R.id.et_bookName)
-    EditText mEtBookName;
-    @Bind(R.id.et_bookAuthor)
-    EditText mEtBookAuthor;
-    @Bind(R.id.et_bookPublisher)
-    EditText mEtBookPublisher;
-
-    private List<Book2> mBook2List;
-    private GetBookInfoImplement bookInfoImplement;
-    private BookDao mBookDao;
-
-    @OnClick({R.id.btn_bookURL, R.id.btn_insert})
-    public void onClick(View view)
-    {
-        switch (view.getId())
-        {
-            case R.id.btn_bookURL:
-
-                customScan();
-                break;
-
-            case R.id.btn_insert:
-                String bookName = mEtBookName.getText().toString();
-                String bookAuthor = mEtBookAuthor.getText().toString();
-                String bookPublisher = mEtBookPublisher.getText().toString();
-
-                Book2 mBook2 = new Book2(bookName, bookAuthor, bookPublisher);
-
-                Log.w("WZY", mBook2.getTitle() + mBook2.getAuthor() + mBook2.getPublisher());
-                mBookDao.insert(mBook2);
-                mBook2List.add(mBook2);
-                break;
-        }
-    }
+    private PopupWindow mPopupWindow;
+    private SearchViewHolder holder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        bookInfoImplement = new GetBookInfo();
-        mBookDao = new BookDao(this);
-
-        mBook2List = mBookDao.queryAll();
-        for (Book2 list : mBook2List)
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener()
         {
-            Log.w("onMainAct", list.getTitle() +","+ list.getAuthor() + "," + list.getPublisher());
-        }
-    }
-
-    public void customScan()
-    {
-        new IntentIntegrator(this)
-                .setOrientationLocked(false)
-                .setCaptureActivity(ScanActivity.class)
-                .initiateScan(); // 初始化扫描
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
-        if(intentResult != null) {
-            if(intentResult.getContents() == null) {
-                Toast.makeText(this,"内容为空", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(this,"扫描成功",Toast.LENGTH_SHORT).show();
-                // ScanResult 为 获取到的字符串
-                String ScanResult = intentResult.getContents();
-                //Toast.makeText(this, ScanResult , Toast.LENGTH_SHORT).show();
-
-                bookInfoImplement.getBookInfo(ScanResult, this);
+            @Override
+            public void onClick(View view)
+            {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
+        });
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void initEvents()
+    {
+
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onActivityResult(requestCode,resultCode,data);
+            super.onBackPressed();
         }
     }
 
     @Override
-    public void onGetInfoSuccess(String response)
+    public boolean onCreateOptionsMenu(Menu menu)
     {
-        String[] strings = response.split(",");
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
-        for (int i = 0; i < strings.length; i++)
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_search)
         {
-            Log.w("WZY", strings[i]);
+            //showSearchView();
+            return true;
         }
-        mEtBookName.setText(strings[0]);
-        mEtBookAuthor.setText(strings[1]);
-        mEtBookPublisher.setText(strings[2]);
-        bookInfoImplement.getBookImg(strings[3], this);
+
+        return super.onOptionsItemSelected(item);
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public void onGetInfoFailure(String response)
+    public boolean onNavigationItemSelected(MenuItem item)
     {
-        Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
-    }
+        // Handle navigation view item clicks here.
+        switch (item.getItemId())
+        {
+            case R.id.nav_camera:
+                break;
+            case R.id.nav_gallery:
+                break;
+            case R.id.nav_slideshow:
+                break;
+            case R.id.nav_manage:
+                break;
+            case R.id.nav_share:
+                break;
+            case R.id.nav_send:
+                break;
+        }
 
-    @Override
-    public void onGetImgSuccess(Bitmap bitmap)
-    {
-        mIvImage.setImageBitmap(bitmap);
-    }
-
-    @Override
-    public void onGetImgFailure(String response)
-    {
-        Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
