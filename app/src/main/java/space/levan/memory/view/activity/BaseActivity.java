@@ -16,7 +16,6 @@ import android.view.WindowManager;
 import space.levan.memory.BaseApplication;
 import space.levan.memory.R;
 import space.levan.memory.common.Constant;
-import space.levan.memory.utils.SystemBarTintManager;
 import space.levan.memory.utils.common.SPUtils;
 import space.levan.memory.utils.common.UIUtils;
 
@@ -57,10 +56,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     {
         initData();
         initEvents();
-        if (isInitSystemBar())
-        {
-            initSystemBar(this);
-        }
     }
 
     /***
@@ -86,21 +81,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         return mToolbar;
     }
 
-    private void initSystemBar(Activity activity)
-    {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-        {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            {
-                setTranslucentStatus(activity, true);
-            }
-            SystemBarTintManager tintManager = new SystemBarTintManager(activity);
-            tintManager.setStatusBarTintEnabled(true);
-            // 使用颜色资源
-            tintManager.setStatusBarTintResource(getStatusColor());
-        }
-    }
-
     @Override
     public void setContentView(@LayoutRes int layoutResID)
     {
@@ -121,6 +101,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      *
      * @return ID
      */
+
+    /*
     protected int getStatusColor()
     {
         if (SPUtils.getPrefBoolean(Constant.THEME_MODEL, false)) {
@@ -143,7 +125,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
-    }
+    }*/
 
     /**
      * 菜单按钮初始化

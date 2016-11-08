@@ -43,6 +43,8 @@ public class UIUtils {
      * @param content 分享内容
      * @param uri     分享图片uri
      */
+
+    /*
     public static void share(Context context, String content, Uri uri)
     {
         Intent shareIntent = new Intent();
@@ -57,5 +59,5 @@ public class UIUtils {
         }
         shareIntent.putExtra(Intent.EXTRA_TEXT, content);
         context.startActivity(Intent.createChooser(shareIntent, context.getString(R.string.share_dialog_title)));
-    }
+    }*/
 }
