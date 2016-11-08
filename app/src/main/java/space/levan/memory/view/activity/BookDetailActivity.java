@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.uniquestudio.lowpoly.LowPoly;
 
 import space.levan.memory.R;
 
@@ -25,7 +24,7 @@ import space.levan.memory.R;
 
 public class BookDetailActivity extends BaseActivity {
 
-    private String strImage = "https://img3.doubanio.com/lpic/s27389271.jpg";
+    private String strImage = "https://img3.doubanio.com/lpic/s9127731.jpg";
     private ImageView iv_book_img;
     private ImageView iv_book_bg;
 
@@ -60,7 +59,7 @@ public class BookDetailActivity extends BaseActivity {
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation)
                     {
                         iv_book_img.setImageBitmap(resource);
-                        iv_book_bg.setImageBitmap(LowPoly.generate(resource, 5));
+                        iv_book_bg.setImageBitmap(resource);
                     }
                 });
     }
@@ -68,7 +67,7 @@ public class BookDetailActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_book_detail, menu);
         return true;
     }
 
@@ -80,7 +79,7 @@ public class BookDetailActivity extends BaseActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
+        if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);

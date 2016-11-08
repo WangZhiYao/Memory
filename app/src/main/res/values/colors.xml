@@ -6,4 +6,5 @@
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="black_overlay">#66000000</color>
+    <color name="book_title_mask">#80000000</color>
 </resources>
