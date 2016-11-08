@@ -1,6 +1,5 @@
 package space.levan.memory.view.activity;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +18,8 @@ import com.uniquestudio.lowpoly.LowPoly;
 import space.levan.memory.R;
 
 /**
+ * 图书详情
+ *
  * Created by WangZhiYao on 2016/10/23.
  */
 

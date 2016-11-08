@@ -17,6 +17,8 @@ import butterknife.OnClick;
 import space.levan.memory.R;
 
 /**
+ * 二维码，条形码扫描
+ *
  * Created by WangZhiYao on 2016/10/22.
  */
 

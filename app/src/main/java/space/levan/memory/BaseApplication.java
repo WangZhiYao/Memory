@@ -11,6 +11,8 @@ import java.util.ListIterator;
 import space.levan.memory.view.activity.BaseActivity;
 
 /**
+ * Base
+ *
  * Created by WangZhiYao on 2016/10/22.
  */
 

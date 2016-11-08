@@ -1,10 +1,8 @@
 package space.levan.memory.utils.common;
 
 import android.content.Context;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.PopupWindow;
 
 /**
  * Created by WangZhiYao on 2016/10/23.

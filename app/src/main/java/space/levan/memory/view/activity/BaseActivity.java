@@ -1,8 +1,5 @@
 package space.levan.memory.view.activity;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -10,16 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 
 import space.levan.memory.BaseApplication;
 import space.levan.memory.R;
-import space.levan.memory.common.Constant;
-import space.levan.memory.utils.common.SPUtils;
 import space.levan.memory.utils.common.UIUtils;
 
 /**
+ * Base
+ *
  * Created by WangZhiYao on 2016/10/22.
  */
 
@@ -94,38 +89,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
     }
-
-    /**
-     * 状态栏的颜色
-     * 子类可以通过复写这个方法来修改状态栏颜色
-     *
-     * @return ID
-     */
-
-    /*
-    protected int getStatusColor()
-    {
-        if (SPUtils.getPrefBoolean(Constant.THEME_MODEL, false)) {
-            return R.color.colorPrimaryDarkNight;
-        } else {
-            return R.color.colorPrimaryDark;
-        }
-    }
-
-    @TargetApi(19)
-    protected void setTranslucentStatus(Activity activity, boolean on)
-    {
-        Window win = activity.getWindow();
-        WindowManager.LayoutParams winParams = win.getAttributes();
-
-        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        if (on) {
-            winParams.flags |= bits;
-        } else {
-            winParams.flags &= ~bits;
-        }
-        win.setAttributes(winParams);
-    }*/
 
     /**
      * 菜单按钮初始化

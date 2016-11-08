@@ -8,6 +8,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 /**
+ * 网络状态工具类
+ *
  * Created by WangZhiYao on 2016/10/22.
  */
 

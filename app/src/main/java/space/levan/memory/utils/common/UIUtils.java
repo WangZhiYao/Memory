@@ -2,10 +2,8 @@ package space.levan.memory.utils.common;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 
 import space.levan.memory.BaseApplication;
-import space.levan.memory.R;
 import space.levan.memory.view.activity.BaseActivity;
 
 /**
