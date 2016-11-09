@@ -87,11 +87,13 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search)
+        switch (id)
         {
-            //showSearchView();
-            customScan();
-            return true;
+            case R.id.action_search:
+                break;
+            case R.id.action_scan:
+                customScan();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -130,8 +132,8 @@ public class MainActivity extends BaseActivity
     {
         new IntentIntegrator(this)
                 .setOrientationLocked(false)
-                .setCaptureActivity(ScanActivity.class) // 设置自定义的activity是CustomActivity
-                .initiateScan(); // 初始化扫描
+                .setCaptureActivity(ScanActivity.class)
+                .initiateScan();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -141,7 +143,7 @@ public class MainActivity extends BaseActivity
             if(intentResult.getContents() == null) {
                 Toast.makeText(this,"内容为空", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(this,"扫描成功",Toast.LENGTH_LONG).show();
+                //Toast.makeText(this,"扫描成功",Toast.LENGTH_LONG).show();
                 // ScanResult 为 获取到的字符串
                 String ScanResult = intentResult.getContents();
                 Toast.makeText(this, ScanResult , Toast.LENGTH_SHORT).show();
