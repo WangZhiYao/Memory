@@ -33,8 +33,15 @@ public class MainActivity extends BaseActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -103,6 +110,8 @@ public class MainActivity extends BaseActivity
                 //customScan();
                 break;
             case R.id.nav_gallery:
+                Intent i = new Intent(MainActivity.this, BookDetailActivity.class);
+                startActivity(i);
                 break;
             case R.id.nav_slideshow:
                 break;
@@ -134,10 +143,10 @@ public class MainActivity extends BaseActivity
             if(intentResult.getContents() == null) {
                 Toast.makeText(this,"内容为空", Toast.LENGTH_LONG).show();
             } else {
+                //Toast.makeText(this,"扫描成功",Toast.LENGTH_LONG).show();
+                // ScanResult 为 获取到的字符串
                 String ScanResult = intentResult.getContents();
-                Intent i = new Intent(MainActivity.this, BookDetailActivity.class);
-                i.putExtra("ScanResult",ScanResult);
-                startActivity(i);
+                Toast.makeText(this, ScanResult , Toast.LENGTH_SHORT).show();
             }
         } else {
             super.onActivityResult(requestCode,resultCode,data);

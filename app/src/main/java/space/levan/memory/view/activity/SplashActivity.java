@@ -32,11 +32,15 @@ public class SplashActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mPvLogo = (ParticleView) findViewById(R.id.pv_logo);
-        mPvLogo.setOnParticleAnimListener(() ->
+        mPvLogo.setOnParticleAnimListener(new ParticleView.ParticleAnimListener()
         {
-            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-            SplashActivity.this.startActivity(intent);
-            SplashActivity.this.finish();
+            @Override
+            public void onAnimationEnd()
+            {
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                SplashActivity.this.startActivity(intent);
+                SplashActivity.this.finish();
+            }
         });
 
         mPvLogo.startAnim();
