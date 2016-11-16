@@ -30,7 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activity = this;
         ((BaseApplication) UIUtils.getContext()).addActivity(this);
-        init();
+        //init();
     }
 
     @Override
@@ -47,24 +47,21 @@ public abstract class BaseActivity extends AppCompatActivity {
         activity = null;
     }
 
-    private void init()
+    /*private void init()
     {
         initData();
         initEvents();
-    }
+    }*/
 
     /***
      * 初始化事件（监听事件等事件绑定）
      */
-    protected abstract void initEvents();
+    /*protected abstract void initEvents();*/
 
     /**
      * 绑定数据
      */
-    protected void initData()
-    {
-
-    }
+    /*protected void initData() {}*/
 
     /**
      * 获取toolbar

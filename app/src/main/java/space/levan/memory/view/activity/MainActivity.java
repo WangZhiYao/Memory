@@ -28,20 +28,13 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //setSupportActionBar(toolbar);
+        //getSupportActionBar().setHomeButtonEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -51,12 +44,6 @@ public class MainActivity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    @Override
-    protected void initEvents()
-    {
-
     }
 
     @Override
@@ -110,8 +97,6 @@ public class MainActivity extends BaseActivity
                 //customScan();
                 break;
             case R.id.nav_gallery:
-                Intent i = new Intent(MainActivity.this, BookDetailActivity.class);
-                startActivity(i);
                 break;
             case R.id.nav_slideshow:
                 break;
@@ -141,12 +126,15 @@ public class MainActivity extends BaseActivity
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
         if(intentResult != null) {
             if(intentResult.getContents() == null) {
-                Toast.makeText(this,"内容为空", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.content_null, Toast.LENGTH_LONG).show();
             } else {
                 //Toast.makeText(this,"扫描成功",Toast.LENGTH_LONG).show();
                 // ScanResult 为 获取到的字符串
+                //Toast.makeText(this, ScanResult , Toast.LENGTH_SHORT).show();
                 String ScanResult = intentResult.getContents();
-                Toast.makeText(this, ScanResult , Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(MainActivity.this, BookDetailActivity.class);
+                i.putExtra("ScanResult",ScanResult);
+                startActivity(i);
             }
         } else {
             super.onActivityResult(requestCode,resultCode,data);
