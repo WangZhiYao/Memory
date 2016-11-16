@@ -1,5 +1,6 @@
 package space.levan.memory.view.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -46,29 +47,6 @@ public class BookDetailActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        fab.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        Glide.with(this)
-                .load(strImage)
-                .asBitmap()
-                .into(new SimpleTarget<Bitmap>()
-                {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation)
-                    {
-                        mIvBookImg.setImageBitmap(resource);
-                        mIvBookBg.setImageBitmap(resource);
-                    }
-                });
     }
 
     @Override
@@ -98,6 +76,24 @@ public class BookDetailActivity extends BaseActivity {
     @Override
     protected void initEvents()
     {
+        Intent getIntent = getIntent();
+        final String mScanResult = getIntent.getStringExtra("ScanResult");
 
+
+        fab.setOnClickListener(view -> Snackbar.make(view, mScanResult, Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
+
+        Glide.with(this)
+                .load(strImage)
+                .asBitmap()
+                .into(new SimpleTarget<Bitmap>()
+                {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation)
+                    {
+                        mIvBookImg.setImageBitmap(resource);
+                        mIvBookBg.setImageBitmap(resource);
+                    }
+                });
     }
 }
