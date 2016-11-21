@@ -139,7 +139,7 @@ public class BookDetailActivity extends BaseActivity implements IBookDetailView 
         mBookISBN13 = mBook.get("bookISBN13").toString();
         mBookAuthor = mBook.get("bookAuthor").toString().replace("[","").replace("]","");
         mBookPubDate = mBook.get("bookPubDate").toString();
-        mBookSummary = mBook.get("bookSummary").toString();
+        mBookSummary = mBook.get("bookSummary").toString().replaceAll("    ","　　");
         mBookPublisher = mBook.get("bookPublisher").toString();
         mBookTranslator = mBook.get("bookTranslator").toString().replace("[","").replace("]","");
 
@@ -149,7 +149,7 @@ public class BookDetailActivity extends BaseActivity implements IBookDetailView 
         mTvBookPubDate.setText("出版日期：" + mBookPubDate);
         mTvBookPublisher.setText("出版社："+mBookPublisher);
         mTvBookIsbn.setText("ISBN：" + mBookISBN13);
-        mTvBookSummary.setText("简介：\n" + mBookSummary);
+        mTvBookSummary.setText("简介：\n　　" + mBookSummary);
 
         Glide.with(this)
                 .load(mBookImg)
