@@ -47,6 +47,11 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
+    protected void initEvents() {
+
+    }
+
+    @Override
     public void onBackPressed()
     {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

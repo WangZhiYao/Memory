@@ -1,5 +1,7 @@
 package space.levan.memory.api.view;
 
+import java.util.HashMap;
+
 /**
  * Created by WangZhiYao on 2016/10/22.
  */
@@ -12,5 +14,5 @@ public interface IBookDetailView {
 
     void hideProgress();
 
-    void updateView(Object result);
+    void updateView(HashMap<String, Object> mBook);
 }
