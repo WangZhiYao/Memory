@@ -48,6 +48,7 @@ public class BookDetailModelImpl implements IBookDetailModel {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
             {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
+                listener.Failure("未找到该图书信息！");
             }
         });
     }

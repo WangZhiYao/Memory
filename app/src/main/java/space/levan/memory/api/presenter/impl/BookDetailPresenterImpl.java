@@ -33,11 +33,11 @@ public class BookDetailPresenterImpl implements IBookDetailPresenter, ApiComplet
         if (!NetworkUtils.isConnected(UIUtils.getContext()))
         {
             mBookDetailView.showMessage(UIUtils.getContext().getString(R.string.poor_network));
-            mBookDetailView.hideProgress();
+            //mBookDetailView.hideProgress();
+        } else {
+            mBookDetailView.showProgress();
+            mBookDetailModel.getBookDetail(urlString, this);
         }
-
-        mBookDetailView.showProgress();
-        mBookDetailModel.getBookDetail(urlString, this);
     }
 
     @Override
