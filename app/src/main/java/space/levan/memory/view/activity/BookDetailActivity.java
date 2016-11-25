@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import space.levan.memory.R;
 import space.levan.memory.api.presenter.impl.BookDetailPresenterImpl;
 import space.levan.memory.api.view.IBookDetailView;
+import space.levan.memory.utils.common.Blur;
 
 /**
  * 图书详情
@@ -143,7 +144,7 @@ public class BookDetailActivity extends BaseActivity implements IBookDetailView 
         mBookPublisher = mBook.get("bookPublisher").toString();
         mBookTranslator = mBook.get("bookTranslator").toString().replace("[","").replace("]","");
 
-        mCollapsingLayout.setTitle("《" + mBookTitle + "》");
+        mCollapsingLayout.setTitle(mBookTitle);
         mTvBookAuthor.setText("作者：" + mBookAuthor);
         mTvBookTranslator.setText("译者：" + mBookTranslator);
         mTvBookPubDate.setText("出版日期：" + mBookPubDate);
@@ -160,7 +161,7 @@ public class BookDetailActivity extends BaseActivity implements IBookDetailView 
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation)
                     {
                         mIvBookImg.setImageBitmap(resource);
-                        mIvBookBg.setImageBitmap(resource);
+                        mIvBookBg.setImageBitmap(Blur.apply(resource));
                     }
                 });
 

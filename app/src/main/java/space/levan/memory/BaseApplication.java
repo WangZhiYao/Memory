@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import space.levan.memory.view.activity.BaseActivity;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Base
@@ -39,6 +40,16 @@ public class BaseApplication extends Application {
         activities = new LinkedList<>();
         application = this;
         mainTid = android.os.Process.myTid();
+        initTypeFace();
+    }
+
+    private void initTypeFace()
+    {
+        CalligraphyConfig calligraphyConfig =new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/PMingLiU.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build();
+        CalligraphyConfig.initDefault(calligraphyConfig);
     }
 
     /**

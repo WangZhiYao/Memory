@@ -11,7 +11,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="320dp"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -21,9 +21,9 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginBottom="16dp"
+            app:expandedTitleMarginBottom="21dp"
             app:expandedTitleMarginStart="24dp"
-
+            app:expandedTitleTextAppearance="?android:attr/textAppearanceMedium"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
