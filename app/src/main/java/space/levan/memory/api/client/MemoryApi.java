@@ -9,18 +9,12 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class MemoryApi {
 
-    private static String DOUBAN_ISBN = "https://api.douban.com/v2/book/isbn/";
-    private static String DOUBAN_BOOK = "https://api.douban.com/v2/book/search";
+    private static String DouBan_BOOK = "https://api.douban.com/v2/book/search";
+    //private static String fields = "title,author,translator,publisher,pubdate,summary,pages,price,isbn13,images";
 
-    public static void getBookDetail(String strISBN, AsyncHttpResponseHandler handler)
+    public static void getBookList(String KeyWords, int start, int count, String fields, JsonHttpResponseHandler handler)
     {
-        String urlString = DOUBAN_ISBN + strISBN;
-        Client.get(urlString, handler);
-    }
-
-    public static void getBookList(String KeyWords, int start, int count, JsonHttpResponseHandler handler)
-    {
-        String urlString = DOUBAN_BOOK + "?q=" + KeyWords + "&start=" + start + "&count=" + count;
+        String urlString = DouBan_BOOK + "?q=" + KeyWords + "&start=" + start + "&count=" + count + "&fields=" + fields;
         Client.get(urlString, handler);
     }
 }

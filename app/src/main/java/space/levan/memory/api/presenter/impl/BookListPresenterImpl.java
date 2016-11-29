@@ -1,53 +1,76 @@
 package space.levan.memory.api.presenter.impl;
 
+import space.levan.memory.BaseApplication;
 import space.levan.memory.R;
 import space.levan.memory.api.ApiCompleteListener;
 import space.levan.memory.api.model.IBookListModel;
 import space.levan.memory.api.model.impl.BookListModelImpl;
 import space.levan.memory.api.presenter.IBookListPresenter;
 import space.levan.memory.api.view.IBookListView;
+import space.levan.memory.bean.http.douban.BaseResponse;
+import space.levan.memory.bean.http.douban.BookListResponse;
 import space.levan.memory.utils.common.NetworkUtils;
-import space.levan.memory.utils.common.UIUtils;
 
 /**
  * Created by WangZhiYao on 2016-11-29.
  */
 
-public class BookListPresenterImpl implements IBookListPresenter , ApiCompleteListener {
+public class BookListPresenterImpl implements IBookListPresenter, ApiCompleteListener {
 
     private IBookListView mBookListView;
-    private IBookListModel mBoolListModel;
+    private IBookListModel mBookListModel;
 
-    public BookListPresenterImpl (IBookListView mBookListView)
+    public BookListPresenterImpl(IBookListView view)
     {
-        this.mBookListView = mBookListView;
-        mBoolListModel = new BookListModelImpl();
+        mBookListView = view;
+        mBookListModel = new BookListModelImpl();
     }
 
     @Override
-    public void getBookList(String KeyWords, int start, int count)
+    public void loadBooks(String q, int start, int count, String fields)
     {
-        if (!NetworkUtils.isConnected(UIUtils.getContext()))
+        if (!NetworkUtils.isConnected(BaseApplication.getApplication()))
         {
-            mBookListView.showMessage(UIUtils.getContext().getString(R.string.poor_network));
+            mBookListView.showMessage(BaseApplication.getApplication().getString(R.string.poor_network));
+            return;
         }
-        else
+        mBookListView.showProgress();
+        mBookListModel.loadBookList(q, start, count, fields, this);
+    }
+
+    @Override
+    public void cancelLoading()
+    {
+        mBookListModel.cancelLoading();
+    }
+
+    @Override
+    public void onComplected(Object result)
+    {
+        if (result instanceof BookListResponse)
         {
-            mBookListView.showProgress();
-            mBoolListModel.getBookList(KeyWords, start, count, this);
+            int index = ((BookListResponse) result).getStart();
+            if (index == 0)
+            {
+                mBookListView.refreshData(result);
+            }
+            else
+            {
+                mBookListView.addData(result);
+            }
+
+            mBookListView.hideProgress();
         }
     }
 
     @Override
-    public void Success(Object response)
+    public void onFailed(BaseResponse msg)
     {
-        mBookListView.updateView(response);
         mBookListView.hideProgress();
-    }
-
-    @Override
-    public void Failure(String msg)
-    {
-        mBookListView.showMessage(msg);
+        if (msg == null)
+        {
+            return;
+        }
+        mBookListView.showMessage(msg.getMsg());
     }
 }

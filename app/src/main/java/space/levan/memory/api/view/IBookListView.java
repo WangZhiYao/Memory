@@ -12,5 +12,7 @@ public interface IBookListView {
 
     void hideProgress();
 
-    void updateView(Object response);
+    void refreshData(Object result);
+
+    void addData(Object result);
 }

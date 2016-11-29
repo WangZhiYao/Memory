@@ -6,5 +6,7 @@ package space.levan.memory.api.presenter;
 
 public interface IBookListPresenter {
 
-    void getBookList(String KeyWords, int start, int count);
+    void loadBooks(String q, int start, int count, String fields);
+
+    void cancelLoading();
 }
