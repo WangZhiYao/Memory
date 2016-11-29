@@ -1,10 +1,10 @@
 package space.levan.memory.api.view;
 
 /**
- * Created by WangZhiYao on 2016/10/22.
+ * Created by WangZhiYao on 2016-11-29.
  */
 
-public interface IBookDetailView {
+public interface IBookListView {
 
     void showMessage(String msg);
 

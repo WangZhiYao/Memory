@@ -1,14 +1,11 @@
 package space.levan.memory.api.presenter.impl;
 
-import java.util.HashMap;
-
 import space.levan.memory.R;
 import space.levan.memory.api.ApiCompleteListener;
 import space.levan.memory.api.model.IBookDetailModel;
 import space.levan.memory.api.model.impl.BookDetailModelImpl;
 import space.levan.memory.api.presenter.IBookDetailPresenter;
 import space.levan.memory.api.view.IBookDetailView;
-import space.levan.memory.bean.http.douban.Book;
 import space.levan.memory.utils.common.NetworkUtils;
 import space.levan.memory.utils.common.UIUtils;
 
@@ -41,17 +38,17 @@ public class BookDetailPresenterImpl implements IBookDetailPresenter, ApiComplet
     }
 
     @Override
-    public void Success(HashMap<String, Object> mBook)
+    public void Success(Object response)
     {
-        mBookDetailView.updateView(mBook);
+        mBookDetailView.updateView(response);
         mBookDetailView.hideProgress();
     }
 
     @Override
-    public void Failure(String response)
+    public void Failure(String msg)
     {
         mBookDetailView.hideProgress();
-        if (response == null) return;
-        mBookDetailView.showMessage(response);
+        if (msg == null) return;
+        mBookDetailView.showMessage(msg);
     }
 }

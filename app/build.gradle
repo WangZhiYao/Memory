@@ -3,7 +3,7 @@ apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "space.levan.memory"
         minSdkVersion 15
@@ -26,7 +26,6 @@ android {
 }
 
 retrolambda {
-    //指定将源码编译的级别，使用下列代码，会将代码编译到兼容1.6的字节码格式
     javaVersion JavaVersion.VERSION_1_6
 }
 
@@ -39,7 +38,6 @@ dependencies {
     compile 'com.android.support:design:25.0.1'
     testCompile 'junit:junit:4.12'
     compile 'com.google.code.gson:gson:2.7'
-    compile 'com.uniquestudio:lowpoly:1.0.2'
     compile 'me.wangyuwei:ParticleView:1.0.4'
     compile 'com.jakewharton:butterknife:8.4.0'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'

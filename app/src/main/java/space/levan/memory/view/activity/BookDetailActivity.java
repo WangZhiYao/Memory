@@ -132,8 +132,9 @@ public class BookDetailActivity extends BaseActivity implements IBookDetailView 
     }
 
     @Override
-    public void updateView(HashMap<String, Object> mBook)
+    public void updateView(Object response)
     {
+        /*
         Log.w("WZY", mBook.toString());
         mBookImg = mBook.get("bookImg").toString();
         mBookTitle = mBook.get("bookTitle").toString();
@@ -166,5 +167,6 @@ public class BookDetailActivity extends BaseActivity implements IBookDetailView 
                 });
 
         Log.w("WZY", "" + mBookAuthor);
+        */
     }
 }
