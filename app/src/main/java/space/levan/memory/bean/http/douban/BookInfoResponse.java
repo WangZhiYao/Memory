@@ -12,6 +12,8 @@ public class BookInfoResponse implements Serializable {
 
     public static final String serialVersionName = "bookInfo";
     private String title;
+    private String subtitle;
+    private String origin_title;
     private String publisher;
     private String[] author;
     private String[] translator;
@@ -32,6 +34,22 @@ public class BookInfoResponse implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    public String getOrigin_title() {
+        return origin_title;
+    }
+
+    public void setOrigin_title(String origin_title) {
+        this.origin_title = origin_title;
     }
 
     public String getPublisher() {

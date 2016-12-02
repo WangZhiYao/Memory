@@ -22,5 +22,6 @@
 
     <string name="content_null">内容为空</string>
     <string name="loading">加载中请稍候…</string>
+    <string name="no_brief">暂无简介。</string>
 
 </resources>

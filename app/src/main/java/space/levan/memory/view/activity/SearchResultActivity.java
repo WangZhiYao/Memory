@@ -28,7 +28,7 @@ public class SearchResultActivity extends BaseActivity
         implements IBookListView, SwipeRefreshLayout.OnRefreshListener {
 
     //private static final int PRO_LOADING_SIZE = 2;
-    private static String fields = "title,author,translator,publisher,pubdate,summary,pages,price,isbn13,images";
+    private static String fields = "title,subtitle,origin_title,author,translator,publisher,pubdate,summary,pages,price,isbn13,images";
     private static int count = 20;
     private static int page = 0;
     private static String q;
