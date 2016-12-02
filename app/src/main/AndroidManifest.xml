@@ -44,6 +44,9 @@
         <activity android:name=".view.activity.BookDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        <activity android:name=".view.activity.SearchResultActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>

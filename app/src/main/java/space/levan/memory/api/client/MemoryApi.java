@@ -1,6 +1,5 @@
 package space.levan.memory.api.client;
 
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 /**

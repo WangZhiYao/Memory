@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -136,10 +135,10 @@ public class MainActivity extends BaseActivity
                 //Toast.makeText(this,"扫描成功",Toast.LENGTH_LONG).show();
                 // ScanResult 为 获取到的字符串
                 //Toast.makeText(this, ScanResult , Toast.LENGTH_SHORT).show();
-                String ScanResult = intentResult.getContents();
-                Intent i = new Intent(MainActivity.this, BookDetailActivity.class);
-                i.putExtra("ScanResult",ScanResult);
-                startActivity(i);
+                String q = intentResult.getContents();
+                Intent intent = new Intent(this, SearchResultActivity.class);
+                intent.putExtra("q", q);
+                startActivity(intent);
             }
         } else {
             super.onActivityResult(requestCode,resultCode,data);
