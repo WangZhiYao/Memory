@@ -9,20 +9,20 @@
     tools:context=".view.activity.BookDetailActivity"
     tools:showIn="@layout/activity_book_detail">
 
+    <!--必须在最外层嵌套一个相对或绝对布局否则非滑动布局高度将被压缩-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_marginTop="15dp"
+            android:layout_margin="@dimen/activity_vertical_margin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/rl_more_info"
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:foreground="?android:selectableItemBackground">
@@ -162,23 +162,25 @@
                     android:visibility="gone" />
             </FrameLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/book_summary"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:id="@+id/tv_book_summary"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/book_summary"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/tv_book_summary"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

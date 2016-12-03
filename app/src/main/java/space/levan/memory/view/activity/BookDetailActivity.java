@@ -32,7 +32,7 @@ import space.levan.memory.utils.common.UIUtils;
 
 /**
  * 图书详情
- * <p>
+ *
  * Created by WangZhiYao on 2016/10/23.
  */
 
@@ -92,7 +92,8 @@ public class BookDetailActivity extends BaseActivity {
     @Override
     protected void initEvents()
     {
-        mBookInfoResponse = (BookInfoResponse) getIntent().getSerializableExtra(BookInfoResponse.serialVersionName);
+        mBookInfoResponse = (BookInfoResponse)
+                getIntent().getSerializableExtra(BookInfoResponse.serialVersionName);
         mCollapsingLayout.setTitle(mBookInfoResponse.getTitle());
         Bitmap book_img = getIntent().getParcelableExtra("book_img");
         if (book_img != null) {
@@ -114,7 +115,6 @@ public class BookDetailActivity extends BaseActivity {
                         }
                     });
         }
-        fab.setOnClickListener(v -> Snackbar.make(v, "click", Snackbar.LENGTH_LONG).show());
 
         mTvBookInfo.setText(mBookInfoResponse.getInfoString());
         mRlMoreInfo.setOnClickListener(view -> {
@@ -146,7 +146,7 @@ public class BookDetailActivity extends BaseActivity {
         if (mBookInfoResponse.getAuthor().length > 0) {
             mTvAuthor.setText("作者：" + mBookInfoResponse.getAuthor()[0]);
         }
-        mTvPublisher.setText("出版社" + mBookInfoResponse.getPublisher());
+        mTvPublisher.setText("出版社：" + mBookInfoResponse.getPublisher());
         if (mBookInfoResponse.getSubtitle().isEmpty()) {
             mTvSubTitle.setVisibility(View.GONE);
         }
@@ -168,21 +168,26 @@ public class BookDetailActivity extends BaseActivity {
         } else {
             mTvBookSummary.setText(UIUtils.getContext().getString(R.string.no_brief));
         }
+
+        fab.setOnClickListener(v -> Snackbar.make(v, "click", Snackbar.LENGTH_LONG).show());
     }
 
-    private int getDelayTime() {
+    private int getDelayTime()
+    {
         return new Random().nextInt(PROGRESS_DELAY_SIZE_TIME) + PROGRESS_DELAY_MIN_TIME;
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_book_detail, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.

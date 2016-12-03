@@ -70,6 +70,7 @@ public class MainActivity extends BaseActivity
         getMenuInflater().inflate(R.menu.main, menu);
         final MenuItem itemSearch = menu.findItem(R.id.action_search);
         mSearchView = (SearchView) MenuItemCompat.getActionView(itemSearch);
+        mSearchView.setQueryHint(getString(R.string.action_search));
         return true;
     }
 
