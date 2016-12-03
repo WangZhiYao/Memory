@@ -6,8 +6,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,15 +23,14 @@ import space.levan.memory.R;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private SearchView mSearchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().setHomeButtonEnabled(true);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -46,7 +47,8 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
-    protected void initEvents() {
+    protected void initEvents()
+    {
 
     }
 
@@ -66,6 +68,8 @@ public class MainActivity extends BaseActivity
     {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        final MenuItem itemSearch = menu.findItem(R.id.action_search);
+        mSearchView = (SearchView) MenuItemCompat.getActionView(itemSearch);
         return true;
     }
 
@@ -81,6 +85,7 @@ public class MainActivity extends BaseActivity
         switch (id)
         {
             case R.id.action_search:
+                setSearch();
                 break;
             case R.id.action_scan:
                 customScan();
@@ -88,6 +93,27 @@ public class MainActivity extends BaseActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setSearch()
+    {
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+        {
+            @Override
+            public boolean onQueryTextSubmit(String query)
+            {
+                Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
+                intent.putExtra("q", query);
+                startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText)
+            {
+                return false;
+            }
+        });
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -98,7 +124,6 @@ public class MainActivity extends BaseActivity
         switch (item.getItemId())
         {
             case R.id.nav_camera:
-                //customScan();
                 break;
             case R.id.nav_gallery:
                 break;
@@ -132,9 +157,6 @@ public class MainActivity extends BaseActivity
             if(intentResult.getContents() == null) {
                 Toast.makeText(this, R.string.content_null, Toast.LENGTH_LONG).show();
             } else {
-                //Toast.makeText(this,"扫描成功",Toast.LENGTH_LONG).show();
-                // ScanResult 为 获取到的字符串
-                //Toast.makeText(this, ScanResult , Toast.LENGTH_SHORT).show();
                 String q = intentResult.getContents();
                 Intent intent = new Intent(this, SearchResultActivity.class);
                 intent.putExtra("q", q);
