@@ -96,11 +96,14 @@ public class BookDetailActivity extends BaseActivity {
                 getIntent().getSerializableExtra(BookInfoResponse.serialVersionName);
         mCollapsingLayout.setTitle(mBookInfoResponse.getTitle());
         Bitmap book_img = getIntent().getParcelableExtra("book_img");
-        if (book_img != null) {
+        if (book_img != null)
+        {
             mIvBookImg.setImageBitmap(book_img);
             mIvBookBg.setImageBitmap(Blur.apply(book_img));
             mIvBookBg.setAlpha(0.9f);
-        } else {
+        }
+        else
+        {
             Glide.with(this)
                     .load(mBookInfoResponse.getImages().getLarge())
                     .asBitmap()
@@ -117,13 +120,17 @@ public class BookDetailActivity extends BaseActivity {
         }
 
         mTvBookInfo.setText(mBookInfoResponse.getInfoString());
-        mRlMoreInfo.setOnClickListener(view -> {
-            if (flag) {
+        mRlMoreInfo.setOnClickListener(view ->
+        {
+            if (flag)
+            {
                 ObjectAnimator.ofFloat(mIvMoreInfo, "rotation", 90, 0).start();
                 mProgressBar.setVisibility(View.GONE);
                 mLlPublishInfo.setVisibility(View.GONE);
                 flag = false;
-            } else {
+            }
+            else
+            {
                 ObjectAnimator.ofFloat(mIvMoreInfo, "rotation", 0, 90).start();
                 mProgressBar.setVisibility(View.VISIBLE);
                 new Handler()
@@ -143,29 +150,38 @@ public class BookDetailActivity extends BaseActivity {
             }
         });
 
-        if (mBookInfoResponse.getAuthor().length > 0) {
+        if (mBookInfoResponse.getAuthor().length > 0)
+        {
             mTvAuthor.setText("作者：" + mBookInfoResponse.getAuthor()[0]);
         }
         mTvPublisher.setText("出版社：" + mBookInfoResponse.getPublisher());
-        if (mBookInfoResponse.getSubtitle().isEmpty()) {
+        if (mBookInfoResponse.getSubtitle().isEmpty())
+        {
             mTvSubTitle.setVisibility(View.GONE);
         }
         mTvSubTitle.setText("副标题：" + mBookInfoResponse.getSubtitle());
-        if (mBookInfoResponse.getOrigin_title().isEmpty()) {
+        if (mBookInfoResponse.getOrigin_title().isEmpty())
+        {
             mTvOriginTitle.setVisibility(View.GONE);
         }
         mTvOriginTitle.setText("原作名：" + mBookInfoResponse.getOrigin_title());
-        if (mBookInfoResponse.getTranslator().length > 0) {
+        if (mBookInfoResponse.getTranslator().length > 0)
+        {
             mTvTranslator.setText("译者：" + mBookInfoResponse.getTranslator()[0]);
-        } else {
+        }
+        else
+        {
             mTvTranslator.setVisibility(View.GONE);
         }
         mTvPublishDate.setText("出版年：" + mBookInfoResponse.getPubdate());
         mTvPages.setText("页数：" + mBookInfoResponse.getPages());
         mTvIsbn.setText("ISBN：" + mBookInfoResponse.getIsbn13());
-        if (!mBookInfoResponse.getSummary().isEmpty()) {
+        if (!mBookInfoResponse.getSummary().isEmpty())
+        {
             mTvBookSummary.setText(mBookInfoResponse.getSummary());
-        } else {
+        }
+        else
+        {
             mTvBookSummary.setText(UIUtils.getContext().getString(R.string.no_brief));
         }
 
@@ -194,7 +210,8 @@ public class BookDetailActivity extends BaseActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings)
+        {
             return true;
         }
         return super.onOptionsItemSelected(item);

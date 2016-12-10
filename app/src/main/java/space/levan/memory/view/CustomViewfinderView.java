@@ -70,11 +70,14 @@ public class CustomViewfinderView extends ViewfinderView {
         canvas.drawRect(frame.right + 1, frame.top, width, frame.bottom + 1, paint);
         canvas.drawRect(0, frame.bottom + 1, width, height, paint);
 
-        if (resultBitmap != null) {
+        if (resultBitmap != null)
+        {
             // Draw the opaque result bitmap over the scanning rectangle
             paint.setAlpha(CURRENT_POINT_OPACITY);
             canvas.drawBitmap(resultBitmap, null, frame, paint);
-        } else {
+        }
+        else
+        {
             //  paint.setAlpha(SCANNER_ALPHA[scannerAlpha]);
             //  scannerAlpha = (scannerAlpha + 1) % SCANNER_ALPHA.length;
             int middle = frame.height() / 2 + frame.top;
@@ -99,21 +102,26 @@ public class CustomViewfinderView extends ViewfinderView {
             List<ResultPoint> currentLast = lastPossibleResultPoints;
             int frameLeft = frame.left;
             int frameTop = frame.top;
-            if (currentPossible.isEmpty()) {
+            if (currentPossible.isEmpty())
+            {
                 lastPossibleResultPoints = null;
-            } else {
+            }
+            else
+            {
                 possibleResultPoints = new ArrayList<>(5);
                 lastPossibleResultPoints = currentPossible;
                 paint.setAlpha(CURRENT_POINT_OPACITY);
                 paint.setColor(resultPointColor);
-                for (ResultPoint point : currentPossible) {
+                for (ResultPoint point : currentPossible)
+                {
                     canvas.drawCircle(frameLeft + (int) (point.getX() * scaleX),
                             frameTop + (int) (point.getY() * scaleY),
                             POINT_SIZE, paint);
                 }
             }
 
-            if (currentLast != null) {
+            if (currentLast != null)
+            {
                 paint.setAlpha(CURRENT_POINT_OPACITY / 2);
                 paint.setColor(resultPointColor);
                 float radius = POINT_SIZE / 2.0f;

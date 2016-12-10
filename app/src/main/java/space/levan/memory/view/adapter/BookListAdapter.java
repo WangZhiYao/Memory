@@ -47,10 +47,13 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         View view;
-        if (viewType == TYPE_DEFAULT) {
+        if (viewType == TYPE_DEFAULT)
+        {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book_list, parent, false);
             return new BookListHolder(view);
-        } else {
+        }
+        else
+        {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_empty, parent, false);
             return new EmptyHolder(view);
         }
@@ -59,9 +62,12 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemViewType(int position)
     {
-        if (bookInfoResponses == null || bookInfoResponses.isEmpty()) {
+        if (bookInfoResponses == null || bookInfoResponses.isEmpty())
+        {
             return TYPE_EMPTY;
-        } else {
+        }
+        else
+        {
             return TYPE_DEFAULT;
         }
     }
@@ -95,21 +101,26 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 b.putSerializable(BookInfoResponse.serialVersionName, bookInfo);
                 Bitmap bitmap;
                 GlideBitmapDrawable imageDrawable = (GlideBitmapDrawable) ((BookListHolder) holder).iv_book_img.getDrawable();
-                if (imageDrawable != null) {
+                if (imageDrawable != null)
+                {
                     bitmap = imageDrawable.getBitmap();
                     b.putParcelable("book_img", bitmap);
                 }
                 Intent intent = new Intent(UIUtils.getContext(), BookDetailActivity.class);
                 intent.putExtras(b);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    if (BaseActivity.activity == null) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                {
+                    if (BaseActivity.activity == null)
+                    {
                         UIUtils.startActivity(intent);
                         return;
                     }
                     ActivityOptionsCompat options = ActivityOptionsCompat.
                             makeSceneTransitionAnimation(BaseActivity.activity, ((BookListHolder) holder).iv_book_img, "book_img");
                     BaseActivity.activity.startActivity(intent, options.toBundle());
-                } else {
+                }
+                else
+                {
                     UIUtils.startActivity(intent);
                 }
             });

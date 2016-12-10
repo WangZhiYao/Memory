@@ -143,9 +143,12 @@ public class SearchResultActivity extends BaseActivity
         bookInfoResponses.clear();
         bookInfoResponses.addAll(((BookListResponse) result).getBooks());
         mListAdapter.notifyDataSetChanged();
-        if (((BookListResponse) result).getTotal() > page * count) {
+        if (((BookListResponse) result).getTotal() > page * count)
+        {
             isLoadAll = false;
-        } else {
+        }
+        else
+        {
             isLoadAll = true;
         }
         page++;
@@ -156,21 +159,28 @@ public class SearchResultActivity extends BaseActivity
     {
         bookInfoResponses.addAll(((BookListResponse) result).getBooks());
         mListAdapter.notifyDataSetChanged();
-        if (((BookListResponse) result).getTotal() > page * count) {
+        if (((BookListResponse) result).getTotal() > page * count)
+        {
             page++;
             isLoadAll = false;
-        } else {
+        }
+        else
+        {
             isLoadAll = true;
         }
     }
 
     private void onLoadMore()
     {
-        if (!isLoadAll) {
-            if (!mSwipeRefreshLayout.isRefreshing()) {
+        if (!isLoadAll)
+        {
+            if (!mSwipeRefreshLayout.isRefreshing())
+            {
                 bookListPresenter.loadBooks(q, page * count, count, fields);
             }
-        } else {
+        }
+        else
+        {
             showMessage(getResources().getString(R.string.no_more));
         }
     }

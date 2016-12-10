@@ -37,9 +37,12 @@ public class ScanActivity extends AppCompatActivity
     @OnClick(R.id.btn_switch)
     public void swichLight()
     {
-        if(isLightOn){
+        if(isLightOn)
+        {
             mDBV.setTorchOff();
-        }else{
+        }
+        else
+        {
             mDBV.setTorchOn();
         }
     }

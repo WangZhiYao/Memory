@@ -20,7 +20,8 @@ public class Blur {
 
         Bitmap bitmap = Bitmap.createScaledBitmap(sentBitmap, sentBitmap.getWidth() / 2, sentBitmap.getHeight() / 2, false);
 
-        if (radius < 1) {
+        if (radius < 1)
+        {
             return (null);
         }
 
@@ -74,11 +75,14 @@ public class Blur {
                 rsum += sir[0] * rbs;
                 gsum += sir[1] * rbs;
                 bsum += sir[2] * rbs;
-                if (i > 0) {
+                if (i > 0)
+                {
                     rinsum += sir[0];
                     ginsum += sir[1];
                     binsum += sir[2];
-                } else {
+                }
+                else
+                {
                     routsum += sir[0];
                     goutsum += sir[1];
                     boutsum += sir[2];
@@ -157,17 +161,21 @@ public class Blur {
                 gsum += g[yi] * rbs;
                 bsum += b[yi] * rbs;
 
-                if (i > 0) {
+                if (i > 0)
+                {
                     rinsum += sir[0];
                     ginsum += sir[1];
                     binsum += sir[2];
-                } else {
+                }
+                else
+                {
                     routsum += sir[0];
                     goutsum += sir[1];
                     boutsum += sir[2];
                 }
 
-                if (i < hm) {
+                if (i < hm)
+                {
                     yp += w;
                 }
             }

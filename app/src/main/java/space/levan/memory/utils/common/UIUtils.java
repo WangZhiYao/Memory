@@ -29,7 +29,9 @@ public class UIUtils {
         {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getContext().startActivity(intent);
-        } else {
+        }
+        else
+        {
             BaseActivity.activity.startActivity(intent);
         }
     }

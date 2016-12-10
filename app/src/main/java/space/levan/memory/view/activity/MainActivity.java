@@ -56,9 +56,12 @@ public class MainActivity extends BaseActivity
     public void onBackPressed()
     {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer.isDrawerOpen(GravityCompat.START))
+        {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+        else
+        {
             super.onBackPressed();
         }
     }
@@ -154,16 +157,22 @@ public class MainActivity extends BaseActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
-        if(intentResult != null) {
-            if(intentResult.getContents() == null) {
+        if(intentResult != null)
+        {
+            if(intentResult.getContents() == null)
+            {
                 Toast.makeText(this, R.string.content_null, Toast.LENGTH_LONG).show();
-            } else {
+            }
+            else
+            {
                 String q = intentResult.getContents();
                 Intent intent = new Intent(this, SearchResultActivity.class);
                 intent.putExtra("q", q);
                 startActivity(intent);
             }
-        } else {
+        }
+        else
+        {
             super.onActivityResult(requestCode,resultCode,data);
         }
     }
