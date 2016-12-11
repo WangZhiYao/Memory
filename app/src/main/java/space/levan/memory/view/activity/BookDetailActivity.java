@@ -210,11 +210,11 @@ public class BookDetailActivity extends BaseActivity {
             {
                 if (deleteCollection() == 0)
                 {
-                    Snackbar.make(v, "取消收藏失败", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, getString(R.string.delete_collection_failure), Snackbar.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    Snackbar.make(v, "取消收藏成功", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, getString(R.string.delete_collection_success), Snackbar.LENGTH_SHORT).show();
                     fab.setImageResource(R.drawable.ic_fab_loyalty_white);
                     isCollection = false;
                 }
@@ -223,11 +223,11 @@ public class BookDetailActivity extends BaseActivity {
             {
                 if (addCollection() == -1)
                 {
-                    Snackbar.make(v, "加入收藏失败", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, getString(R.string.add_collection_failure), Snackbar.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    Snackbar.make(v, "加入收藏成功", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, getString(R.string.add_collection_success), Snackbar.LENGTH_SHORT).show();
                     fab.setImageResource(R.drawable.ic_fab_loyalty_black);
                     isCollection = true;
                 }

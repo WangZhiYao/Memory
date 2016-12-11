@@ -10,13 +10,17 @@
     <string name="poor_network">网络连接失败，请检查网络</string>
     <string name="action_scan">扫描条形码或二维码</string>
     <string name="action_search">搜索书名，类别，作者等…</string>
-
-    <string name="book_summary">简介：</string>
-
+    
     <string name="no_more">已经没有更多了</string>
 
+    <string name="book_summary">简介：</string>
     <string name="content_null">内容为空</string>
     <string name="loading">加载中请稍候…</string>
     <string name="no_brief">暂无简介。</string>
+    
+    <string name="add_collection_success">加入收藏成功</string>
+    <string name="add_collection_failure">加入收藏失败</string>
+    <string name="delete_collection_success">取消收藏成功</string>
+    <string name="delete_collection_failure">取消收藏失败</string>
 
 </resources>
