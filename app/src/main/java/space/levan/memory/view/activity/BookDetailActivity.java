@@ -27,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import space.levan.memory.R;
 import space.levan.memory.bean.http.douban.BookInfoResponse;
+import space.levan.memory.dao.DBHelper;
 import space.levan.memory.utils.common.Blur;
 import space.levan.memory.utils.common.UIUtils;
 
@@ -75,8 +76,10 @@ public class BookDetailActivity extends BaseActivity {
     @BindView(R.id.tv_book_summary)
     TextView mTvBookSummary;
 
-    private boolean flag;
+    private boolean isOpen;
+    private boolean isCollection;
     private BookInfoResponse mBookInfoResponse;
+    private DBHelper dbHelper;
     //模拟加载时间
     private static final int PROGRESS_DELAY_MIN_TIME = 500;
     private static final int PROGRESS_DELAY_SIZE_TIME = 1000;
@@ -87,6 +90,22 @@ public class BookDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_book_detail);
         ButterKnife.bind(this);
         super.onCreate(savedInstanceState);
+
+        dbHelper = new DBHelper(this);
+        initCollection();
+    }
+
+    private void initCollection()
+    {
+        if (dbHelper.isCollection(mBookInfoResponse.getIsbn13()))
+        {
+            fab.setImageResource(R.drawable.ic_fab_loyalty_black);
+            isCollection = true;
+        }
+        else
+        {
+            isCollection = false;
+        }
     }
 
     @Override
@@ -122,12 +141,12 @@ public class BookDetailActivity extends BaseActivity {
         mTvBookInfo.setText(mBookInfoResponse.getInfoString());
         mRlMoreInfo.setOnClickListener(view ->
         {
-            if (flag)
+            if (isOpen)
             {
                 ObjectAnimator.ofFloat(mIvMoreInfo, "rotation", 90, 0).start();
                 mProgressBar.setVisibility(View.GONE);
                 mLlPublishInfo.setVisibility(View.GONE);
-                flag = false;
+                isOpen = false;
             }
             else
             {
@@ -139,14 +158,14 @@ public class BookDetailActivity extends BaseActivity {
                     public void handleMessage(Message msg)
                     {
                         super.handleMessage(msg);
-                        if (flag)
+                        if (isOpen)
                         {
                             mLlPublishInfo.setVisibility(View.VISIBLE);
                             mProgressBar.setVisibility(View.GONE);
                         }
                     }
                 }.sendEmptyMessageDelayed(0, getDelayTime());
-                flag = true;
+                isOpen = true;
             }
         });
 
@@ -185,7 +204,50 @@ public class BookDetailActivity extends BaseActivity {
             mTvBookSummary.setText(UIUtils.getContext().getString(R.string.no_brief));
         }
 
-        fab.setOnClickListener(v -> Snackbar.make(v, "click", Snackbar.LENGTH_LONG).show());
+        fab.setOnClickListener(v ->
+        {
+            if (isCollection)
+            {
+                if (deleteCollection() == 0)
+                {
+                    Snackbar.make(v, "取消收藏失败", Snackbar.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Snackbar.make(v, "取消收藏成功", Snackbar.LENGTH_SHORT).show();
+                    fab.setImageResource(R.drawable.ic_fab_loyalty_white);
+                    isCollection = false;
+                }
+            }
+            else
+            {
+                if (addCollection() == -1)
+                {
+                    Snackbar.make(v, "加入收藏失败", Snackbar.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Snackbar.make(v, "加入收藏成功", Snackbar.LENGTH_SHORT).show();
+                    fab.setImageResource(R.drawable.ic_fab_loyalty_black);
+                    isCollection = true;
+                }
+            }
+        });
+    }
+
+    private long addCollection()
+    {
+        return dbHelper.insert(mBookInfoResponse.getAuthor().length > 0 ? mBookInfoResponse.getAuthor()[0] : "",
+                mBookInfoResponse.getTitle(), mBookInfoResponse.getImages().getLarge(),
+                mBookInfoResponse.getPublisher(), mBookInfoResponse.getSubtitle(),
+                mBookInfoResponse.getOrigin_title(), mBookInfoResponse.getTranslator().length > 0 ? mBookInfoResponse.getTranslator()[0] : "",
+                mBookInfoResponse.getPubdate(), mBookInfoResponse.getPages(),
+                mBookInfoResponse.getIsbn13(), mBookInfoResponse.getSummary());
+    }
+
+    private long deleteCollection()
+    {
+        return dbHelper.delete(mBookInfoResponse.getIsbn13());
     }
 
     private int getDelayTime()
@@ -215,5 +277,20 @@ public class BookDetailActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        dbHelper.openDB();
+
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        dbHelper.closeDB();
     }
 }
