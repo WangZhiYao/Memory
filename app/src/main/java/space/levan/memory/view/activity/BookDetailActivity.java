@@ -90,22 +90,6 @@ public class BookDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_book_detail);
         ButterKnife.bind(this);
         super.onCreate(savedInstanceState);
-
-        dbHelper = new DBHelper(this);
-        initCollection();
-    }
-
-    private void initCollection()
-    {
-        if (dbHelper.isCollection(mBookInfoResponse.getIsbn13()))
-        {
-            fab.setImageResource(R.drawable.ic_fab_loyalty_black);
-            isCollection = true;
-        }
-        else
-        {
-            isCollection = false;
-        }
     }
 
     @Override
@@ -202,6 +186,17 @@ public class BookDetailActivity extends BaseActivity {
         else
         {
             mTvBookSummary.setText(UIUtils.getContext().getString(R.string.no_brief));
+        }
+
+        dbHelper = new DBHelper(this);
+        if (dbHelper.isCollection(mBookInfoResponse.getIsbn13()))
+        {
+            fab.setImageResource(R.drawable.ic_fab_loyalty_black);
+            isCollection = true;
+        }
+        else
+        {
+            isCollection = false;
         }
 
         fab.setOnClickListener(v ->
