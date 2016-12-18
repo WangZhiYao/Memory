@@ -17,11 +17,11 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  * Created by WangZhiYao on 2016/10/22.
  */
 
-public class BaseApplication extends Application {
+public class App extends Application {
 
-    public final static String TAG = "BaseApplication";
+    public final static String TAG = "App";
     public final static boolean DEBUG = true;
-    private static BaseApplication application;
+    private static App application;
     private static int mainTid;
     /**
      * Activity集合，来管理所有的Activity

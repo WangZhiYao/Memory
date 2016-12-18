@@ -1,6 +1,6 @@
 package space.levan.memory.api;
 
-import space.levan.memory.bean.http.douban.BaseResponse;
+import space.levan.memory.bean.BaseResponse;
 
 /**
  * Created by WangZhiYao on 2016/10/22.

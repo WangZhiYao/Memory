@@ -1,13 +1,13 @@
 package space.levan.memory.api.presenter.impl;
 
-import space.levan.memory.BaseApplication;
+import space.levan.memory.App;
 import space.levan.memory.R;
 import space.levan.memory.api.ApiCompleteListener;
 import space.levan.memory.api.model.IBookListModel;
 import space.levan.memory.api.model.impl.BookListModelImpl;
 import space.levan.memory.api.presenter.IBookListPresenter;
 import space.levan.memory.api.view.IBookListView;
-import space.levan.memory.bean.http.douban.BaseResponse;
+import space.levan.memory.bean.BaseResponse;
 import space.levan.memory.bean.http.douban.BookListResponse;
 import space.levan.memory.utils.common.NetworkUtils;
 
@@ -29,9 +29,9 @@ public class BookListPresenterImpl implements IBookListPresenter, ApiCompleteLis
     @Override
     public void loadBooks(String q, int start, int count, String fields)
     {
-        if (!NetworkUtils.isConnected(BaseApplication.getApplication()))
+        if (!NetworkUtils.isConnected(App.getApplication()))
         {
-            mBookListView.showMessage(BaseApplication.getApplication().getString(R.string.poor_network));
+            mBookListView.showMessage(App.getApplication().getString(R.string.poor_network));
             return;
         }
         mBookListView.showProgress();

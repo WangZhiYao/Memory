@@ -2,8 +2,6 @@ package space.levan.memory.bean.http.douban;
 
 import java.io.Serializable;
 
-import space.levan.memory.bean.ImageBean;
-
 /**
  * Created by WangZhiYao on 2016-11-29.
  */

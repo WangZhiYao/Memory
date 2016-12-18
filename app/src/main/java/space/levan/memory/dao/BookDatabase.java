@@ -27,5 +27,6 @@ final class BookDatabase {
         static final String BOOK_PAGES = "pages";
         static final String BOOK_ISBN = "isbn";
         static final String BOOK_SUMMARY = "summary";
+        static final String BOOK_REVIEW = "review";
     }
 }

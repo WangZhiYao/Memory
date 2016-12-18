@@ -11,7 +11,7 @@ import cz.msebera.android.httpclient.Header;
 import space.levan.memory.api.ApiCompleteListener;
 import space.levan.memory.api.client.MemoryApi;
 import space.levan.memory.api.model.IBookListModel;
-import space.levan.memory.bean.http.douban.BaseResponse;
+import space.levan.memory.bean.BaseResponse;
 import space.levan.memory.bean.http.douban.BookListResponse;
 
 /**
@@ -44,7 +44,7 @@ public class BookListModelImpl implements IBookListModel {
                     listener.onFailed(null);
                     return;
                 }
-                listener.onFailed(new BaseResponse(404, throwable.getMessage()));
+                listener.onFailed(new BaseResponse(statusCode, throwable.getMessage()));
             }
         });
     }
@@ -52,6 +52,6 @@ public class BookListModelImpl implements IBookListModel {
     @Override
     public void cancelLoading()
     {
-
+        // TODO: 2016-12-18 取消接口调用
     }
 }

@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import space.levan.memory.BaseApplication;
+import space.levan.memory.App;
 import space.levan.memory.R;
 import space.levan.memory.utils.common.UIUtils;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -31,7 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         activity = this;
-        ((BaseApplication) UIUtils.getContext()).addActivity(this);
+        ((App) UIUtils.getContext()).addActivity(this);
         init();
     }
 
@@ -161,6 +161,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy()
     {
         super.onDestroy();
-        ((BaseApplication) UIUtils.getContext()).removeActivity(this);
+        ((App) UIUtils.getContext()).removeActivity(this);
     }
 }

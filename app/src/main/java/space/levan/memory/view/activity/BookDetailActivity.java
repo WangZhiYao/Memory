@@ -26,6 +26,8 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import space.levan.memory.R;
+import space.levan.memory.api.presenter.impl.AddCollectionPresenterImpl;
+import space.levan.memory.api.view.IAddCollectionView;
 import space.levan.memory.bean.http.douban.BookInfoResponse;
 import space.levan.memory.dao.DBHelper;
 import space.levan.memory.utils.common.Blur;
@@ -37,7 +39,7 @@ import space.levan.memory.utils.common.UIUtils;
  * Created by WangZhiYao on 2016/10/23.
  */
 
-public class BookDetailActivity extends BaseActivity {
+public class BookDetailActivity extends BaseActivity implements IAddCollectionView {
 
     @BindView(R.id.iv_book_bg)
     ImageView mIvBookBg;
@@ -80,6 +82,7 @@ public class BookDetailActivity extends BaseActivity {
     private boolean isCollection;
     private BookInfoResponse mBookInfoResponse;
     private DBHelper dbHelper;
+    private AddCollectionPresenterImpl mACPresenterImpl;
     //模拟加载时间
     private static final int PROGRESS_DELAY_MIN_TIME = 500;
     private static final int PROGRESS_DELAY_SIZE_TIME = 1000;
@@ -89,6 +92,7 @@ public class BookDetailActivity extends BaseActivity {
     {
         setContentView(R.layout.activity_book_detail);
         ButterKnife.bind(this);
+        dbHelper = new DBHelper(this);
         super.onCreate(savedInstanceState);
     }
 
@@ -188,7 +192,6 @@ public class BookDetailActivity extends BaseActivity {
             mTvBookSummary.setText(UIUtils.getContext().getString(R.string.no_brief));
         }
 
-        dbHelper = new DBHelper(this);
         if (dbHelper.isCollection(mBookInfoResponse.getIsbn13()))
         {
             fab.setImageResource(R.drawable.ic_fab_loyalty_black);
@@ -232,6 +235,13 @@ public class BookDetailActivity extends BaseActivity {
 
     private long addCollection()
     {
+        mACPresenterImpl.addCollection("WZY", mBookInfoResponse.getAuthor().length > 0 ? mBookInfoResponse.getAuthor()[0] : "",
+                mBookInfoResponse.getTitle(), mBookInfoResponse.getImages().getLarge(),
+                mBookInfoResponse.getPublisher(), mBookInfoResponse.getSubtitle(),
+                mBookInfoResponse.getOrigin_title(), mBookInfoResponse.getTranslator().length > 0 ? mBookInfoResponse.getTranslator()[0] : "",
+                mBookInfoResponse.getPubdate(), mBookInfoResponse.getPages(),
+                mBookInfoResponse.getIsbn13(), mBookInfoResponse.getSummary(), "无");
+
         return dbHelper.insert(mBookInfoResponse.getAuthor().length > 0 ? mBookInfoResponse.getAuthor()[0] : "",
                 mBookInfoResponse.getTitle(), mBookInfoResponse.getImages().getLarge(),
                 mBookInfoResponse.getPublisher(), mBookInfoResponse.getSubtitle(),
@@ -248,6 +258,24 @@ public class BookDetailActivity extends BaseActivity {
     private int getDelayTime()
     {
         return new Random().nextInt(PROGRESS_DELAY_SIZE_TIME) + PROGRESS_DELAY_MIN_TIME;
+    }
+
+    @Override
+    public void showMessage(String msg)
+    {
+
+    }
+
+    @Override
+    public void showProgress()
+    {
+
+    }
+
+    @Override
+    public void hideProgress()
+    {
+
     }
 
     @Override

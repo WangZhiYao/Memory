@@ -1,4 +1,4 @@
-package space.levan.memory.bean.http.douban;
+package space.levan.memory.bean;
 
 /**
  * Created by WangZhiYao on 2016/10/22.

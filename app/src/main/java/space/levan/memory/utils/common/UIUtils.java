@@ -3,7 +3,7 @@ package space.levan.memory.utils.common;
 import android.content.Context;
 import android.content.Intent;
 
-import space.levan.memory.BaseApplication;
+import space.levan.memory.App;
 import space.levan.memory.view.activity.BaseActivity;
 
 /**
@@ -14,7 +14,7 @@ public class UIUtils {
 
     public static Context getContext()
     {
-        return BaseApplication.getApplication();
+        return App.getApplication();
     }
 
     /**

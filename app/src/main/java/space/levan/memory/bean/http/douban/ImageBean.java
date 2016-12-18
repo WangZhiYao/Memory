@@ -1,4 +1,4 @@
-package space.levan.memory.bean;
+package space.levan.memory.bean.http.douban;
 
 import java.io.Serializable;
 

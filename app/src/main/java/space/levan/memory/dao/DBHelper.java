@@ -45,6 +45,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + BookInfo.BOOK_PAGES + " TEXT, "
                 + BookInfo.BOOK_ISBN + " TEXT, "
                 + BookInfo.BOOK_SUMMARY + " TEXT"
+                //+ BookInfo.BOOK_REVIEW + " TEXT"
                 + ")");
 
         Log.w("WZY","Database Create success!");
@@ -69,9 +70,10 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public long insert(String author, String title, String img, String publisher,
-                       String subtitle, String origin_title, String translator,
-                       String publish_date, String pages, String isbn, String summary)
+    public long insert(String author, String title, String img,
+                       String publisher, String subtitle, String origin_title,
+                       String translator, String publish_date, String pages,
+                       String isbn, String summary/*, String review*/)
     {
         ContentValues values = new ContentValues();
         values.put(BookInfo.BOOK_AUTHOR, author);
@@ -85,13 +87,15 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(BookInfo.BOOK_PAGES, pages);
         values.put(BookInfo.BOOK_ISBN, isbn);
         values.put(BookInfo.BOOK_SUMMARY, summary);
+        //values.put(BookInfo.BOOK_REVIEW, review);
 
         return sqLiteDatabase.insert(TABLE_NAME, null, values);
     }
 
-    public long update(int id, String author, String title, String img, String publisher,
-                       String subtitle, String origin_title, String translator,
-                       String publish_date, String pages, String isbn, String summary)
+    public long update(int id, String author, String title, String img,
+                       String publisher, String subtitle, String origin_title,
+                       String translator, String publish_date, String pages,
+                       String isbn, String summary/*, String review*/)
     {
         ContentValues values = new ContentValues();
         values.put(BookInfo.BOOK_AUTHOR, author);
@@ -105,6 +109,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(BookInfo.BOOK_PAGES, pages);
         values.put(BookInfo.BOOK_ISBN, isbn);
         values.put(BookInfo.BOOK_SUMMARY, summary);
+        //values.put(BookInfo.BOOK_REVIEW, review);
 
         String where = BookInfo.BOOK_ID + "=" + id;
 

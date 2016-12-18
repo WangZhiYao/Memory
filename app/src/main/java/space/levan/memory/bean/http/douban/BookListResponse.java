@@ -2,6 +2,8 @@ package space.levan.memory.bean.http.douban;
 
 import java.util.List;
 
+import space.levan.memory.bean.BaseResponse;
+
 /**
  * Created by WangZhiYao on 2016-11-29.
  */
