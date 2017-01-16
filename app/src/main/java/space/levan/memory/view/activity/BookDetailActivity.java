@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVUser;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -25,21 +26,23 @@ import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import io.realm.RealmResults;
 import space.levan.memory.R;
-import space.levan.memory.api.presenter.impl.AddCollectionPresenterImpl;
-import space.levan.memory.api.view.IAddCollectionView;
-import space.levan.memory.bean.http.douban.BookInfoResponse;
-import space.levan.memory.dao.DBHelper;
-import space.levan.memory.utils.common.Blur;
-import space.levan.memory.utils.common.UIUtils;
+import space.levan.memory.bean.Book;
+import space.levan.memory.bean.douban.BookInfoResponse;
+import space.levan.memory.realm.presenter.CollectionPresenter;
+import space.levan.memory.realm.view.ICollectionView;
+import space.levan.memory.utils.Blur;
+import space.levan.memory.utils.UIUtils;
 
 /**
  * 图书详情
- *
+ * <p>
  * Created by WangZhiYao on 2016/10/23.
  */
 
-public class BookDetailActivity extends BaseActivity implements IAddCollectionView {
+public class BookDetailActivity extends BaseActivity implements ICollectionView {
 
     @BindView(R.id.iv_book_bg)
     ImageView mIvBookBg;
@@ -77,12 +80,33 @@ public class BookDetailActivity extends BaseActivity implements IAddCollectionVi
     ProgressBar mProgressBar;
     @BindView(R.id.tv_book_summary)
     TextView mTvBookSummary;
+    @OnClick({R.id.rl_more_info, R.id.fab})
+    public void onClick(View view)
+    {
+        switch (view.getId())
+        {
+            case R.id.rl_more_info:
+                showMoreInfo();
+                break;
+            case R.id.fab:
+                if (isCollection)
+                {
+                    cancelCollection();
+                }
+                else
+                {
+                    addCollection();
+                }
+                break;
+        }
+    }
 
+    private Book mBook;
     private boolean isOpen;
     private boolean isCollection;
     private BookInfoResponse mBookInfoResponse;
-    private DBHelper dbHelper;
-    private AddCollectionPresenterImpl mACPresenterImpl;
+    private CollectionPresenter mCollectionPresenter;
+
     //模拟加载时间
     private static final int PROGRESS_DELAY_MIN_TIME = 500;
     private static final int PROGRESS_DELAY_SIZE_TIME = 1000;
@@ -92,16 +116,20 @@ public class BookDetailActivity extends BaseActivity implements IAddCollectionVi
     {
         setContentView(R.layout.activity_book_detail);
         ButterKnife.bind(this);
-        dbHelper = new DBHelper(this);
         super.onCreate(savedInstanceState);
     }
 
     @Override
     protected void initEvents()
     {
+        mBook = new Book();
+        mBook.setUser(AVUser.getCurrentUser().getUsername());
         mBookInfoResponse = (BookInfoResponse)
                 getIntent().getSerializableExtra(BookInfoResponse.serialVersionName);
+        mCollectionPresenter = new CollectionPresenter(this);
+        mCollectionPresenter.checkCollection(mBookInfoResponse.getIsbn13());
         mCollapsingLayout.setTitle(mBookInfoResponse.getTitle());
+        mBook.setTitle(mBookInfoResponse.getTitle());
         Bitmap book_img = getIntent().getParcelableExtra("book_img");
         if (book_img != null)
         {
@@ -117,7 +145,8 @@ public class BookDetailActivity extends BaseActivity implements IAddCollectionVi
                     .into(new SimpleTarget<Bitmap>()
                     {
                         @Override
-                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation)
+                        public void onResourceReady(Bitmap resource,
+                                                    GlideAnimation<? super Bitmap> glideAnimation)
                         {
                             mIvBookImg.setImageBitmap(book_img);
                             mIvBookBg.setImageBitmap(Blur.apply(book_img));
@@ -126,156 +155,132 @@ public class BookDetailActivity extends BaseActivity implements IAddCollectionVi
                     });
         }
 
+        mBook.setImg(mBookInfoResponse.getImages().getLarge());
         mTvBookInfo.setText(mBookInfoResponse.getInfoString());
-        mRlMoreInfo.setOnClickListener(view ->
-        {
-            if (isOpen)
-            {
-                ObjectAnimator.ofFloat(mIvMoreInfo, "rotation", 90, 0).start();
-                mProgressBar.setVisibility(View.GONE);
-                mLlPublishInfo.setVisibility(View.GONE);
-                isOpen = false;
-            }
-            else
-            {
-                ObjectAnimator.ofFloat(mIvMoreInfo, "rotation", 0, 90).start();
-                mProgressBar.setVisibility(View.VISIBLE);
-                new Handler()
-                {
-                    @Override
-                    public void handleMessage(Message msg)
-                    {
-                        super.handleMessage(msg);
-                        if (isOpen)
-                        {
-                            mLlPublishInfo.setVisibility(View.VISIBLE);
-                            mProgressBar.setVisibility(View.GONE);
-                        }
-                    }
-                }.sendEmptyMessageDelayed(0, getDelayTime());
-                isOpen = true;
-            }
-        });
 
         if (mBookInfoResponse.getAuthor().length > 0)
         {
             mTvAuthor.setText("作者：" + mBookInfoResponse.getAuthor()[0]);
+            mBook.setAuthor(mBookInfoResponse.getAuthor()[0]);
         }
         mTvPublisher.setText("出版社：" + mBookInfoResponse.getPublisher());
+        mBook.setPublisher(mBookInfoResponse.getPublisher());
         if (mBookInfoResponse.getSubtitle().isEmpty())
         {
             mTvSubTitle.setVisibility(View.GONE);
         }
         mTvSubTitle.setText("副标题：" + mBookInfoResponse.getSubtitle());
+        mBook.setSubtitle(mBookInfoResponse.getSubtitle());
         if (mBookInfoResponse.getOrigin_title().isEmpty())
         {
             mTvOriginTitle.setVisibility(View.GONE);
         }
         mTvOriginTitle.setText("原作名：" + mBookInfoResponse.getOrigin_title());
+        mBook.setOrigin_title(mBookInfoResponse.getOrigin_title());
         if (mBookInfoResponse.getTranslator().length > 0)
         {
             mTvTranslator.setText("译者：" + mBookInfoResponse.getTranslator()[0]);
+            mBook.setTranslator(mBookInfoResponse.getTranslator()[0]);
         }
         else
         {
             mTvTranslator.setVisibility(View.GONE);
         }
         mTvPublishDate.setText("出版年：" + mBookInfoResponse.getPubdate());
+        mBook.setPubdate(mBookInfoResponse.getPubdate());
         mTvPages.setText("页数：" + mBookInfoResponse.getPages());
+        mBook.setPages(mBookInfoResponse.getPages());
         mTvIsbn.setText("ISBN：" + mBookInfoResponse.getIsbn13());
+        mBook.setIsbn(mBookInfoResponse.getIsbn13());
         if (!mBookInfoResponse.getSummary().isEmpty())
         {
             mTvBookSummary.setText(mBookInfoResponse.getSummary());
+            mBook.setSummary(mBookInfoResponse.getSummary());
         }
         else
         {
             mTvBookSummary.setText(UIUtils.getContext().getString(R.string.no_brief));
         }
+    }
 
-        if (dbHelper.isCollection(mBookInfoResponse.getIsbn13()))
+    @Override
+    public void initFab(boolean collection)
+    {
+        if (collection)
         {
             fab.setImageResource(R.drawable.ic_fab_loyalty_black);
             isCollection = true;
         }
         else
         {
+            fab.setImageResource(R.drawable.ic_fab_loyalty_white);
             isCollection = false;
         }
+    }
 
-        fab.setOnClickListener(v ->
+    private void showMoreInfo()
+    {
+        if (isOpen)
         {
-            if (isCollection)
+            ObjectAnimator.ofFloat(mIvMoreInfo, "rotation", 90, 0).start();
+            mProgressBar.setVisibility(View.GONE);
+            mLlPublishInfo.setVisibility(View.GONE);
+            isOpen = false;
+        }
+        else
+        {
+            ObjectAnimator.ofFloat(mIvMoreInfo, "rotation", 0, 90).start();
+            mProgressBar.setVisibility(View.VISIBLE);
+            new Handler()
             {
-                if (deleteCollection() == 0)
+                @Override
+                public void handleMessage(Message msg)
                 {
-                    Snackbar.make(v, getString(R.string.delete_collection_failure), Snackbar.LENGTH_SHORT).show();
+                    super.handleMessage(msg);
+                    if (isOpen)
+                    {
+                        mLlPublishInfo.setVisibility(View.VISIBLE);
+                        mProgressBar.setVisibility(View.GONE);
+                    }
                 }
-                else
-                {
-                    Snackbar.make(v, getString(R.string.delete_collection_success), Snackbar.LENGTH_SHORT).show();
-                    fab.setImageResource(R.drawable.ic_fab_loyalty_white);
-                    isCollection = false;
-                }
-            }
-            else
-            {
-                if (addCollection() == -1)
-                {
-                    Snackbar.make(v, getString(R.string.add_collection_failure), Snackbar.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Snackbar.make(v, getString(R.string.add_collection_success), Snackbar.LENGTH_SHORT).show();
-                    fab.setImageResource(R.drawable.ic_fab_loyalty_black);
-                    isCollection = true;
-                }
-            }
-        });
+            }.sendEmptyMessageDelayed(0, getDelayTime());
+            isOpen = true;
+        }
     }
 
-    private long addCollection()
+    private void addCollection()
     {
-        mACPresenterImpl.addCollection("WZY", mBookInfoResponse.getAuthor().length > 0 ? mBookInfoResponse.getAuthor()[0] : "",
-                mBookInfoResponse.getTitle(), mBookInfoResponse.getImages().getLarge(),
-                mBookInfoResponse.getPublisher(), mBookInfoResponse.getSubtitle(),
-                mBookInfoResponse.getOrigin_title(), mBookInfoResponse.getTranslator().length > 0 ? mBookInfoResponse.getTranslator()[0] : "",
-                mBookInfoResponse.getPubdate(), mBookInfoResponse.getPages(),
-                mBookInfoResponse.getIsbn13(), mBookInfoResponse.getSummary(), "无");
-
-        return dbHelper.insert(mBookInfoResponse.getAuthor().length > 0 ? mBookInfoResponse.getAuthor()[0] : "",
-                mBookInfoResponse.getTitle(), mBookInfoResponse.getImages().getLarge(),
-                mBookInfoResponse.getPublisher(), mBookInfoResponse.getSubtitle(),
-                mBookInfoResponse.getOrigin_title(), mBookInfoResponse.getTranslator().length > 0 ? mBookInfoResponse.getTranslator()[0] : "",
-                mBookInfoResponse.getPubdate(), mBookInfoResponse.getPages(),
-                mBookInfoResponse.getIsbn13(), mBookInfoResponse.getSummary());
+        mCollectionPresenter = new CollectionPresenter(this);
+        mCollectionPresenter.addCollection(mBook);
     }
 
-    private long deleteCollection()
+    private void cancelCollection()
     {
-        return dbHelper.delete(mBookInfoResponse.getIsbn13());
+        mCollectionPresenter = new CollectionPresenter(this);
+        mCollectionPresenter.cancelCollection(mBookInfoResponse.getIsbn13());
+    }
+
+    @Override
+    public void onAddSuccess()
+    {
+        Snackbar.make(fab, getString(R.string.add_collection_success),
+                Snackbar.LENGTH_SHORT).show();
+        fab.setImageResource(R.drawable.ic_fab_loyalty_black);
+        isCollection = true;
+    }
+
+    @Override
+    public void onCancelSuccess()
+    {
+        Snackbar.make(fab, getString(R.string.delete_collection_success),
+                Snackbar.LENGTH_SHORT).show();
+        fab.setImageResource(R.drawable.ic_fab_loyalty_white);
+        isCollection = false;
     }
 
     private int getDelayTime()
     {
         return new Random().nextInt(PROGRESS_DELAY_SIZE_TIME) + PROGRESS_DELAY_MIN_TIME;
-    }
-
-    @Override
-    public void showMessage(String msg)
-    {
-
-    }
-
-    @Override
-    public void showProgress()
-    {
-
-    }
-
-    @Override
-    public void hideProgress()
-    {
-
     }
 
     @Override
@@ -300,20 +305,5 @@ public class BookDetailActivity extends BaseActivity implements IAddCollectionVi
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
-        dbHelper.openDB();
-
-    }
-
-    @Override
-    protected void onStop()
-    {
-        super.onStop();
-        dbHelper.closeDB();
     }
 }

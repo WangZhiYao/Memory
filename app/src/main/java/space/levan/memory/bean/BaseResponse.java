@@ -8,6 +8,7 @@ public class BaseResponse {
 
     private int code;
     private String msg;
+    private String error;
 
     public BaseResponse()
     {
@@ -18,6 +19,11 @@ public class BaseResponse {
     {
         this.code = code;
         this.msg = msg;
+    }
+
+    public BaseResponse(String error)
+    {
+        this.error = error;
     }
 
     public String getMsg()
@@ -38,5 +44,13 @@ public class BaseResponse {
     public void setCode(int code)
     {
         this.code = code;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

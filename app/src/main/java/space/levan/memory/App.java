@@ -4,10 +4,15 @@ import android.app.Application;
 import android.content.Context;
 import android.support.v7.app.AppCompatDelegate;
 
+import com.avos.avoscloud.AVOSCloud;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import space.levan.memory.common.Constant;
 import space.levan.memory.view.activity.BaseActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -41,6 +46,8 @@ public class App extends Application {
         application = this;
         mainTid = android.os.Process.myTid();
         initTypeFace();
+        initLeanCloud();
+        initRealm();
     }
 
     private void initTypeFace()
@@ -50,6 +57,21 @@ public class App extends Application {
                 .setFontAttrId(R.attr.fontPath)
                 .build();
         CalligraphyConfig.initDefault(calligraphyConfig);
+    }
+
+    private void initLeanCloud()
+    {
+        AVOSCloud.initialize(this, Constant.APP_ID, Constant.APP_KEY);
+    }
+
+    private void initRealm()
+    {
+        Realm.init(this);
+        RealmConfiguration config = new  RealmConfiguration.Builder()
+                .name("Book.realm")
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(config);
     }
 
     /**

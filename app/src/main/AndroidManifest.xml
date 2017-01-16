@@ -47,6 +47,14 @@
         <activity android:name=".view.activity.SearchResultActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        <activity android:name=".view.activity.CollectionActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".view.activity.LoginActivity"
+            android:theme="@style/AppTheme.FullScreen"/>
+        
+        <activity android:name=".view.activity.RegisterActivity"
+            android:theme="@style/AppTheme.FullScreen"/>
     </application>
 
 </manifest>

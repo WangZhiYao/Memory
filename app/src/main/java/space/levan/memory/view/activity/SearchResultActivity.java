@@ -14,11 +14,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import space.levan.memory.R;
-import space.levan.memory.api.presenter.impl.BookListPresenterImpl;
-import space.levan.memory.api.view.IBookListView;
-import space.levan.memory.bean.http.douban.BookInfoResponse;
-import space.levan.memory.bean.http.douban.BookListResponse;
-import space.levan.memory.view.adapter.BookListAdapter;
+import space.levan.memory.api.douban.presenter.BookListPresenter;
+import space.levan.memory.api.douban.view.IBookListView;
+import space.levan.memory.bean.douban.BookInfoResponse;
+import space.levan.memory.bean.douban.BookListResponse;
+import space.levan.memory.view.adapter.SearchResultAdapter;
 
 /**
  * Created by WangZhiYao on 2016-12-02.
@@ -41,9 +41,9 @@ public class SearchResultActivity extends BaseActivity
     private boolean isLoadAll;
 
     private GridLayoutManager mLayoutManager;
-    private BookListAdapter mListAdapter;
+    private SearchResultAdapter mListAdapter;
     private List<BookInfoResponse> bookInfoResponses;
-    private BookListPresenterImpl bookListPresenter;
+    private BookListPresenter bookListPresenter;
     private int spanCount = 1;
 
 
@@ -63,8 +63,8 @@ public class SearchResultActivity extends BaseActivity
     {
         q = getIntent().getStringExtra("q");
         setTitle(q);
-        spanCount = (int) getResources().getInteger(R.integer.home_span_count);
-        bookListPresenter = new BookListPresenterImpl(this);
+        spanCount = getResources().getInteger(R.integer.home_span_count);
+        bookListPresenter = new BookListPresenter(this);
         bookInfoResponses = new ArrayList<>();
         mSwipeRefreshLayout.setColorSchemeResources(R.color.recycler_color1, R.color.recycler_color2,
                 R.color.recycler_color3, R.color.recycler_color4);
@@ -82,7 +82,7 @@ public class SearchResultActivity extends BaseActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //设置adapter
-        mListAdapter = new BookListAdapter(this, bookInfoResponses, spanCount);
+        mListAdapter = new SearchResultAdapter(this, bookInfoResponses, spanCount);
         mRecyclerView.setAdapter(mListAdapter);
 
         //设置Item增加、移除动画

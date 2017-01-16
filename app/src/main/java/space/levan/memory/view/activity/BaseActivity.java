@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import space.levan.memory.App;
 import space.levan.memory.R;
-import space.levan.memory.utils.common.UIUtils;
+import space.levan.memory.utils.UIUtils;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
