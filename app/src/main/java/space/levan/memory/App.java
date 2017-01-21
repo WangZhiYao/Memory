@@ -14,12 +14,9 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import space.levan.memory.common.Constant;
 import space.levan.memory.view.activity.BaseActivity;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
- * Base
- *
- * Created by WangZhiYao on 2016/10/22.
+ * Created by WangZhiYao on 2017-01-21.
  */
 
 public class App extends Application {
@@ -35,7 +32,7 @@ public class App extends Application {
 
     static
     {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
 
     @Override
@@ -45,18 +42,8 @@ public class App extends Application {
         activities = new LinkedList<>();
         application = this;
         mainTid = android.os.Process.myTid();
-        initTypeFace();
         initLeanCloud();
         initRealm();
-    }
-
-    private void initTypeFace()
-    {
-        CalligraphyConfig calligraphyConfig =new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/PMingLiU.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build();
-        CalligraphyConfig.initDefault(calligraphyConfig);
     }
 
     private void initLeanCloud()

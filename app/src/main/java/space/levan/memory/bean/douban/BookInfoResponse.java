@@ -3,27 +3,46 @@ package space.levan.memory.bean.douban;
 import java.io.Serializable;
 
 /**
- * Created by WangZhiYao on 2016-11-29.
+ * Created by WangZhiYao on 2017-01-21.
  */
 
 public class BookInfoResponse implements Serializable {
 
+    public static final long serialVersionUID = 7060254125600464481L;
     public static final String serialVersionName = "bookInfo";
+    private String id;
     private String title;
     private String subtitle;
-    private String origin_title;
     private String publisher;
     private String[] author;
     private String[] translator;
     private String pubdate;
+    private String image;
+    private String ebook_url;
     private String pages;
+    private String binding;
+    private String origin_title;
     private ImageBean images;
     private String isbn13;
+    private String author_intro;
     private String summary;
+    private String ebook_price;
     private String price;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public static String getSerialVersionName() {
         return serialVersionName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -40,14 +59,6 @@ public class BookInfoResponse implements Serializable {
 
     public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
-    }
-
-    public String getOrigin_title() {
-        return origin_title;
-    }
-
-    public void setOrigin_title(String origin_title) {
-        this.origin_title = origin_title;
     }
 
     public String getPublisher() {
@@ -82,12 +93,44 @@ public class BookInfoResponse implements Serializable {
         this.pubdate = pubdate;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getEbook_url() {
+        return ebook_url;
+    }
+
+    public void setEbook_url(String ebook_url) {
+        this.ebook_url = ebook_url;
+    }
+
     public String getPages() {
         return pages;
     }
 
     public void setPages(String pages) {
         this.pages = pages;
+    }
+
+    public String getBinding() {
+        return binding;
+    }
+
+    public void setBinding(String binding) {
+        this.binding = binding;
+    }
+
+    public String getOrigin_title() {
+        return origin_title;
+    }
+
+    public void setOrigin_title(String origin_title) {
+        this.origin_title = origin_title;
     }
 
     public ImageBean getImages() {
@@ -106,12 +149,28 @@ public class BookInfoResponse implements Serializable {
         this.isbn13 = isbn13;
     }
 
+    public String getAuthor_intro() {
+        return author_intro;
+    }
+
+    public void setAuthor_intro(String author_intro) {
+        this.author_intro = author_intro;
+    }
+
     public String getSummary() {
         return summary;
     }
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public String getEbook_price() {
+        return ebook_price;
+    }
+
+    public void setEbook_price(String ebook_price) {
+        this.ebook_price = ebook_price;
     }
 
     public String getPrice() {

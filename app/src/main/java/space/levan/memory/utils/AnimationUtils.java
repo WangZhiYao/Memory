@@ -5,9 +5,7 @@ import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 
 /**
- * 动画工具类
- *
- * Created by WangZhiYao on 2016/10/23.
+ * Created by WangZhiYao on 2017-01-21.
  */
 
 public class AnimationUtils {

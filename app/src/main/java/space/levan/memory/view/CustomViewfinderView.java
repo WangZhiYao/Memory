@@ -14,9 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 自定义二维码扫描界面
- *
- * Created by WangZhiYao on 2016/10/21.
+ * Created by WangZhiYao on 2017-01-21.
  */
 
 public class CustomViewfinderView extends ViewfinderView {

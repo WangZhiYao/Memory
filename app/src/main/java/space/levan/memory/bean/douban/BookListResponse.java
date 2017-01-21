@@ -5,7 +5,7 @@ import java.util.List;
 import space.levan.memory.bean.BaseResponse;
 
 /**
- * Created by WangZhiYao on 2016-11-29.
+ * Created by WangZhiYao on 2017-01-21.
  */
 
 public class BookListResponse extends BaseResponse {

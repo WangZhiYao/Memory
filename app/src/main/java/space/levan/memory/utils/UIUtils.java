@@ -7,7 +7,7 @@ import space.levan.memory.App;
 import space.levan.memory.view.activity.BaseActivity;
 
 /**
- * Created by WangZhiYao on 2016/10/22.
+ * Created by WangZhiYao on 2017-01-21.
  */
 
 public class UIUtils {
@@ -35,29 +35,4 @@ public class UIUtils {
             BaseActivity.activity.startActivity(intent);
         }
     }
-
-    /**
-     * 分享
-     *
-     * @param context
-     * @param content 分享内容
-     * @param uri     分享图片uri
-     */
-
-    /*
-    public static void share(Context context, String content, Uri uri)
-    {
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        if (uri != null) {
-            shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-            shareIntent.setType("image/*");
-            //当用户选择短信时使用sms_body取得文字
-            shareIntent.putExtra("sms_body", content);
-        } else {
-            shareIntent.setType("text/plain");
-        }
-        shareIntent.putExtra(Intent.EXTRA_TEXT, content);
-        context.startActivity(Intent.createChooser(shareIntent, context.getString(R.string.share_dialog_title)));
-    }*/
 }

@@ -1,7 +1,7 @@
 package space.levan.memory.bean;
 
 /**
- * Created by WangZhiYao on 2016/10/22.
+ * Created by WangZhiYao on 2017-01-21.
  */
 
 public class BaseResponse {
@@ -46,11 +46,13 @@ public class BaseResponse {
         this.code = code;
     }
 
-    public String getError() {
+    public String getError()
+    {
         return error;
     }
 
-    public void setError(String error) {
+    public void setError(String error)
+    {
         this.error = error;
     }
 }

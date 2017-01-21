@@ -2,121 +2,75 @@ package space.levan.memory.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.SearchView;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.avos.avoscloud.AVUser;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import space.levan.memory.App;
 import space.levan.memory.R;
+import space.levan.memory.api.presenter.BookListPresenter;
+import space.levan.memory.api.view.IBookListView;
+import space.levan.memory.bean.douban.BookListResponse;
+import space.levan.memory.utils.AnimationUtils;
 
-public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements IBookListView {
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
-    @BindView(R.id.nav_view)
-    NavigationView navigationView;
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawer;
     @BindView(R.id.content_main)
-    RelativeLayout contentMain;
+    RelativeLayout mContentMain;
+    @BindView(R.id.et_search)
+    EditText mEtSearch;
 
-    private SearchView mSearchView;
     private long exitTime = 0;
+    private BookListPresenter bookListPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+        initToolbar();
         ButterKnife.bind(this);
-
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        navigationView.setNavigationItemSelectedListener(this);
+        initSearch();
     }
 
-    @Override
-    protected void initEvents()
+    private void initToolbar()
     {
-
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getLayoutInflater().inflate(R.layout.main_toolbar, mToolbar);
     }
 
-    private void setSearch()
+    private void initSearch()
     {
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+        mEtSearch.setOnEditorActionListener((textView, i, keyEvent) ->
         {
-            @Override
-            public boolean onQueryTextSubmit(String query)
+            if (i == EditorInfo.IME_ACTION_SEARCH)
             {
-                mSearchView.clearFocus();
-                Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
-                intent.putExtra("q", query);
-                startActivity(intent);
-                return true;
+                if (TextUtils.isEmpty(textView.getText()))
+                {
+                    Toast.makeText(MainActivity.this, "isEmpty", Toast.LENGTH_SHORT).show();
+                    textView.setAnimation(AnimationUtils.shakeAnimation(2));
+                }
+                else
+                {
+                    //TODO: Start Search
+                }
             }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
+            return false;
         });
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item)
-    {
-        // Handle navigation view item clicks here.
-        switch (item.getItemId())
-        {
-            case R.id.nav_collection:
-                startActivity(new Intent(MainActivity.this, CollectionActivity.class));
-                break;
-            case R.id.nav_gallery:
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                break;
-            case R.id.nav_slideshow:
-                break;
-            case R.id.nav_manage:
-                break;
-            case R.id.nav_share:
-                break;
-            case R.id.nav_send:
-                AVUser.logOut();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                this.finish();
-                break;
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     public void customScan()
@@ -134,14 +88,13 @@ public class MainActivity extends BaseActivity
         {
             if (intentResult.getContents() == null)
             {
-                Toast.makeText(this, R.string.content_null, Toast.LENGTH_LONG).show();
+                //ScanResult is Empty
             }
             else
             {
-                String q = intentResult.getContents();
-                Intent intent = new Intent(this, SearchResultActivity.class);
-                intent.putExtra("q", q);
-                startActivity(intent);
+                //TODO: Start Search
+                bookListPresenter = new BookListPresenter(this);
+                bookListPresenter.loadBooks(intentResult.getContents().toString(),0,20,"title");
             }
         }
         else
@@ -153,57 +106,65 @@ public class MainActivity extends BaseActivity
     @Override
     public void onBackPressed()
     {
-        Log.w("WZY", "onBackPressed");
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START))
+        if ((System.currentTimeMillis() - exitTime) > 2000)
         {
-            drawer.closeDrawer(GravityCompat.START);
+            Snackbar.make(mContentMain, R.string.exit, Snackbar.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
         }
         else
         {
-            if ((System.currentTimeMillis() - exitTime) > 3000)
-            {
-                Snackbar.make(contentMain, R.string.exit,
-                        Snackbar.LENGTH_SHORT).show();
-                exitTime = System.currentTimeMillis();
-            }
-            else
-            {
-                App.quiteApplication();
-            }
+            this.finish();
+            App.quiteApplication();
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
+    @OnClick({R.id.fab, R.id.iv_avatar, R.id.iv_collection, R.id.iv_scan})
+    public void onClick(View view)
     {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        final MenuItem itemSearch = menu.findItem(R.id.action_search);
-        mSearchView = (SearchView) MenuItemCompat.getActionView(itemSearch);
-        mSearchView.setQueryHint(getString(R.string.action_search));
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        switch (id)
+        switch (view.getId())
         {
-            case R.id.action_search:
-                setSearch();
+            case R.id.fab:
+                Snackbar.make(view, "FAB", Snackbar.LENGTH_SHORT).show();
                 break;
-            case R.id.action_scan:
+            case R.id.iv_avatar:
+                Toast.makeText(MainActivity.this, "avatar", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.iv_collection:
+                Toast.makeText(this, "collection", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.iv_scan:
                 customScan();
                 break;
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    @Override
+    public void showMessage(String msg)
+    {
+        Log.w("WZY", msg);
+    }
+
+    @Override
+    public void showProgress()
+    {
+        Log.w("WZY", "showProgress");
+    }
+
+    @Override
+    public void hideProgress()
+    {
+        Log.w("WZY", "hideProgress");
+    }
+
+    @Override
+    public void refreshData(Object result)
+    {
+        Log.w("WZY", result.toString());
+    }
+
+    @Override
+    public void addData(Object result)
+    {
+        Log.w("WZY", result.toString());
     }
 }

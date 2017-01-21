@@ -1,6 +1,5 @@
 package space.levan.memory.view.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -8,16 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import space.levan.memory.App;
 import space.levan.memory.R;
+import space.levan.memory.utils.NetworkUtils;
 import space.levan.memory.utils.UIUtils;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
- * Base
- *
- * Created by WangZhiYao on 2016/10/22.
+ * Created by WangZhiYao on 2017-01-21.
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -33,12 +31,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         activity = this;
         ((App) UIUtils.getContext()).addActivity(this);
         init();
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase)
-    {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override

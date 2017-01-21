@@ -17,9 +17,7 @@ import butterknife.OnClick;
 import space.levan.memory.R;
 
 /**
- * 二维码，条形码扫描
- *
- * Created by WangZhiYao on 2016/10/22.
+ * Created by WangZhiYao on 2017-01-21.
  */
 
 public class ScanActivity extends AppCompatActivity
