@@ -3,7 +3,6 @@ package space.levan.memory.view.activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +19,7 @@ import space.levan.memory.R;
  * Created by WangZhiYao on 2017-01-21.
  */
 
-public class ScanActivity extends AppCompatActivity
+public class ScanActivity extends BaseActivity
         implements DecoratedBarcodeView.TorchListener {
 
     @BindView(R.id.btn_switch)
@@ -46,6 +45,12 @@ public class ScanActivity extends AppCompatActivity
     }
 
     @Override
+    protected int getOverridePendingTransitionMode()
+    {
+        return 2;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -66,6 +71,12 @@ public class ScanActivity extends AppCompatActivity
         captureManager = new CaptureManager(this,mDBV);
         captureManager.initializeFromIntent(getIntent(),savedInstanceState);
         captureManager.decode();
+    }
+
+    @Override
+    protected void initEvents()
+    {
+
     }
 
     @Override

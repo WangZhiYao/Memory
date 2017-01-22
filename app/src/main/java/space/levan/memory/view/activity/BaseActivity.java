@@ -1,17 +1,13 @@
 package space.levan.memory.view.activity;
 
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import space.levan.memory.App;
 import space.levan.memory.R;
-import space.levan.memory.utils.NetworkUtils;
 import space.levan.memory.utils.UIUtils;
 
 /**
@@ -20,31 +16,35 @@ import space.levan.memory.utils.UIUtils;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    public static final int LEFT_IN    = 1;
+    public static final int LEFT_OUT   = 1;
+    public static final int RIGHT_IN   = 2;
+    public static final int RIGHT_OUT  = 2;
+    protected abstract int getOverridePendingTransitionMode();
     protected final String TAG = getClass().getSimpleName();
     public static BaseActivity activity;
-    protected Toolbar mToolbar;
+    //protected Toolbar mToolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
+        switch (getOverridePendingTransitionMode())
+        {
+            case LEFT_IN:
+                overridePendingTransition(R.anim.left_in, R.anim.stay);
+                break;
+
+            case RIGHT_IN:
+                overridePendingTransition(R.anim.right_in, R.anim.stay);
+                break;
+
+            default:
+                break;
+        }
         super.onCreate(savedInstanceState);
         activity = this;
         ((App) UIUtils.getContext()).addActivity(this);
         init();
-    }
-
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        activity = this;
-    }
-
-    @Override
-    protected void onPause()
-    {
-        super.onPause();
-        activity = null;
     }
 
     private void init()
@@ -68,7 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      *
      * @return
      */
-    public Toolbar getToolbar()
+    /*public Toolbar getToolbar()
     {
         return mToolbar;
     }
@@ -86,6 +86,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
     }
+    */
 
     /**
      * 菜单按钮初始化
@@ -146,6 +147,39 @@ public abstract class BaseActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        activity = this;
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        activity = null;
+    }
+
+    @Override
+    public void finish()
+    {
+        super.finish();
+        ((App) UIUtils.getContext()).removeActivity(this);
+        switch (getOverridePendingTransitionMode())
+        {
+            case LEFT_OUT:
+                overridePendingTransition(0, R.anim.left_out);
+                break;
+
+            case RIGHT_OUT:
+                overridePendingTransition(0, R.anim.right_out);
+                break;
+
+            default:
+                break;
+        }
+    }
     /**
      * activity退出时将activity移出栈
      */

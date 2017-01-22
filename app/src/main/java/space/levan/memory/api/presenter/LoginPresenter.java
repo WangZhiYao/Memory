@@ -62,6 +62,6 @@ public class LoginPresenter implements ILoginPresenter, ApiListener {
     public void onFailed(BaseResponse msg)
     {
         mILoginView.hideProgress();
-        mILoginView.loginFailed(msg.getError());
+        mILoginView.showMessage(msg.getError());
     }
 }

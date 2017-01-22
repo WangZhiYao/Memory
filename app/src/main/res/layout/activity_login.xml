@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="space.levan.memory.view.activity.LoginActivity">
+
+    <ImageView
+        android:src="@drawable/ic_logo"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="64dp"/>
+    
+    <EditText
+        android:id="@+id/et_email"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:hint="@string/login_email"
+        android:textColorHint="@color/colorTips"
+        android:maxLines="1"
+        android:layout_width="240dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="48dp"
+        android:background="@color/colorSplit"
+        android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:id="@+id/et_password"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:hint="@string/login_password"
+        android:textColorHint="@color/colorTips"
+        android:maxLines="1"
+        android:layout_width="240dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorSplit"
+        android:inputType="textPassword"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/tv_register"
+                android:text="@string/login_register"
+                android:textSize="12sp"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/tv_reset_password"
+                android:text="@string/login_forget_password"
+                android:textSize="12sp"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_login"
+        android:text="@string/login_login"
+        android:textSize="16sp"
+        android:textColor="@color/colorWhite"
+        android:layout_width="240dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/ic_btn_ripple"/>
+
+</LinearLayout>

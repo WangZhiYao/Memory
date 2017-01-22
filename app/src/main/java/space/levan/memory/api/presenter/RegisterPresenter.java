@@ -55,6 +55,6 @@ public class RegisterPresenter implements IRegisterPresenter, ApiListener {
     public void onFailed(BaseResponse msg)
     {
         mIRegisterView.hideProgress();
-        mIRegisterView.registerFailed(msg.getError());
+        mIRegisterView.showMessage(msg.getError());
     }
 }

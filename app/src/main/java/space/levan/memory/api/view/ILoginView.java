@@ -10,8 +10,6 @@ public interface ILoginView {
 
     void loginSuccess(String msg);
 
-    void loginFailed(String msg);
-
     void showProgress();
 
     void hideProgress();

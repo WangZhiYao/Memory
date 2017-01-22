@@ -56,4 +56,7 @@ dependencies {
 
     //CircleImageView
     compile 'de.hdodenhof:circleimageview:2.1.0'
+
+    //ParticleView
+    compile 'me.wangyuwei:ParticleView:1.0.4'
 }
