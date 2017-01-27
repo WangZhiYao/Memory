@@ -13,4 +13,6 @@ public interface ILoginView {
     void showProgress();
 
     void hideProgress();
+
+    void shake(int code);
 }

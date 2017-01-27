@@ -6,7 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 
 import com.avos.avoscloud.AVUser;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -17,16 +17,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import space.levan.memory.App;
 import space.levan.memory.R;
-import space.levan.memory.api.presenter.BookListPresenter;
-import space.levan.memory.api.view.IBookListView;
 
-public class MainActivity extends BaseActivity implements IBookListView {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.content_main)
-    RelativeLayout mContentMain;
+    LinearLayout mContentMain;
 
     private long exitTime = 0;
-    private BookListPresenter bookListPresenter;
 
     @Override
     protected int getOverridePendingTransitionMode()
@@ -56,8 +53,7 @@ public class MainActivity extends BaseActivity implements IBookListView {
         getLayoutInflater().inflate(R.layout.toolbar_main, mToolbar);
     }
 
-    public
-    void customScan()
+    public void customScan()
     {
         new IntentIntegrator(this)
                 .setOrientationLocked(false)
@@ -77,8 +73,6 @@ public class MainActivity extends BaseActivity implements IBookListView {
             else
             {
                 //TODO: Start Search
-                bookListPresenter = new BookListPresenter(this);
-                bookListPresenter.loadBooks(intentResult.getContents().toString(),0,20,"title");
             }
         }
         else
@@ -116,7 +110,7 @@ public class MainActivity extends BaseActivity implements IBookListView {
                 this.finish();
                 break;
             case R.id.iv_collection:
-
+                startActivity(new Intent(MainActivity.this, BookDetailActivity.class));
                 break;
             case R.id.iv_search:
                 startActivity(new Intent(MainActivity.this, SearchActivity.class));
@@ -125,35 +119,5 @@ public class MainActivity extends BaseActivity implements IBookListView {
                 customScan();
                 break;
         }
-    }
-
-    @Override
-    public void showMessage(String msg)
-    {
-        Log.w("WZY", msg);
-    }
-
-    @Override
-    public void showProgress()
-    {
-        Log.w("WZY", "showProgress");
-    }
-
-    @Override
-    public void hideProgress()
-    {
-        Log.w("WZY", "hideProgress");
-    }
-
-    @Override
-    public void refreshData(Object result)
-    {
-        Log.w("WZY", result.toString());
-    }
-
-    @Override
-    public void addData(Object result)
-    {
-        Log.w("WZY", result.toString());
     }
 }

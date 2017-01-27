@@ -14,6 +14,7 @@ import butterknife.OnClick;
 import space.levan.memory.R;
 import space.levan.memory.api.presenter.RegisterPresenter;
 import space.levan.memory.api.view.IRegisterView;
+import space.levan.memory.utils.AnimationUtils;
 
 public class RegisterActivity extends BaseActivity implements IRegisterView {
 
@@ -32,6 +33,10 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     private String mNickname;
     private String mEmail;
     private String mPassword;
+
+    private static final int SHAKE_NICKNAME = 1;
+    private static final int SHAKE_USERNAME = 2;
+    private static final int SHAKE_PASSWORD = 3;
 
     @Override
     protected int getOverridePendingTransitionMode()
@@ -105,5 +110,24 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     {
         mProDialog.dismiss();
         mBtRegister.setClickable(true);
+    }
+
+    @Override
+    public void shake(int code)
+    {
+        switch (code)
+        {
+            case SHAKE_NICKNAME:
+                mEtNickname.startAnimation(AnimationUtils.shakeAnimation(2));
+                break;
+
+            case SHAKE_USERNAME:
+                mEtEmail.startAnimation(AnimationUtils.shakeAnimation(2));
+                break;
+
+            case SHAKE_PASSWORD:
+                mEtPassword.startAnimation(AnimationUtils.shakeAnimation(2));
+                break;
+        }
     }
 }

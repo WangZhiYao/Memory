@@ -14,6 +14,7 @@ import butterknife.OnClick;
 import space.levan.memory.R;
 import space.levan.memory.api.presenter.LoginPresenter;
 import space.levan.memory.api.view.ILoginView;
+import space.levan.memory.utils.AnimationUtils;
 
 public class LoginActivity extends BaseActivity implements ILoginView {
 
@@ -28,6 +29,8 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     private LoginPresenter mLoginPresenter;
     private String mEmail;
     private String mPassword;
+    private static final int SHAKE_USERNAME = 1;
+    private static final int SHAKE_PASSWORD = 2;
 
     @Override
     protected int getOverridePendingTransitionMode()
@@ -110,5 +113,20 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     {
         mProDialog.dismiss();
         mBtLogin.setClickable(true);
+    }
+
+    @Override
+    public void shake(int code)
+    {
+        switch (code)
+        {
+            case SHAKE_USERNAME:
+                mEtEmail.startAnimation(AnimationUtils.shakeAnimation(2));
+                break;
+
+            case SHAKE_PASSWORD:
+                mEtPassword.startAnimation(AnimationUtils.shakeAnimation(2));
+                break;
+        }
     }
 }

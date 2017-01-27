@@ -1,5 +1,7 @@
 package space.levan.memory.api.presenter;
 
+import android.text.TextUtils;
+
 import space.levan.memory.App;
 import space.levan.memory.R;
 import space.levan.memory.api.ApiListener;
@@ -31,6 +33,12 @@ public class ResetPasswordPresenter implements IResetPasswordPresenter, ApiListe
         if (!NetworkUtils.isConnected(App.getApplication()))
         {
             mIResetPasswordView.showMessage(App.getApplication().getResources().getString(R.string.poor_network));
+            return;
+        }
+        if (TextUtils.isEmpty(email))
+        {
+            mIResetPasswordView.shake();
+            mIResetPasswordView.showMessage(App.getApplication().getString(R.string.reset_empty_email));
             return;
         }
         mIResetPasswordView.showProgress();

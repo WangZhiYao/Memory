@@ -1,5 +1,7 @@
 package space.levan.memory.api.presenter;
 
+import android.text.TextUtils;
+
 import space.levan.memory.App;
 import space.levan.memory.R;
 import space.levan.memory.api.ApiListener;
@@ -19,6 +21,11 @@ public class RegisterPresenter implements IRegisterPresenter, ApiListener {
     private IRegisterModel mIRegisterModel;
     private IRegisterView mIRegisterView;
 
+    private static final int SHAKE_NICKNAME = 1;
+    private static final int SHAKE_USERNAME = 2;
+    private static final int SHAKE_PASSWORD = 3;
+
+
     public RegisterPresenter(IRegisterView view)
     {
         mIRegisterView = view;
@@ -31,6 +38,24 @@ public class RegisterPresenter implements IRegisterPresenter, ApiListener {
         if (!NetworkUtils.isConnected(App.getApplication()))
         {
             mIRegisterView.showMessage(App.getApplication().getResources().getString(R.string.poor_network));
+            return;
+        }
+        if (TextUtils.isEmpty(nickname))
+        {
+            mIRegisterView.shake(SHAKE_NICKNAME);
+            mIRegisterView.showMessage(App.getApplication().getString(R.string.register_empty_username));
+            return;
+        }
+        if (TextUtils.isEmpty(username))
+        {
+            mIRegisterView.shake(SHAKE_USERNAME);
+            mIRegisterView.showMessage(App.getApplication().getString(R.string.register_empty_email));
+            return;
+        }
+        if (TextUtils.isEmpty(password))
+        {
+            mIRegisterView.shake(SHAKE_PASSWORD);
+            mIRegisterView.showMessage(App.getApplication().getString(R.string.register_empty_password));
             return;
         }
         mIRegisterView.showProgress();

@@ -13,4 +13,6 @@ public interface IRegisterView {
     void showProgress();
 
     void hideProgress();
+
+    void shake(int code);
 }

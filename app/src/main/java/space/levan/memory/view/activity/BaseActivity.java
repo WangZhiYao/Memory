@@ -31,11 +31,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         switch (getOverridePendingTransitionMode())
         {
             case LEFT_IN:
-                overridePendingTransition(R.anim.left_in, R.anim.stay);
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
                 break;
 
             case RIGHT_IN:
-                overridePendingTransition(R.anim.right_in, R.anim.stay);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 break;
 
             default:
@@ -169,11 +169,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         switch (getOverridePendingTransitionMode())
         {
             case LEFT_OUT:
-                overridePendingTransition(0, R.anim.left_out);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 break;
 
             case RIGHT_OUT:
-                overridePendingTransition(0, R.anim.right_out);
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
                 break;
 
             default:

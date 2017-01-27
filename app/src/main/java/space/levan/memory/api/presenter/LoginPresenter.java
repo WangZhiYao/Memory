@@ -20,6 +20,8 @@ public class LoginPresenter implements ILoginPresenter, ApiListener {
 
     private ILoginModel mILoginModel;
     private ILoginView mILoginView;
+    private static final int SHAKE_USERNAME              = 1;
+    private static final int SHAKE_PASSWORD              = 2;
 
     public LoginPresenter(ILoginView view)
     {
@@ -35,9 +37,16 @@ public class LoginPresenter implements ILoginPresenter, ApiListener {
             mILoginView.showMessage(App.getApplication().getResources().getString(R.string.poor_network));
             return;
         }
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password))
+        if (TextUtils.isEmpty(username))
         {
-            mILoginView.showMessage(App.getApplication().getResources().getString(R.string.empty_username_or_password));
+            mILoginView.shake(SHAKE_USERNAME);
+            mILoginView.showMessage(App.getApplication().getString(R.string.login_empty_username));
+            return;
+        }
+        if (TextUtils.isEmpty(password))
+        {
+            mILoginView.shake(SHAKE_PASSWORD);
+            mILoginView.showMessage(App.getApplication().getString(R.string.login_empty_password));
             return;
         }
         mILoginView.showProgress();

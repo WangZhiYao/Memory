@@ -1,5 +1,7 @@
 package space.levan.memory.api.presenter;
 
+import android.text.TextUtils;
+
 import space.levan.memory.App;
 import space.levan.memory.R;
 import space.levan.memory.api.ApiListener;
@@ -33,6 +35,12 @@ public class BookListPresenter implements IBookListPresenter, ApiListener {
         if (!NetworkUtils.isConnected(App.getApplication()))
         {
             mBookListView.showMessage(App.getApplication().getString(R.string.poor_network));
+            return;
+        }
+        if (TextUtils.isEmpty(q))
+        {
+            mBookListView.shake();
+            mBookListView.showMessage(App.getApplication().getString(R.string.empty_search));
             return;
         }
         mBookListView.showProgress();

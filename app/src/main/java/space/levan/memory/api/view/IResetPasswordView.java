@@ -11,4 +11,6 @@ public interface IResetPasswordView {
     void showProgress();
 
     void hideProgress();
+
+    void shake();
 }

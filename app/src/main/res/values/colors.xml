@@ -10,4 +10,5 @@
     <color name="colorText">#545454</color>
 
     <color name="colorRipple">#1F799A</color>
+    <color name="colorTransparent">@android:color/transparent</color>
 </resources>

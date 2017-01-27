@@ -181,8 +181,40 @@ public class BookInfoResponse implements Serializable {
         this.price = price;
     }
 
-    public String getInfoString() {
-        if (this.author.length > 0) {
+    public String getAllAuthor()
+    {
+        if (this.author.length > 0)
+        {
+            String allAuthor = "";
+            for (int i = 0; i < author.length - 1; i++)
+            {
+                allAuthor = allAuthor + " " +author[i];
+            }
+            return allAuthor;
+        }
+
+        return "";
+    }
+
+    public String getAllTranslator()
+    {
+        if (this.translator.length > 0)
+        {
+            String allTranslator = "";
+            for (int i = 0; i < author.length - 1; i++)
+            {
+                allTranslator = allTranslator + " " +author[i];
+            }
+            return allTranslator;
+        }
+
+        return "";
+    }
+
+    public String getInfoString()
+    {
+        if (this.author.length > 0)
+        {
             return this.author[0].split("、")[0] + "/" + this.publisher + "/" + this.pubdate;
         }
         return "-";

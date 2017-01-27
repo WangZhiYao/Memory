@@ -13,6 +13,7 @@ import butterknife.OnClick;
 import space.levan.memory.R;
 import space.levan.memory.api.presenter.ResetPasswordPresenter;
 import space.levan.memory.api.view.IResetPasswordView;
+import space.levan.memory.utils.AnimationUtils;
 
 public class ResetPasswordActivity extends BaseActivity implements IResetPasswordView {
 
@@ -84,5 +85,11 @@ public class ResetPasswordActivity extends BaseActivity implements IResetPasswor
     {
         mProDialog.dismiss();
         mBtReset.setClickable(true);
+    }
+
+    @Override
+    public void shake()
+    {
+        mEtEmail.startAnimation(AnimationUtils.shakeAnimation(2));
     }
 }

@@ -54,9 +54,6 @@ dependencies {
     //ZXing
     compile 'com.journeyapps:zxing-android-embedded:3.4.0'
 
-    //CircleImageView
-    compile 'de.hdodenhof:circleimageview:2.1.0'
-
     //ParticleView
     compile 'me.wangyuwei:ParticleView:1.0.4'
 }
