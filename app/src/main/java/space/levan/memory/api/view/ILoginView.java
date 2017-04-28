@@ -1,18 +1,16 @@
 package space.levan.memory.api.view;
 
 /**
- * Created by WangZhiYao on 2017-01-21.
+ * Created by WangZhiYao on 2017/4/13.
  */
 
-public interface ILoginView {
+public interface ILoginView
+{
+    void loginSuccess();
 
     void showMessage(String msg);
-
-    void loginSuccess(String msg);
 
     void showProgress();
 
     void hideProgress();
-
-    void shake(int code);
 }

@@ -5,11 +5,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 /**
- * Created by WangZhiYao on 2017-01-24.
+ * Created by WangZhiYao on 2017/4/28.
  */
 
-public class KeyBoardUtils {
-
+public class KeyBoardUtils
+{
     public static boolean isKeyBordOpen(Context mContext)
     {
         InputMethodManager imm = (InputMethodManager) mContext

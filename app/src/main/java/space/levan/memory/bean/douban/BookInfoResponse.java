@@ -1,33 +1,39 @@
 package space.levan.memory.bean.douban;
 
 import java.io.Serializable;
+import java.util.Arrays;
+
+import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 
 /**
- * Created by WangZhiYao on 2017-01-21.
+ * Created by WangZhiYao on 2017/4/27.
  */
 
-public class BookInfoResponse implements Serializable {
-
+public class BookInfoResponse extends RealmObject implements Serializable
+{
+    @Ignore
     public static final long serialVersionUID = 7060254125600464481L;
+    @Ignore
     public static final String serialVersionName = "bookInfo";
     private String id;
     private String title;
     private String subtitle;
     private String publisher;
+    @Ignore
     private String[] author;
+    @Ignore
     private String[] translator;
+    private String authors;
+    private String translators;
     private String pubdate;
-    private String image;
-    private String ebook_url;
     private String pages;
-    private String binding;
     private String origin_title;
+    @Ignore
     private ImageBean images;
+    private String image;
     private String isbn13;
-    private String author_intro;
     private String summary;
-    private String ebook_price;
-    private String price;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -77,8 +83,42 @@ public class BookInfoResponse implements Serializable {
         this.author = author;
     }
 
+    public String getAuthors()
+    {
+        if (this.author.length > 0)
+        {
+            String author = "";
+            for (int i = 0; i < this.author.length-1 ; i++)
+            {
+                author += getAuthor()[i] + "，";
+            }
+            author += this.author[this.author.length-1];
+
+            return author;
+        }
+
+        return "";
+    }
+
     public String[] getTranslator() {
         return translator;
+    }
+
+    public String getTranslators()
+    {
+        if (this.translator.length > 0)
+        {
+            String translator = "";
+            for (int i = 0; i < this.translator.length-1 ; i++)
+            {
+                translator += this.translator[i] + "，";
+            }
+            translator += this.translator[this.translator.length-1];
+
+            return translator;
+        }
+
+        return "";
     }
 
     public void setTranslator(String[] translator) {
@@ -94,19 +134,11 @@ public class BookInfoResponse implements Serializable {
     }
 
     public String getImage() {
-        return image;
+        return images.getLarge();
     }
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public String getEbook_url() {
-        return ebook_url;
-    }
-
-    public void setEbook_url(String ebook_url) {
-        this.ebook_url = ebook_url;
     }
 
     public String getPages() {
@@ -115,14 +147,6 @@ public class BookInfoResponse implements Serializable {
 
     public void setPages(String pages) {
         this.pages = pages;
-    }
-
-    public String getBinding() {
-        return binding;
-    }
-
-    public void setBinding(String binding) {
-        this.binding = binding;
     }
 
     public String getOrigin_title() {
@@ -149,66 +173,12 @@ public class BookInfoResponse implements Serializable {
         this.isbn13 = isbn13;
     }
 
-    public String getAuthor_intro() {
-        return author_intro;
-    }
-
-    public void setAuthor_intro(String author_intro) {
-        this.author_intro = author_intro;
-    }
-
     public String getSummary() {
         return summary;
     }
 
     public void setSummary(String summary) {
         this.summary = summary;
-    }
-
-    public String getEbook_price() {
-        return ebook_price;
-    }
-
-    public void setEbook_price(String ebook_price) {
-        this.ebook_price = ebook_price;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getAllAuthor()
-    {
-        if (this.author.length > 0)
-        {
-            String allAuthor = "";
-            for (int i = 0; i < author.length - 1; i++)
-            {
-                allAuthor = allAuthor + " " +author[i];
-            }
-            return allAuthor;
-        }
-
-        return "";
-    }
-
-    public String getAllTranslator()
-    {
-        if (this.translator.length > 0)
-        {
-            String allTranslator = "";
-            for (int i = 0; i < author.length - 1; i++)
-            {
-                allTranslator = allTranslator + " " +author[i];
-            }
-            return allTranslator;
-        }
-
-        return "";
     }
 
     public String getInfoString()
@@ -218,5 +188,26 @@ public class BookInfoResponse implements Serializable {
             return this.author[0].split("、")[0] + "/" + this.publisher + "/" + this.pubdate;
         }
         return "-";
+    }
+
+    @Override
+    public String toString() {
+        return "BookInfoResponse{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", subtitle='" + subtitle + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", author=" + Arrays.toString(author) +
+                ", translator=" + Arrays.toString(translator) +
+                ", authors='" + authors + '\'' +
+                ", translators='" + translators + '\'' +
+                ", pubdate='" + pubdate + '\'' +
+                ", pages='" + pages + '\'' +
+                ", origin_title='" + origin_title + '\'' +
+                ", images=" + images +
+                ", image='" + image + '\'' +
+                ", isbn13='" + isbn13 + '\'' +
+                ", summary='" + summary + '\'' +
+                '}';
     }
 }

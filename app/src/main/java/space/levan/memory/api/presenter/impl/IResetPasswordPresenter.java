@@ -1,10 +1,12 @@
 package space.levan.memory.api.presenter.impl;
 
 /**
- * Created by WangZhiYao on 2017-01-21.
+ * Created by WangZhiYao on 2017/4/14.
  */
 
-public interface IResetPasswordPresenter {
+public interface IResetPasswordPresenter
+{
+    void userResetPwd(String email);
 
-    void resetPassword(String email);
+    void cancelReset();
 }

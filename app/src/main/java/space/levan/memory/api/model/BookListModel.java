@@ -1,64 +1,73 @@
 package space.levan.memory.api.model;
 
-import com.google.gson.Gson;
-import com.loopj.android.http.JsonHttpResponseHandler;
-
-import org.json.JSONObject;
+import android.util.Log;
 
 import java.net.UnknownHostException;
 
-import cz.msebera.android.httpclient.Header;
+import retrofit2.Response;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import space.levan.memory.api.ApiListener;
-import space.levan.memory.api.client.Client;
-import space.levan.memory.api.client.MemoryApi;
 import space.levan.memory.api.model.impl.IBookListModel;
-import space.levan.memory.bean.BaseResponse;
+import space.levan.memory.api.services.ApiService;
+import space.levan.memory.api.services.ServiceFactory;
+import space.levan.memory.bean.douban.BaseResponse;
 import space.levan.memory.bean.douban.BookListResponse;
+import space.levan.memory.common.Constant;
 
 /**
- * Created by WangZhiYao on 2017-01-21.
+ * Created by WangZhiYao on 2017/4/28.
  */
 
-public class BookListModel implements IBookListModel {
-
-    private BookListResponse mBookListResponse;
+public class BookListModel implements IBookListModel
+{
 
     @Override
     public void loadBookList(String q, int start, int count, String fields, ApiListener listener)
     {
-        MemoryApi.getBookList(q, start, count, fields, new JsonHttpResponseHandler()
-        {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response)
-            {
-                super.onSuccess(statusCode, headers, response);
-                mBookListResponse = new Gson().fromJson(response.toString(), BookListResponse.class);
-                listener.onComplete(mBookListResponse);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
-            {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-                if (throwable instanceof UnknownHostException)
+        ApiService apiService = ServiceFactory.createService(Constant.DOUBAN_URL, ApiService.class);
+        apiService.getBookList(q, start, count, fields)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Response<BookListResponse>>()
                 {
-                    listener.onFailed(null);
-                    return;
-                }
-                listener.onFailed(new BaseResponse(statusCode, throwable.getMessage()));
-            }
+                    @Override
+                    public void onCompleted()
+                    {
 
-            @Override
-            public void onCancel()
-            {
-                super.onCancel();
-            }
-        });
+                    }
+
+                    @Override
+                    public void onError(Throwable e)
+                    {
+                        if (e instanceof UnknownHostException)
+                        {
+                            Log.d("WZY", e.getMessage());
+                            return;
+                        }
+
+                        listener.onFailed(new BaseResponse(404, e.getMessage()));
+                    }
+
+                    @Override
+                    public void onNext(Response<BookListResponse> bookListResponseResponse)
+                    {
+                        if (bookListResponseResponse.isSuccessful())
+                        {
+                            listener.onComplete(bookListResponseResponse.body());
+                        }
+                        else
+                        {
+                            listener.onFailed(new BaseResponse(bookListResponseResponse.code(), bookListResponseResponse.message()));
+                        }
+                    }
+                });
     }
 
     @Override
     public void cancelLoading()
     {
-        Client.getClient().cancelAllRequests(true);
+
     }
 }

@@ -2,10 +2,8 @@ package space.levan.memory.bean.douban;
 
 import java.util.List;
 
-import space.levan.memory.bean.BaseResponse;
-
 /**
- * Created by WangZhiYao on 2017-01-21.
+ * Created by WangZhiYao on 2017/4/27.
  */
 
 public class BookListResponse extends BaseResponse {
@@ -52,5 +50,15 @@ public class BookListResponse extends BaseResponse {
 
     public void setBooks(List<BookInfoResponse> books) {
         this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return "BookListResponse{" +
+                "count=" + count +
+                ", start=" + start +
+                ", total=" + total +
+                ", books=" + books +
+                '}';
     }
 }

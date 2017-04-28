@@ -4,11 +4,11 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 
 /**
- * Created by WangZhiYao on 2017-01-24.
+ * Created by WangZhiYao on 2017/4/28.
  */
 
-public class Blur {
-
+public class Blur
+{
     public static Bitmap apply(Bitmap sentBitmap)
     {
         return apply(sentBitmap, 10);

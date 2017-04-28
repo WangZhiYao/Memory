@@ -4,14 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 
 import space.levan.memory.App;
-import space.levan.memory.view.activity.BaseActivity;
+import space.levan.memory.view.base.BaseActivity;
 
 /**
- * Created by WangZhiYao on 2017-01-21.
+ * Created by WangZhiYao on 2017/4/27.
  */
 
-public class UIUtils {
-
+public class UIUtils
+{
     public static Context getContext()
     {
         return App.getApplication();

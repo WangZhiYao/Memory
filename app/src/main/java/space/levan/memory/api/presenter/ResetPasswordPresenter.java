@@ -1,61 +1,52 @@
 package space.levan.memory.api.presenter;
 
-import android.text.TextUtils;
-
-import space.levan.memory.App;
-import space.levan.memory.R;
 import space.levan.memory.api.ApiListener;
 import space.levan.memory.api.model.ResetPasswordModel;
 import space.levan.memory.api.model.impl.IResetPasswordModel;
 import space.levan.memory.api.presenter.impl.IResetPasswordPresenter;
 import space.levan.memory.api.view.IResetPasswordView;
-import space.levan.memory.bean.BaseResponse;
-import space.levan.memory.utils.NetworkUtils;
+import space.levan.memory.bean.douban.BaseResponse;
 
 /**
- * Created by WangZhiYao on 2017-01-21.
+ * Created by WangZhiYao on 2017/4/14.
  */
 
-public class ResetPasswordPresenter implements IResetPasswordPresenter, ApiListener {
-
-    private IResetPasswordModel mIResetPasswordModel;
-    private IResetPasswordView mIResetPasswordView;
+public class ResetPasswordPresenter implements IResetPasswordPresenter, ApiListener
+{
+    private IResetPasswordModel mIResetPwdModel;
+    private IResetPasswordView mIResetPwdView;
 
     public ResetPasswordPresenter(IResetPasswordView view)
     {
-        mIResetPasswordView = view;
-        mIResetPasswordModel = new ResetPasswordModel();
+        mIResetPwdView = view;
+        mIResetPwdModel = new ResetPasswordModel();
     }
 
     @Override
-    public void resetPassword(String email)
+    public void userResetPwd(String email)
     {
-        if (!NetworkUtils.isConnected(App.getApplication()))
-        {
-            mIResetPasswordView.showMessage(App.getApplication().getResources().getString(R.string.poor_network));
-            return;
-        }
-        if (TextUtils.isEmpty(email))
-        {
-            mIResetPasswordView.shake();
-            mIResetPasswordView.showMessage(App.getApplication().getString(R.string.reset_empty_email));
-            return;
-        }
-        mIResetPasswordView.showProgress();
-        mIResetPasswordModel.resetPassword(email, this);
+        mIResetPwdModel.userResetPwd(email, this);
+        mIResetPwdView.showProgress();
+    }
+
+    @Override
+    public void cancelReset()
+    {
+        mIResetPwdView.hideProgress();
+        mIResetPwdModel.cancelReset();
     }
 
     @Override
     public void onComplete(Object result)
     {
-        mIResetPasswordView.hideProgress();
-        mIResetPasswordView.showMessage(result.toString());
+        mIResetPwdView.hideProgress();
+        mIResetPwdView.showMessage(result.toString());
     }
 
     @Override
     public void onFailed(BaseResponse msg)
     {
-        mIResetPasswordView.hideProgress();
-        mIResetPasswordView.showMessage(msg.getError());
+        mIResetPwdView.hideProgress();
+        mIResetPwdView.showMessage(msg.getMsg());
     }
 }

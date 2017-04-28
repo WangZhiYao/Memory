@@ -1,72 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".view.activity.BookDetailActivity">
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="228dp"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginBottom="21dp"
-            app:expandedTitleMarginStart="24dp"
-            app:expandedTitleTextAppearance="?android:attr/textAppearanceMedium"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <ImageView
-                android:id="@+id/iv_book_bg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorWhite"
-                android:fitsSystemWindows="true"
-                android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.5" />
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:contentInsetLeft="0dp"
-                app:contentInsetStart="0dp"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_book_detail" />
+    android:background="@color/colorWhite">
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|center"
-        app:layout_behavior="space.levan.memory.utils.BookImageBehavior">
+        android:layout_width="match_parent"
+        android:layout_height="264dp">
+
         <ImageView
-            android:src="@mipmap/img_book"
-            android:layout_width="96dp"
-            android:layout_height="280dp"
-            android:paddingBottom="90dp"/>
-        <ImageView
-            android:id="@+id/iv_book_img"
-            android:layout_width="86dp"
-            android:layout_height="280dp"
-            android:paddingLeft="2dp"
-            android:paddingBottom="65dp"/>
+            android:id="@+id/iv_book_detail_bg"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="228dp" />
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="23dp">
+
+            <fragment
+                android:id="@+id/fg_book_detail_title"
+                android:name="space.levan.memory.view.fragments.BookDetailTitleFragment"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                tools:layout="@layout/fragment_book_detail_title"/>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp">
+
+                <ImageView
+                    android:src="@mipmap/img_book"
+                    android:layout_width="96dp"
+                    android:layout_height="160dp" />
+
+                <ImageView
+                    android:id="@+id/iv_book_detail_img"
+                    android:layout_marginTop="3dp"
+                    android:layout_width="87dp"
+                    android:layout_height="152dp" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_book_detail_add"
+            android:text="@string/ac_book_detail_add"
+            android:textSize="13sp"
+            android:textColor="@color/colorAccent"
+            android:drawableStart="@mipmap/ic_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="16dp" />
+
     </FrameLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
+
+        <TextView
+            android:id="@+id/tv_book_detail_title"
+            android:text="百年独孤"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        
+        <TextView
+            android:id="@+id/tv_book_detail_info"
+            android:text="[日]某某/某某出版社/2015-4[日]某某/某某出版社/2015-4[日]某某/某某出版社/2015-4"
+            android:textSize="10sp"
+            android:maxEms="20"
+            android:ellipsize="end"
+            android:textColor="@color/colorTips"
+            android:maxLines="1"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_book_detail_author"
+            android:text="作者:XXX"
+            android:textSize="10sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_book_detail_subtitle"
+            android:text="副标题:xxx"
+            android:textSize="10sp"
+            android:maxLines="1"
+            android:maxEms="18"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_book_detail_origin_title"
+            android:text="原作名:xxx"
+            android:textSize="10sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_book_detail_publisher"
+            android:text="出版社:xxx"
+            android:textSize="10sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_book_detail_translator"
+            android:text="译者:xxx"
+            android:textSize="10sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_book_detail_publish_date"
+            android:text="出版年:2016-1"
+            android:textSize="10sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_book_detail_pages"
+            android:text="页数:333"
+            android:textSize="10sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_book_detail_isbn"
+            android:text="isbn:78921793717"
+            android:textSize="10sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_book_detail_summary"
+            android:text="简介：XXXXXXXXXXXX"
+            android:textSize="10sp"
+            android:maxLines="4"
+            android:ellipsize="end"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

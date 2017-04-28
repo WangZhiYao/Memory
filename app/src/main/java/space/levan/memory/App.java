@@ -2,7 +2,6 @@ package space.levan.memory;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.v7.app.AppCompatDelegate;
 
 import com.avos.avoscloud.AVOSCloud;
 
@@ -13,42 +12,29 @@ import java.util.ListIterator;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import space.levan.memory.common.Constant;
-import space.levan.memory.view.activity.BaseActivity;
+import space.levan.memory.view.base.BaseActivity;
 
 /**
- * Created by WangZhiYao on 2017-01-21.
+ * Created by WangZhiYao on 2017-04-09.
  */
 
-public class App extends Application {
-
-    public final static String TAG = "App";
-    public final static boolean DEBUG = true;
-    private static App application;
+public class App extends Application
+{
+    private static App mApp;
     private static int mainTid;
-    /**
-     * Activity集合，来管理所有的Activity
-     */
     private static List<BaseActivity> activities;
-
-    static
-    {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-    }
+    //public volatile static boolean NET_STATE;
 
     @Override
     public void onCreate()
     {
         super.onCreate();
+        mApp = this;
         activities = new LinkedList<>();
-        application = this;
         mainTid = android.os.Process.myTid();
-        initLeanCloud();
         initRealm();
-    }
-
-    private void initLeanCloud()
-    {
-        AVOSCloud.initialize(this, Constant.APP_ID, Constant.APP_KEY);
+        initLeanCloud();
+        //NET_STATE = NetUtils.isConnected(this);
     }
 
     private void initRealm()
@@ -61,6 +47,11 @@ public class App extends Application {
         Realm.setDefaultConfiguration(config);
     }
 
+    private void initLeanCloud()
+    {
+        AVOSCloud.initialize(this, Constant.APP_ID, Constant.APP_KEY);
+    }
+
     /**
      * 获取application
      *
@@ -68,7 +59,7 @@ public class App extends Application {
      */
     public static Context getApplication()
     {
-        return application;
+        return mApp;
     }
 
     /**

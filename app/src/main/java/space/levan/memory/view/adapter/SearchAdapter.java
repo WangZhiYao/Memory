@@ -3,17 +3,13 @@ package space.levan.memory.view.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
@@ -22,17 +18,15 @@ import java.util.List;
 
 import space.levan.memory.R;
 import space.levan.memory.bean.douban.BookInfoResponse;
-import space.levan.memory.utils.Reflect3DImage;
 import space.levan.memory.utils.UIUtils;
-import space.levan.memory.view.activity.BaseActivity;
-import space.levan.memory.view.activity.BookDetailActivity;
+import space.levan.memory.view.activities.BookDetailActivity;
 
 /**
- * Created by WangZhiYao on 2017-01-23.
+ * Created by WangZhiYao on 2017/4/28.
  */
 
-public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+{
     private static final int TYPE_EMPTY = 0;
     private static final int TYPE_DEFAULT = 1;
     private final List<BookInfoResponse> bookInfoResponses;
@@ -85,8 +79,9 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 return columns;
         }
     }
+
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position)
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
     {
         if (holder instanceof SearchHolder)
         {
@@ -96,7 +91,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     .into(((SearchHolder) holder).iv_book_img);
             ((SearchHolder) holder).tv_book_title.setText(bookInfo.getTitle());
             ((SearchHolder) holder).tv_book_info.setText(bookInfo.getInfoString());
-            ((SearchHolder) holder).tv_book_description.setText("\u3000" + bookInfo.getSummary());
+            ((SearchHolder) holder).tv_book_description.setText("　　" + bookInfo.getSummary());
             ((SearchHolder) holder).itemView.setOnClickListener(v ->
             {
                 Bundle b = new Bundle();
@@ -111,22 +106,6 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 Intent intent = new Intent(UIUtils.getContext(), BookDetailActivity.class);
                 intent.putExtras(b);
                 UIUtils.startActivity(intent);
-
-                /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                {
-                    if (BaseActivity.activity == null)
-                    {
-                        UIUtils.startActivity(intent);
-                        return;
-                    }
-                    ActivityOptionsCompat options = ActivityOptionsCompat.
-                            makeSceneTransitionAnimation(BaseActivity.activity, ((SearchHolder) holder).iv_book_img, "book_img");
-                    BaseActivity.activity.startActivity(intent, options.toBundle());
-                }
-                else
-                {
-                    UIUtils.startActivity(intent);
-                }*/
             });
         }
     }
@@ -134,12 +113,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemCount()
     {
-        if (bookInfoResponses.isEmpty())
-        {
-            return 1;
-        }
-
-        return bookInfoResponses.size();
+        return bookInfoResponses.isEmpty() ? 1 : bookInfoResponses.size();
     }
 
     class SearchHolder extends RecyclerView.ViewHolder
@@ -148,7 +122,6 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private final TextView tv_book_title;
         private final TextView tv_book_info;
         private final TextView tv_book_description;
-
         public SearchHolder(View itemView)
         {
             super(itemView);
@@ -158,7 +131,6 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             tv_book_description = (TextView) itemView.findViewById(R.id.tv_book_description);
         }
     }
-
     class EmptyHolder extends RecyclerView.ViewHolder
     {
         public EmptyHolder(View itemView)

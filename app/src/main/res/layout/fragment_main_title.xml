@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/iv_main_logout"
+        android:src="@mipmap/ic_logout"
+        android:scaleType="centerInside"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/fg_main_title_logout"/>
+
+    <ImageView
+        android:id="@+id/iv_main_shelf"
+        android:src="@mipmap/ic_collection"
+        android:scaleType="centerInside"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/fg_main_title_shelf"/>
+
+    <TextView
+        android:layout_weight="4"
+        android:text="@string/fg_main_title"
+        android:textColor="@color/colorWhite"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/iv_main_search"
+        android:src="@mipmap/ic_search_white"
+        android:scaleType="centerInside"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/fg_main_title_search"/>
+
+    <ImageView
+        android:id="@+id/iv_main_scan"
+        android:src="@mipmap/ic_scan"
+        android:scaleType="centerInside"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/fg_main_title_scan"/>
+
+</LinearLayout>

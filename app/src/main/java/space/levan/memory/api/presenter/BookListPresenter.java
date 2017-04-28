@@ -1,57 +1,40 @@
 package space.levan.memory.api.presenter;
 
-import android.text.TextUtils;
-
-import space.levan.memory.App;
-import space.levan.memory.R;
 import space.levan.memory.api.ApiListener;
 import space.levan.memory.api.model.BookListModel;
 import space.levan.memory.api.model.impl.IBookListModel;
 import space.levan.memory.api.presenter.impl.IBookListPresenter;
 import space.levan.memory.api.view.IBookListView;
-import space.levan.memory.bean.BaseResponse;
+import space.levan.memory.bean.douban.BaseResponse;
 import space.levan.memory.bean.douban.BookListResponse;
-import space.levan.memory.utils.NetworkUtils;
 
 /**
- * Created by WangZhiYao on 2017-01-21.
+ * Created by WangZhiYao on 2017/4/28.
  */
 
-public class BookListPresenter implements IBookListPresenter, ApiListener {
-
-    private IBookListView mBookListView;
-    private IBookListModel mBookListModel;
+public class BookListPresenter implements IBookListPresenter, ApiListener
+{
+    private IBookListView mBookDetailView;
+    private IBookListModel mBookDetailModel;
 
     public BookListPresenter(IBookListView view)
     {
-        mBookListView = view;
-        mBookListModel = new BookListModel();
+        mBookDetailView = view;
+        mBookDetailModel = new BookListModel();
     }
 
     @Override
     public void loadBooks(String q, int start, int count, String fields)
     {
-
-        if (!NetworkUtils.isConnected(App.getApplication()))
-        {
-            mBookListView.showMessage(App.getApplication().getString(R.string.poor_network));
-            return;
-        }
-        if (TextUtils.isEmpty(q))
-        {
-            mBookListView.shake();
-            mBookListView.showMessage(App.getApplication().getString(R.string.empty_search));
-            return;
-        }
-        mBookListView.showProgress();
-        mBookListModel.loadBookList(q, start, count, fields, this);
+        mBookDetailView.showProgress();
+        mBookDetailModel.loadBookList(q, start, count, fields, this);
     }
 
     @Override
     public void cancelLoading()
     {
-        mBookListView.hideProgress();
-        mBookListModel.cancelLoading();
+        mBookDetailView.hideProgress();
+        mBookDetailModel.cancelLoading();
     }
 
     @Override
@@ -62,25 +45,26 @@ public class BookListPresenter implements IBookListPresenter, ApiListener {
             int index = ((BookListResponse) result).getStart();
             if (index == 0)
             {
-                mBookListView.refreshData(result);
+                mBookDetailView.refreshData(result);
             }
             else
             {
-                mBookListView.addData(result);
+                mBookDetailView.addData(result);
             }
 
-            mBookListView.hideProgress();
+            mBookDetailView.hideProgress();
         }
     }
 
     @Override
     public void onFailed(BaseResponse msg)
     {
-        mBookListView.hideProgress();
+        mBookDetailView.hideProgress();
         if (msg == null)
         {
             return;
         }
-        mBookListView.showMessage(msg.getMsg());
+
+        mBookDetailView.showMessage(msg.getMsg());
     }
 }
