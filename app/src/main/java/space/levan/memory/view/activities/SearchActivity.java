@@ -1,6 +1,5 @@
 package space.levan.memory.view.activities;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,9 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -31,7 +28,6 @@ import space.levan.memory.bean.douban.BookListResponse;
 import space.levan.memory.utils.KeyBoardUtils;
 import space.levan.memory.view.adapter.SearchAdapter;
 import space.levan.memory.view.base.BaseActivity;
-import space.levan.memory.view.fragments.SearchTitleFragment;
 
 import static space.levan.memory.common.Constant.fields;
 
