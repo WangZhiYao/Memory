@@ -15,6 +15,7 @@
         tools:layout="@layout/fragment_main_title" />
 
     <ImageView
+        android:id="@+id/iv_main_logo"
         android:src="@mipmap/img_top"
         android:scaleType="centerInside"
         android:layout_width="match_parent"

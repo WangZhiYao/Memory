@@ -3,7 +3,6 @@ package space.levan.memory.view.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,12 +15,13 @@ import butterknife.OnClick;
 import space.levan.memory.R;
 import space.levan.memory.api.presenter.RegisterPresenter;
 import space.levan.memory.api.view.IRegisterView;
+import space.levan.memory.view.base.BaseActivity;
 
 /**
  * Created by WangZhiYao on 2017-04-09.
  */
 
-public class RegisterActivity extends AppCompatActivity implements IRegisterView
+public class RegisterActivity extends BaseActivity implements IRegisterView
 {
     @BindView(R.id.et_register_nickname)
     EditText mEtNickname;
@@ -61,6 +61,7 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
     @Override
     public void registerSuccess()
     {
+        Toast.makeText(this, getString(R.string.ac_register_tips), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent();
         intent.putExtra("username", mEtEmail.getText().toString());
         intent.putExtra("password", mEtPassword.getText().toString());

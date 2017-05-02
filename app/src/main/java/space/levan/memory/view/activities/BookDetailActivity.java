@@ -1,6 +1,7 @@
 package space.levan.memory.view.activities;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -17,7 +18,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import space.levan.memory.R;
 import space.levan.memory.bean.douban.BookInfoResponse;
+import space.levan.memory.bean.realm.Book;
 import space.levan.memory.utils.Blur;
+import space.levan.memory.utils.RealmUtils;
 import space.levan.memory.utils.Reflect3DImage;
 import space.levan.memory.utils.UIUtils;
 import space.levan.memory.view.base.BaseActivity;
@@ -57,6 +60,8 @@ public class BookDetailActivity extends BaseActivity
     @BindView(R.id.tv_book_detail_summary)
     TextView mTvBookSummary;
 
+    private Boolean isCollect;
+    private Book mBook;
     private BookInfoResponse mBookInfoResponse;
 
     @Override
@@ -77,8 +82,7 @@ public class BookDetailActivity extends BaseActivity
     {
         mBookInfoResponse = (BookInfoResponse)
                 getIntent().getSerializableExtra(BookInfoResponse.serialVersionName);
-        //mCollectionPresenter = new CollectionPresenter(this);
-        //mCollectionPresenter.checkCollection(mBookInfoResponse.getIsbn13());
+        mBookInfoResponse.setImage(mBookInfoResponse.getImages().getLarge());
         Bitmap book_img = getIntent().getParcelableExtra("book_img");
         Bitmap bitmap = Reflect3DImage.skewImage(book_img);
         if (book_img != null)
@@ -107,9 +111,10 @@ public class BookDetailActivity extends BaseActivity
 
         mTvBookTitle.setText(mBookInfoResponse.getTitle());
         mTvBookInfo.setText(mBookInfoResponse.getInfoString());
+        mTvBookAuthor.setText("作者：" + mBookInfoResponse.getAuthors());
         if (mBookInfoResponse.getAuthor().length > 0)
         {
-            mTvBookAuthor.setText("作者：" + mBookInfoResponse.getAuthors());
+            mBookInfoResponse.setAuthors(mBookInfoResponse.getAuthors());
         }
         mTvBookPublisher.setText("出版社：" + mBookInfoResponse.getPublisher());
         if (mBookInfoResponse.getSubtitle().isEmpty())
@@ -135,17 +140,52 @@ public class BookDetailActivity extends BaseActivity
         mTvBookIsbn.setText("ISBN：" + mBookInfoResponse.getIsbn13());
         if (!mBookInfoResponse.getSummary().isEmpty())
         {
-            mTvBookSummary.setText("　　"+mBookInfoResponse.getSummary());
+            mTvBookSummary.setText("　　" + mBookInfoResponse.getSummary());
         }
         else
         {
             mTvBookSummary.setText(UIUtils.getContext().getString(R.string.ac_book_detail_no_summary));
+        }
+
+        if (RealmUtils.checkCollection(mBookInfoResponse.getIsbn13()))
+        {
+            mTvBookAdd.setText(getString(R.string.ac_book_detail_delete));
+            Drawable drawable = getResources().getDrawable(R.mipmap.ic_like);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            mTvBookAdd.setCompoundDrawables(drawable, null, null, null);
+            isCollect = true;
+        }
+        else
+        {
+            mTvBookAdd.setText(getString(R.string.ac_book_detail_add));
+            Drawable drawable = getResources().getDrawable(R.mipmap.ic_dontlike);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            mTvBookAdd.setCompoundDrawables(drawable, null, null, null);
+            isCollect = false;
         }
     }
 
     @OnClick(R.id.tv_book_detail_add)
     public void onViewClicked()
     {
+        if (isCollect)
+        {
+            RealmUtils.cancelCollection(mBookInfoResponse.getIsbn13());
+            mTvBookAdd.setText(getString(R.string.ac_book_detail_add));
+            Drawable drawable = getResources().getDrawable(R.mipmap.ic_dontlike);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            mTvBookAdd.setCompoundDrawables(drawable, null, null, null);
+            isCollect = false;
+        }
+        else
+        {
 
+            RealmUtils.addCollection(mBookInfoResponse);
+            mTvBookAdd.setText(getString(R.string.ac_book_detail_delete));
+            Drawable drawable = getResources().getDrawable(R.mipmap.ic_like);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            mTvBookAdd.setCompoundDrawables(drawable, null, null, null);
+            isCollect = true;
+        }
     }
 }

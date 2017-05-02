@@ -11,32 +11,33 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVUser;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 
-import java.util.List;
-
+import io.realm.Realm;
+import io.realm.RealmResults;
 import space.levan.memory.R;
 import space.levan.memory.bean.douban.BookInfoResponse;
+import space.levan.memory.bean.douban.ImageBean;
+import space.levan.memory.bean.realm.Book;
 import space.levan.memory.utils.UIUtils;
 import space.levan.memory.view.activities.BookDetailActivity;
 
 /**
- * Created by WangZhiYao on 2017/4/28.
+ * Created by WangZhiYao on 2017/5/2.
  */
 
-public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class ShelfAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
+    private Context mContext;
     private static final int TYPE_EMPTY = 0;
     private static final int TYPE_DEFAULT = 1;
-    private final List<BookInfoResponse> bookInfoResponses;
-    private Context mContext;
-    private int columns;
+    Realm realm = Realm.getDefaultInstance();
+    RealmResults<Book> mBooks = realm.where(Book.class).equalTo("user", AVUser.getCurrentUser().getUsername()).findAll();
 
-    public SearchAdapter(Context context, List<BookInfoResponse> responses, int columns)
+    public ShelfAdapter(Context context)
     {
-        this.bookInfoResponses = responses;
-        this.columns = columns;
         this.mContext = context;
     }
 
@@ -47,7 +48,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (viewType == TYPE_DEFAULT)
         {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book_list, parent, false);
-            return new SearchHolder(view);
+            return new ShelfHolder(view);
         }
         else
         {
@@ -59,7 +60,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemViewType(int position)
     {
-        if (bookInfoResponses == null || bookInfoResponses.isEmpty())
+        if (mBooks.size() == 0 || mBooks.isEmpty())
         {
             return TYPE_EMPTY;
         }
@@ -69,35 +70,38 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    public int getItemColumnSpan(int position)
-    {
-        switch (getItemViewType(position))
-        {
-            case TYPE_DEFAULT:
-                return 1;
-            default:
-                return columns;
-        }
-    }
-
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
     {
-        if (holder instanceof SearchHolder)
+        if (holder instanceof ShelfHolder)
         {
-            final BookInfoResponse bookInfo = bookInfoResponses.get(position);
+            final Book mBook = mBooks.get(position);
             Glide.with(mContext)
-                    .load(bookInfo.getImages().getLarge())
-                    .into(((SearchHolder) holder).iv_book_img);
-            ((SearchHolder) holder).tv_book_title.setText(bookInfo.getTitle());
-            ((SearchHolder) holder).tv_book_info.setText(bookInfo.getInfoString());
-            ((SearchHolder) holder).tv_book_description.setText("　　" + bookInfo.getSummary());
-            ((SearchHolder) holder).itemView.setOnClickListener(v ->
+                    .load(mBook.image)
+                    .into(((ShelfHolder) holder).iv_book_img);
+            ((ShelfHolder) holder).tv_book_title.setText(mBook.title);
+            ((ShelfHolder) holder).tv_book_info.setText(mBook.infoString);
+            ((ShelfHolder) holder).tv_book_description.setText("\u3000" + mBook.summary);
+            ((ShelfHolder) holder).itemView.setOnClickListener(view ->
             {
                 Bundle b = new Bundle();
-                b.putSerializable(BookInfoResponse.serialVersionName, bookInfo);
+                BookInfoResponse bookInfoResponse = new BookInfoResponse();
+                bookInfoResponse.setTitle(mBook.title);
+                bookInfoResponse.setAuthor(new String[]{mBook.authors});
+                ImageBean img = new ImageBean();
+                img.setLarge(mBook.image);
+                bookInfoResponse.setImages(img);
+                bookInfoResponse.setIsbn13(mBook.isbn13);
+                bookInfoResponse.setOrigin_title(mBook.origin_title);
+                bookInfoResponse.setPages(mBook.pages);
+                bookInfoResponse.setPubdate(mBook.pubdate);
+                bookInfoResponse.setPublisher(mBook.publisher);
+                bookInfoResponse.setSubtitle(mBook.subtitle);
+                bookInfoResponse.setTranslator(mBook.translators == null ? new String[]{} : new String[]{mBook.translators});
+                bookInfoResponse.setSummary(mBook.summary);
+                b.putSerializable(BookInfoResponse.serialVersionName, bookInfoResponse);
                 Bitmap bitmap;
-                GlideBitmapDrawable imageDrawable = (GlideBitmapDrawable) ((SearchHolder) holder).iv_book_img.getDrawable();
+                GlideBitmapDrawable imageDrawable = (GlideBitmapDrawable) ((ShelfHolder) holder).iv_book_img.getDrawable();
                 if (imageDrawable != null)
                 {
                     bitmap = imageDrawable.getBitmap();
@@ -110,24 +114,25 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
         else
         {
-            ((EmptyHolder) holder).iv_item_logo.setImageResource(R.mipmap.img_search);
-            ((EmptyHolder) holder).tv_item_tips.setText(R.string.ac_search_no_result);
+            ((EmptyHolder) holder).iv_item_logo.setImageResource(R.mipmap.img_collection);
+            ((EmptyHolder) holder).tv_item_tips.setText(R.string.ac_shelf_no_collection);
         }
     }
 
     @Override
     public int getItemCount()
     {
-        return bookInfoResponses.isEmpty() ? 1 : bookInfoResponses.size();
+        return mBooks.isEmpty() ? 1 : mBooks.size();
     }
 
-    class SearchHolder extends RecyclerView.ViewHolder
+    class ShelfHolder extends RecyclerView.ViewHolder
     {
         private final ImageView iv_book_img;
         private final TextView tv_book_title;
         private final TextView tv_book_info;
         private final TextView tv_book_description;
-        public SearchHolder(View itemView)
+
+        public ShelfHolder(View itemView)
         {
             super(itemView);
             iv_book_img = (ImageView) itemView.findViewById(R.id.iv_book_img);
@@ -136,6 +141,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             tv_book_description = (TextView) itemView.findViewById(R.id.tv_book_description);
         }
     }
+
     class EmptyHolder extends RecyclerView.ViewHolder
     {
         private final ImageView iv_item_logo;

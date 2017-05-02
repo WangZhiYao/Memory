@@ -3,33 +3,24 @@ package space.levan.memory.bean.douban;
 import java.io.Serializable;
 import java.util.Arrays;
 
-import io.realm.RealmObject;
-import io.realm.annotations.Ignore;
-
 /**
  * Created by WangZhiYao on 2017/4/27.
  */
 
-public class BookInfoResponse extends RealmObject implements Serializable
+public class BookInfoResponse implements Serializable
 {
-    @Ignore
     public static final long serialVersionUID = 7060254125600464481L;
-    @Ignore
     public static final String serialVersionName = "bookInfo";
-    private String id;
     private String title;
     private String subtitle;
     private String publisher;
-    @Ignore
     private String[] author;
-    @Ignore
     private String[] translator;
     private String authors;
     private String translators;
     private String pubdate;
     private String pages;
     private String origin_title;
-    @Ignore
     private ImageBean images;
     private String image;
     private String isbn13;
@@ -41,14 +32,6 @@ public class BookInfoResponse extends RealmObject implements Serializable
 
     public static String getSerialVersionName() {
         return serialVersionName;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -83,42 +66,20 @@ public class BookInfoResponse extends RealmObject implements Serializable
         this.author = author;
     }
 
-    public String getAuthors()
-    {
-        if (this.author.length > 0)
-        {
-            String author = "";
-            for (int i = 0; i < this.author.length-1 ; i++)
-            {
-                author += getAuthor()[i] + "，";
-            }
-            author += this.author[this.author.length-1];
+    public String getAuthors() {
+        return Arrays.toString(author).replace("[","").replace("]","");
+    }
 
-            return author;
-        }
+    public void setAuthors(String authors) {
+        this.authors = authors;
+    }
 
-        return "";
+    public String getTranslators() {
+        return Arrays.toString(translator).replace("[","").replace("]","");
     }
 
     public String[] getTranslator() {
         return translator;
-    }
-
-    public String getTranslators()
-    {
-        if (this.translator.length > 0)
-        {
-            String translator = "";
-            for (int i = 0; i < this.translator.length-1 ; i++)
-            {
-                translator += this.translator[i] + "，";
-            }
-            translator += this.translator[this.translator.length-1];
-
-            return translator;
-        }
-
-        return "";
     }
 
     public void setTranslator(String[] translator) {
@@ -134,7 +95,7 @@ public class BookInfoResponse extends RealmObject implements Serializable
     }
 
     public String getImage() {
-        return images.getLarge();
+        return image;
     }
 
     public void setImage(String image) {
@@ -186,14 +147,18 @@ public class BookInfoResponse extends RealmObject implements Serializable
         if (this.author.length > 0)
         {
             return this.author[0].split("、")[0] + "/" + this.publisher + "/" + this.pubdate;
+            //String aut = Arrays.toString(author).replaceFirst("\\[","").split(",")[0];
+            //Log.w("WZY", aut.substring(0, aut.length()-1));
+            //return aut.substring(0, aut.length()-1) + "/" + this.publisher + "/" + this.pubdate;
         }
-        return "-";
+
+        return "-/" + this.publisher + "/" + this.pubdate;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "BookInfoResponse{" +
-                "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", subtitle='" + subtitle + '\'' +
                 ", publisher='" + publisher + '\'' +

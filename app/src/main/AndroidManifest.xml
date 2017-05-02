@@ -18,7 +18,9 @@
         android:theme="@style/AppTheme"
         android:name=".App">
 
-        <activity android:name=".view.activities.MainActivity">
+        <activity android:name=".view.activities.SplashActivity"
+            android:theme="@style/AppTheme.FullScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,23 +28,33 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".view.activities.MainActivity"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".view.activities.LoginActivity"
-            android:theme="@style/AppTheme.FullScreen" />
+            android:theme="@style/AppTheme.FullScreen"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".view.activities.RegisterActivity"
-            android:theme="@style/AppTheme.FullScreen" />
+            android:theme="@style/AppTheme.FullScreen"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".view.activities.ResetPasswordActivity"
-            android:theme="@style/AppTheme.FullScreen" />
+            android:theme="@style/AppTheme.FullScreen"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".view.activities.SearchActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".view.activities.ShelfActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".view.activities.BookDetailActivity"
-            android:theme="@style/AppTheme.TransparentActionBar" />
+            android:theme="@style/AppTheme.TransparentActionBar"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".view.activities.ScanActivity"

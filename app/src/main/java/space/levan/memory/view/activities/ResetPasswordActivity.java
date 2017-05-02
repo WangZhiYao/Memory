@@ -2,7 +2,6 @@ package space.levan.memory.view.activities;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,12 +13,13 @@ import butterknife.OnClick;
 import space.levan.memory.R;
 import space.levan.memory.api.presenter.ResetPasswordPresenter;
 import space.levan.memory.api.view.IResetPasswordView;
+import space.levan.memory.view.base.BaseActivity;
 
 /**
  * Created by WangZhiYao on 2017-04-09.
  */
 
-public class ResetPasswordActivity extends AppCompatActivity implements IResetPasswordView
+public class ResetPasswordActivity extends BaseActivity implements IResetPasswordView
 {
     @BindView(R.id.et_reset_password_email)
     EditText mEtResetPasswordEmail;

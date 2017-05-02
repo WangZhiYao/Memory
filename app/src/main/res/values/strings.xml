@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Memory</string>
+    <string name="app_developer">WangZhiYao</string>
     <string name="app_poor_network">网络错误！请检查网络状态</string>
+    <string name="app_exit">再按一次退出</string>
 
     <string name="fg_main_title">首页</string>
     <string name="fg_main_title_logout">退出登录</string>
@@ -43,4 +45,6 @@
     <string name="ac_search_no_more">已经没有更多了</string>
     
     <string name="ac_book_detail_no_summary">暂无简介</string>
+
+    <string name="ac_shelf_no_collection">还没有收藏哦</string>
 </resources>

@@ -36,6 +36,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
+    compile 'junit:junit:4.12'
     // Gson
     compile 'com.google.code.gson:gson:2.8.0'
     // Zxing
@@ -45,13 +46,13 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     // Glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
+    // Retrofit2 RxJava
     compile 'io.reactivex:rxjava:1.2.10'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.7.0'
-
-    compile 'junit:junit:4.12'
+    // ParticleView
+    compile 'me.wangyuwei:ParticleView:1.0.4'
 }
