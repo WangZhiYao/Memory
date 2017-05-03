@@ -26,6 +26,12 @@ public class MainActivity extends BaseActivity
     private long exitTime = 0;
 
     @Override
+    protected int getActTransitionMode()
+    {
+        return 2;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);

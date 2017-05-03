@@ -56,6 +56,12 @@ public class SearchActivity extends BaseActivity implements IBookListView, Swipe
 
 
     @Override
+    protected int getActTransitionMode()
+    {
+        return 2;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         if (savedInstanceState != null)

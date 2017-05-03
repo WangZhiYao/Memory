@@ -21,10 +21,16 @@ public class SplashActivity extends BaseActivity
     ParticleView mPvLogo;
 
     @Override
+    protected int getActTransitionMode()
+    {
+        return 0;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        setContentView(R.layout.activity_splash);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
         initEvents();
     }

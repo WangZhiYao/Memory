@@ -18,7 +18,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import space.levan.memory.R;
 import space.levan.memory.bean.douban.BookInfoResponse;
-import space.levan.memory.bean.realm.Book;
 import space.levan.memory.utils.Blur;
 import space.levan.memory.utils.RealmUtils;
 import space.levan.memory.utils.Reflect3DImage;
@@ -61,8 +60,13 @@ public class BookDetailActivity extends BaseActivity
     TextView mTvBookSummary;
 
     private Boolean isCollect;
-    private Book mBook;
     private BookInfoResponse mBookInfoResponse;
+
+    @Override
+    protected int getActTransitionMode()
+    {
+        return 2;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -135,7 +139,7 @@ public class BookDetailActivity extends BaseActivity
         {
             mTvBookTranslator.setVisibility(View.GONE);
         }
-        mTvBookPublishDate.setText("出版年：" + mBookInfoResponse.getPubdate());
+        mTvBookPublishDate.setText("出版日期：" + mBookInfoResponse.getPubdate());
         mTvBookPages.setText("页数：" + mBookInfoResponse.getPages());
         mTvBookIsbn.setText("ISBN：" + mBookInfoResponse.getIsbn13());
         if (!mBookInfoResponse.getSummary().isEmpty())

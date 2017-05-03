@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import space.levan.memory.App;
+import space.levan.memory.R;
 import space.levan.memory.utils.UIUtils;
 
 /**
@@ -12,24 +13,32 @@ import space.levan.memory.utils.UIUtils;
 
 public abstract class BaseActivity extends AppCompatActivity
 {
+    public static final int LEFT_IN    = 1;
+    public static final int LEFT_OUT   = 1;
+    public static final int RIGHT_IN   = 2;
+    public static final int RIGHT_OUT  = 2;
+
     public static BaseActivity activity;
+    protected abstract int getActTransitionMode();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        switch (getActTransitionMode())
+        {
+            case LEFT_IN:
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                break;
+            case RIGHT_IN:
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                break;
+            default:
+                break;
+        }
         super.onCreate(savedInstanceState);
         activity = this;
         ((App) UIUtils.getContext()).addActivity(this);
-        init();
     }
-
-    private void init()
-    {
-        //initView();
-        //initData();
-    }
-
-    //protected abstract void initView();
 
     @Override
     protected void onResume()
@@ -43,6 +52,24 @@ public abstract class BaseActivity extends AppCompatActivity
     {
         super.onPause();
         activity = null;
+    }
+
+    @Override
+    public void finish()
+    {
+        super.finish();
+        ((App) UIUtils.getContext()).removeActivity(this);
+        switch (getActTransitionMode())
+        {
+            case LEFT_OUT:
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                break;
+            case RIGHT_OUT:
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                break;
+            default:
+                break;
+        }
     }
 
     /**

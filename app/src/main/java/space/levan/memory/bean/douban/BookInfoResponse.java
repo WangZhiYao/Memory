@@ -25,6 +25,7 @@ public class BookInfoResponse implements Serializable
     private String image;
     private String isbn13;
     private String summary;
+    private String infoString;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -147,12 +148,13 @@ public class BookInfoResponse implements Serializable
         if (this.author.length > 0)
         {
             return this.author[0].split("、")[0] + "/" + this.publisher + "/" + this.pubdate;
-            //String aut = Arrays.toString(author).replaceFirst("\\[","").split(",")[0];
-            //Log.w("WZY", aut.substring(0, aut.length()-1));
-            //return aut.substring(0, aut.length()-1) + "/" + this.publisher + "/" + this.pubdate;
         }
 
         return "-/" + this.publisher + "/" + this.pubdate;
+    }
+
+    public void setInfoString(String[] author, String publisher, String pubdate ) {
+        this.infoString = author[0].split("、")[0] + "/" + publisher + "/" + pubdate;
     }
 
     @Override

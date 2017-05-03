@@ -1,9 +1,11 @@
 package space.levan.memory.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import space.levan.memory.R;
+import space.levan.memory.view.activities.AddCollectionActivity;
 import space.levan.memory.view.base.BaseFragment;
 
 /**
@@ -34,7 +36,7 @@ public class ShelfTitleFragment extends BaseFragment
                 getActivity().finish();
                 break;
             case R.id.iv_shelf_add:
-                //TODO 添加收藏
+                startActivity(new Intent(getActivity(), AddCollectionActivity.class));
                 break;
         }
     }

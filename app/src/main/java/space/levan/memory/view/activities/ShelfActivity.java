@@ -30,6 +30,12 @@ public class ShelfActivity extends BaseActivity
     private RealmChangeListener realmListener;
 
     @Override
+    protected int getActTransitionMode()
+    {
+        return 1;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);

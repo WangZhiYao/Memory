@@ -31,6 +31,12 @@ public class ResetPasswordActivity extends BaseActivity implements IResetPasswor
     private ResetPasswordPresenter mResetPwdPresenter;
 
     @Override
+    protected int getActTransitionMode()
+    {
+        return 2;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);

@@ -45,6 +45,12 @@ public class ScanActivity extends BaseActivity implements DecoratedBarcodeView.T
     }
 
     @Override
+    protected int getActTransitionMode()
+    {
+        return 2;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);

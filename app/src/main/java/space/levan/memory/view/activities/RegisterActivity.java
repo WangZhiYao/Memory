@@ -41,6 +41,12 @@ public class RegisterActivity extends BaseActivity implements IRegisterView
     private RegisterPresenter mRegisterPresenter;
 
     @Override
+    protected int getActTransitionMode()
+    {
+        return 1;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);

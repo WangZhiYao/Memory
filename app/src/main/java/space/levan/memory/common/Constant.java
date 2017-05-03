@@ -14,4 +14,5 @@ public class Constant
     public static final String APP_ID = "D6pk8zwWuMB89hBIbB99oJQf-gzGzoHsz";
     public static final String APP_KEY = "IAPARDj6aNQ3YDQ88QydyvAn";
     public static final String fields = "title,subtitle,origin_title,author,translator,publisher,pubdate,summary,pages,isbn13,images";
+    public static final String PLACEHOLD_IT = "https://placeholdit.imgix.net/~text?txtsize=28&txtclr=ffffff&bg=000000&txt=Title&w=87&h=152";
 }

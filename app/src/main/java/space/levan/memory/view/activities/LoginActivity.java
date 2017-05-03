@@ -35,6 +35,12 @@ public class LoginActivity extends BaseActivity implements ILoginView
     private LoginPresenter mLoginPresenter;
 
     @Override
+    protected int getActTransitionMode()
+    {
+        return 2;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);

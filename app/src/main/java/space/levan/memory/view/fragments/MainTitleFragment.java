@@ -2,7 +2,10 @@ package space.levan.memory.view.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
+
+import com.avos.avoscloud.AVUser;
 
 import space.levan.memory.R;
 import space.levan.memory.view.activities.LoginActivity;
@@ -38,7 +41,7 @@ public class MainTitleFragment extends BaseFragment
         switch (view.getId())
         {
             case R.id.iv_main_logout:
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                showLogoutDialog();
                 break;
             case R.id.iv_main_shelf:
                 startActivity(new Intent(getActivity(), ShelfActivity.class));
@@ -51,5 +54,25 @@ public class MainTitleFragment extends BaseFragment
                 mainActivity.customScan();
                 break;
         }
+    }
+
+    private void showLogoutDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.fg_main_title_dialog_title));
+        builder.setMessage(getString(R.string.fg_main_title_dialog_message));
+        builder.setPositiveButton(getString(R.string.fg_main_title_dialog_sure), (dialog, which) ->
+        {
+            AVUser.logOut();
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+            getActivity().finish();
+        });
+        builder.setNegativeButton("取消", (dialog, which) ->
+        {
+
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
