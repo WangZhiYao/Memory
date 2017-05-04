@@ -13,7 +13,7 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:contentDescription="@string/fg_shelf_title_back"/>
+        android:contentDescription="@string/fg_add_collection_title_back"/>
 
     <TextView
         android:text="@string/fg_add_collection_title_add"
@@ -23,9 +23,13 @@
         android:layout_height="match_parent"
         android:gravity="center"/>
 
-    <View
+    <ImageView
+        android:id="@+id/iv_add_collection_excel"
+        android:src="@mipmap/ic_excel"
+        android:scaleType="centerInside"
         android:layout_weight="1"
         android:layout_width="0dp"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:contentDescription="@string/fg_add_collection_title_excel"/>
 
 </LinearLayout>

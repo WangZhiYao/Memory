@@ -44,7 +44,7 @@ public class AddCollectionActivity extends BaseActivity
     @Override
     protected int getActTransitionMode()
     {
-        return 2;
+        return 1;
     }
 
     @Override

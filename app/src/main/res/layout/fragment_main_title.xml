@@ -16,13 +16,13 @@
         android:contentDescription="@string/fg_main_title_logout"/>
 
     <ImageView
-        android:id="@+id/iv_main_shelf"
-        android:src="@mipmap/ic_collection"
+        android:id="@+id/iv_main_add"
+        android:src="@mipmap/ic_add"
         android:scaleType="centerInside"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:contentDescription="@string/fg_main_title_shelf"/>
+        android:contentDescription="@string/fg_main_title_add"/>
 
     <TextView
         android:layout_weight="4"

@@ -8,10 +8,10 @@ import android.view.View;
 import com.avos.avoscloud.AVUser;
 
 import space.levan.memory.R;
+import space.levan.memory.view.activities.AddCollectionActivity;
 import space.levan.memory.view.activities.LoginActivity;
 import space.levan.memory.view.activities.MainActivity;
 import space.levan.memory.view.activities.SearchActivity;
-import space.levan.memory.view.activities.ShelfActivity;
 import space.levan.memory.view.base.BaseFragment;
 
 /**
@@ -24,7 +24,7 @@ public class MainTitleFragment extends BaseFragment
     protected void initView(View view, Bundle savedInstanceState)
     {
         view.findViewById(R.id.iv_main_logout).setOnClickListener(this);
-        view.findViewById(R.id.iv_main_shelf).setOnClickListener(this);
+        view.findViewById(R.id.iv_main_add).setOnClickListener(this);
         view.findViewById(R.id.iv_main_search).setOnClickListener(this);
         view.findViewById(R.id.iv_main_scan).setOnClickListener(this);
     }
@@ -43,8 +43,8 @@ public class MainTitleFragment extends BaseFragment
             case R.id.iv_main_logout:
                 showLogoutDialog();
                 break;
-            case R.id.iv_main_shelf:
-                startActivity(new Intent(getActivity(), ShelfActivity.class));
+            case R.id.iv_main_add:
+                startActivity(new Intent(getActivity(), AddCollectionActivity.class));
                 break;
             case R.id.iv_main_search:
                 startActivity(new Intent(getActivity(), SearchActivity.class));
@@ -67,11 +67,8 @@ public class MainTitleFragment extends BaseFragment
             startActivity(new Intent(getActivity(), LoginActivity.class));
             getActivity().finish();
         });
-        builder.setNegativeButton("取消", (dialog, which) ->
-        {
-
-        });
-
+        builder.setNegativeButton(getString(R.string.fg_main_title_dialog_cancel),
+                (dialog, which) -> {});
         AlertDialog dialog = builder.create();
         dialog.show();
     }

@@ -1,9 +1,11 @@
 package space.levan.memory.view.fragments;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import space.levan.memory.R;
+import space.levan.memory.utils.JxlUtils;
 import space.levan.memory.view.base.BaseFragment;
 
 /**
@@ -16,6 +18,7 @@ public class AddCollectionTitleFragment extends BaseFragment
     protected void initView(View view, Bundle savedInstanceState)
     {
         view.findViewById(R.id.iv_add_collection_back).setOnClickListener(this);
+        view.findViewById(R.id.iv_add_collection_excel).setOnClickListener(this);
     }
 
     @Override
@@ -27,9 +30,27 @@ public class AddCollectionTitleFragment extends BaseFragment
     @Override
     public void onClick(View view)
     {
-        if (view.getId() == R.id.iv_add_collection_back)
+        switch (view.getId())
         {
-            getActivity().finish();
+            case R.id.iv_add_collection_back:
+                getActivity().finish();
+                break;
+            case R.id.iv_add_collection_excel:
+                showExportDialog();
+                break;
         }
+    }
+
+    private void showExportDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.fg_add_collection_title_dialog_title));
+        builder.setMessage(getString(R.string.fg_add_collection_title_dialog_message));
+        builder.setPositiveButton(getString(R.string.fg_add_collection_title_dialog_sure),
+                (dialog, which) -> JxlUtils.exportExcel(getActivity()));
+        builder.setNegativeButton(getString(R.string.fg_add_collection_title_dialog_cancel),
+                (dialog, which) -> {});
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

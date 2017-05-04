@@ -72,6 +72,8 @@ public class SearchActivity extends BaseActivity implements IBookListView, Swipe
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
+        mSwipeRefreshLayout.setEnabled(false);
+
         Intent intent = getIntent();
         if (intent.getStringExtra("q") != null)
         {
@@ -121,6 +123,7 @@ public class SearchActivity extends BaseActivity implements IBookListView, Swipe
 
     public void startSearch(String q)
     {
+        mSwipeRefreshLayout.setEnabled(true);
         spanCount = getResources().getInteger(R.integer.home_span_count);
         bookListPresenter = new BookListPresenter(this);
         bookInfoResponses = new ArrayList<>();

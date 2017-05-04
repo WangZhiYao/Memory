@@ -37,7 +37,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'junit:junit:4.12'
-    
+
     // Zxing
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
     // Butter Knife
@@ -54,4 +54,6 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.7.0'
     // ParticleView
     compile 'me.wangyuwei:ParticleView:1.0.4'
+    // JXL
+    compile group: 'net.sourceforge.jexcelapi', name: 'jxl', version: '2.6.12'
 }

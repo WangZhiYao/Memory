@@ -28,7 +28,7 @@ import space.levan.memory.view.activities.BookDetailActivity;
  * Created by WangZhiYao on 2017/5/2.
  */
 
-public class ShelfAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
     private Context mContext;
     private static final int TYPE_EMPTY = 0;
@@ -36,7 +36,7 @@ public class ShelfAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     Realm realm = Realm.getDefaultInstance();
     RealmResults<Book> mBooks = realm.where(Book.class).equalTo("user", AVUser.getCurrentUser().getUsername()).findAll();
 
-    public ShelfAdapter(Context context)
+    public MainAdapter(Context context)
     {
         this.mContext = context;
     }
@@ -48,7 +48,7 @@ public class ShelfAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (viewType == TYPE_DEFAULT)
         {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book_list, parent, false);
-            return new ShelfHolder(view);
+            return new MainHolder(view);
         }
         else
         {
@@ -73,16 +73,16 @@ public class ShelfAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
     {
-        if (holder instanceof ShelfHolder)
+        if (holder instanceof MainHolder)
         {
             final Book mBook = mBooks.get(position);
             Glide.with(mContext)
                     .load(mBook.image)
-                    .into(((ShelfHolder) holder).iv_book_img);
-            ((ShelfHolder) holder).tv_book_title.setText(mBook.title);
-            ((ShelfHolder) holder).tv_book_info.setText(mBook.infoString);
-            ((ShelfHolder) holder).tv_book_description.setText("\u3000" + mBook.summary);
-            ((ShelfHolder) holder).itemView.setOnClickListener(view ->
+                    .into(((MainHolder) holder).iv_book_img);
+            ((MainHolder) holder).tv_book_title.setText(mBook.title);
+            ((MainHolder) holder).tv_book_info.setText(mBook.infoString);
+            ((MainHolder) holder).tv_book_description.setText("\u3000" + mBook.summary);
+            ((MainHolder) holder).itemView.setOnClickListener(view ->
             {
                 Bundle b = new Bundle();
                 BookInfoResponse bookInfoResponse = new BookInfoResponse();
@@ -101,7 +101,7 @@ public class ShelfAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 bookInfoResponse.setSummary(mBook.summary);
                 b.putSerializable(BookInfoResponse.serialVersionName, bookInfoResponse);
                 Bitmap bitmap;
-                GlideBitmapDrawable imageDrawable = (GlideBitmapDrawable) ((ShelfHolder) holder).iv_book_img.getDrawable();
+                GlideBitmapDrawable imageDrawable = (GlideBitmapDrawable) ((MainHolder) holder).iv_book_img.getDrawable();
                 if (imageDrawable != null)
                 {
                     bitmap = imageDrawable.getBitmap();
@@ -125,14 +125,14 @@ public class ShelfAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return mBooks.isEmpty() ? 1 : mBooks.size();
     }
 
-    class ShelfHolder extends RecyclerView.ViewHolder
+    class MainHolder extends RecyclerView.ViewHolder
     {
         private final ImageView iv_book_img;
         private final TextView tv_book_title;
         private final TextView tv_book_info;
         private final TextView tv_book_description;
 
-        public ShelfHolder(View itemView)
+        public MainHolder(View itemView)
         {
             super(itemView);
             iv_book_img = (ImageView) itemView.findViewById(R.id.iv_book_img);
@@ -146,6 +146,7 @@ public class ShelfAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     {
         private final ImageView iv_item_logo;
         private final TextView tv_item_tips;
+
         public EmptyHolder(View itemView)
         {
             super(itemView);
