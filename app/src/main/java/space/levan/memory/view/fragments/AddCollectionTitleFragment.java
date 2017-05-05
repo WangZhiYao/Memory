@@ -43,14 +43,12 @@ public class AddCollectionTitleFragment extends BaseFragment
 
     private void showExportDialog()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getString(R.string.fg_add_collection_title_dialog_title));
-        builder.setMessage(getString(R.string.fg_add_collection_title_dialog_message));
-        builder.setPositiveButton(getString(R.string.fg_add_collection_title_dialog_sure),
-                (dialog, which) -> JxlUtils.exportExcel(getActivity()));
-        builder.setNegativeButton(getString(R.string.fg_add_collection_title_dialog_cancel),
-                (dialog, which) -> {});
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.fg_add_collection_title_dialog_title)
+                .setMessage(R.string.fg_add_collection_title_dialog_message)
+                .setPositiveButton(R.string.fg_add_collection_title_dialog_sure,
+                        (dialogInterface, i) -> JxlUtils.exportExcel(getActivity()))
+                .setNegativeButton(R.string.fg_add_collection_title_dialog_cancel, null)
+                .show();
     }
 }

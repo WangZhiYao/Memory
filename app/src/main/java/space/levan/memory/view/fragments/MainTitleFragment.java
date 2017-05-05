@@ -58,18 +58,17 @@ public class MainTitleFragment extends BaseFragment
 
     private void showLogoutDialog()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getString(R.string.fg_main_title_dialog_title));
-        builder.setMessage(getString(R.string.fg_main_title_dialog_message));
-        builder.setPositiveButton(getString(R.string.fg_main_title_dialog_sure), (dialog, which) ->
-        {
-            AVUser.logOut();
-            startActivity(new Intent(getActivity(), LoginActivity.class));
-            getActivity().finish();
-        });
-        builder.setNegativeButton(getString(R.string.fg_main_title_dialog_cancel),
-                (dialog, which) -> {});
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.fg_main_title_dialog_title)
+                .setMessage(R.string.fg_main_title_dialog_message)
+                .setPositiveButton(R.string.fg_main_title_dialog_sure, (dialogInterface, i) ->
+                {
+                    AVUser.logOut();
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                    getActivity().finish();
+
+                })
+                .setNegativeButton(R.string.fg_main_title_dialog_cancel, null)
+                .show();
     }
 }
