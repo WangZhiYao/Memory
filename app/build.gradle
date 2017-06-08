@@ -47,7 +47,7 @@ dependencies {
 
     // LeanCloud
     compile 'cn.leancloud.android:avoscloud-sdk:v4.0.2'
-    // Zxing
+    // ZXing
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
     // Butter Knife
     compile 'com.jakewharton:butterknife:8.5.1'
