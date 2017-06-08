@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.avos.avoscloud.AVUser;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 
@@ -34,7 +33,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private static final int TYPE_EMPTY = 0;
     private static final int TYPE_DEFAULT = 1;
     Realm realm = Realm.getDefaultInstance();
-    RealmResults<Book> mBooks = realm.where(Book.class).equalTo("user", AVUser.getCurrentUser().getUsername()).findAll();
+    RealmResults<Book> mBooks = realm.where(Book.class).findAll();
 
     public MainAdapter(Context context)
     {

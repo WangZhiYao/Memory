@@ -3,15 +3,11 @@ package space.levan.memory;
 import android.app.Application;
 import android.content.Context;
 
-import com.avos.avoscloud.AVOSCloud;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import space.levan.memory.common.Constant;
 import space.levan.memory.view.base.BaseActivity;
 
 /**
@@ -32,24 +28,7 @@ public class App extends Application
         mApp = this;
         activities = new LinkedList<>();
         mainTid = android.os.Process.myTid();
-        initRealm();
-        initLeanCloud();
-        //NET_STATE = NetUtils.isConnected(this);
-    }
-
-    private void initRealm()
-    {
         Realm.init(this);
-        RealmConfiguration config = new  RealmConfiguration.Builder()
-                .name("Book.realm")
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        Realm.setDefaultConfiguration(config);
-    }
-
-    private void initLeanCloud()
-    {
-        AVOSCloud.initialize(this, Constant.APP_ID, Constant.APP_KEY);
     }
 
     /**

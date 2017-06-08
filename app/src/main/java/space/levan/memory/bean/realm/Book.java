@@ -20,5 +20,4 @@ public class Book extends RealmObject
     public String image;
     public String summary;
     public String infoString;
-    public String user;
 }

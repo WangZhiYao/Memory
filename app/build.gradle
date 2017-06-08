@@ -12,6 +12,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String','REALM_AUTH_URL', '"http://122.114.183.170:9080/auth"'
+        buildConfigField 'String','REALM_SERVER_URL', '"realm://122.114.183.170:9080/~/Memory"'
     }
     buildTypes {
         release {
@@ -36,6 +38,10 @@ retrolambda {
     javaVersion JavaVersion.VERSION_1_6
 }
 
+realm {
+    syncEnabled = true;
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -45,8 +51,6 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     testCompile 'junit:junit:4.12'
 
-    // LeanCloud
-    compile 'cn.leancloud.android:avoscloud-sdk:v4.0.2'
     // ZXing
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
     // Butter Knife

@@ -1,9 +1,6 @@
 package space.levan.memory.view.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import com.avos.avoscloud.AVUser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,17 +37,7 @@ public class SplashActivity extends BaseActivity
         mPvLogo = (ParticleView) findViewById(R.id.pv_logo);
         mPvLogo.setOnParticleAnimListener(() ->
         {
-            AVUser currentUser = AVUser.getCurrentUser();
-            if (currentUser != null && currentUser.getBoolean("emailVerified"))
-            {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                this.finish();
-            }
-            else
-            {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                this.finish();
-            }
+
         });
         mPvLogo.startAnim();
     }

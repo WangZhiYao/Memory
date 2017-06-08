@@ -2,8 +2,6 @@ package space.levan.memory.utils;
 
 import android.text.TextUtils;
 
-import com.avos.avoscloud.AVUser;
-
 import io.realm.Realm;
 import io.realm.RealmResults;
 import space.levan.memory.bean.douban.BookInfoResponse;
@@ -43,7 +41,6 @@ public class RealmUtils
             {
                 mBook.translators = book.getTranslators();
             }
-            mBook.user = AVUser.getCurrentUser().getEmail();
         });
 
         return true;
