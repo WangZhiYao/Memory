@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
+import io.realm.SyncUser;
 import space.levan.memory.R;
+import space.levan.memory.utils.RealmUtils;
 import space.levan.memory.view.activities.AddCollectionActivity;
+import space.levan.memory.view.activities.LoginActivity;
 import space.levan.memory.view.activities.MainActivity;
 import space.levan.memory.view.activities.SearchActivity;
 import space.levan.memory.view.base.BaseFragment;
@@ -60,7 +63,9 @@ public class MainTitleFragment extends BaseFragment
                 .setMessage(R.string.fg_main_title_dialog_message)
                 .setPositiveButton(R.string.fg_main_title_dialog_sure, (dialogInterface, i) ->
                 {
-
+                    RealmUtils.logoutActiveUser();
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                    getActivity().finish();
                 })
                 .setNegativeButton(R.string.fg_main_title_dialog_cancel, null)
                 .show();

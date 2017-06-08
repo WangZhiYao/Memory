@@ -14,19 +14,6 @@
         android:layout_marginTop="64dp"/>
 
     <EditText
-        android:id="@+id/et_register_nickname"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:hint="@string/ac_register_username"
-        android:textColorHint="@color/colorTips"
-        android:maxLines="1"
-        android:layout_width="240dp"
-        android:layout_height="48dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="48dp"
-        android:background="@color/colorSplit" />
-
-    <EditText
         android:id="@+id/et_register_email"
         android:gravity="center"
         android:textSize="16sp"
@@ -36,7 +23,7 @@
         android:layout_width="240dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="48dp"
         android:background="@color/colorSplit"
         android:inputType="textEmailAddress"/>
 
@@ -79,7 +66,7 @@
         android:layout_width="240dp"
         android:layout_height="56dp"
         android:layout_gravity="center"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="88dp"
         android:background="@drawable/ic_btn_ripple"/>
 
 </LinearLayout>

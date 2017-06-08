@@ -9,7 +9,7 @@ import space.levan.memory.api.ApiListener;
 public interface ILoginModel
 {
 
-    void userLogin(String username, String password, ApiListener listener);
+    void userLogin(String username, String password, ApiListener apiListener);
 
     void cancelLogin();
 }

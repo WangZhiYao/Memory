@@ -5,7 +5,6 @@ import space.levan.memory.api.model.BookListModel;
 import space.levan.memory.api.model.impl.IBookListModel;
 import space.levan.memory.api.presenter.impl.IBookListPresenter;
 import space.levan.memory.api.view.IBookListView;
-import space.levan.memory.bean.douban.BaseResponse;
 import space.levan.memory.bean.douban.BookListResponse;
 
 /**
@@ -38,7 +37,7 @@ public class BookListPresenter implements IBookListPresenter, ApiListener
     }
 
     @Override
-    public void onComplete(Object result)
+    public void onSuccess(Object result)
     {
         if (result instanceof BookListResponse)
         {
@@ -57,7 +56,7 @@ public class BookListPresenter implements IBookListPresenter, ApiListener
     }
 
     @Override
-    public void onFailed(BaseResponse msg)
+    public void onFailure(String msg)
     {
         mBookDetailView.hideProgress();
         if (msg == null)
@@ -65,6 +64,6 @@ public class BookListPresenter implements IBookListPresenter, ApiListener
             return;
         }
 
-        mBookDetailView.showMessage(msg.getMsg());
+        mBookDetailView.showMessage(msg);
     }
 }

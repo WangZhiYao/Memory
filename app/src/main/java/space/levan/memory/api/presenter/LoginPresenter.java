@@ -5,7 +5,6 @@ import space.levan.memory.api.model.LoginModel;
 import space.levan.memory.api.model.impl.ILoginModel;
 import space.levan.memory.api.presenter.impl.ILoginPresenter;
 import space.levan.memory.api.view.ILoginView;
-import space.levan.memory.bean.douban.BaseResponse;
 
 /**
  * Created by WangZhiYao on 2017/4/13.
@@ -37,16 +36,16 @@ public class LoginPresenter implements ILoginPresenter, ApiListener
     }
 
     @Override
-    public void onComplete(Object result)
+    public void onSuccess(Object result)
     {
         mILoginView.hideProgress();
         mILoginView.loginSuccess();
     }
 
     @Override
-    public void onFailed(BaseResponse msg)
+    public void onFailure(String msg)
     {
         mILoginView.hideProgress();
-        mILoginView.showMessage(msg.getMsg());
+        mILoginView.showMessage(msg);
     }
 }

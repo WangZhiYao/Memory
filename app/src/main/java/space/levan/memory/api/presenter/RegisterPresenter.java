@@ -5,7 +5,6 @@ import space.levan.memory.api.model.RegisterModel;
 import space.levan.memory.api.model.impl.IRegisterModel;
 import space.levan.memory.api.presenter.impl.IRegisterPresenter;
 import space.levan.memory.api.view.IRegisterView;
-import space.levan.memory.bean.douban.BaseResponse;
 
 /**
  * Created by WangZhiYao on 2017/4/14.
@@ -23,9 +22,9 @@ public class RegisterPresenter implements IRegisterPresenter, ApiListener
     }
 
     @Override
-    public void userRegister(String nickname, String email, String username, String password)
+    public void userRegister(String email, String password)
     {
-        mIRegisterModel.userRegister(nickname, email, username, password, this);
+        mIRegisterModel.userRegister(email, password, this);
         mIRegisterView.showProgress();
     }
 
@@ -37,16 +36,16 @@ public class RegisterPresenter implements IRegisterPresenter, ApiListener
     }
 
     @Override
-    public void onComplete(Object result)
+    public void onSuccess(Object result)
     {
         mIRegisterView.hideProgress();
         mIRegisterView.registerSuccess();
     }
 
     @Override
-    public void onFailed(BaseResponse msg)
+    public void onFailure(String msg)
     {
         mIRegisterView.hideProgress();
-        mIRegisterView.showMessage(msg.getMsg());
+        mIRegisterView.showMessage(msg);
     }
 }

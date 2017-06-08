@@ -11,7 +11,7 @@ public interface IBookListModel
     /**
      * 获取图书接口
      */
-    void loadBookList(String q, int start, int count, String fields, ApiListener listener);
+    void loadBookList(String q, int start, int count, String fields, ApiListener apiListener);
 
     /**
      * 取消加载数据

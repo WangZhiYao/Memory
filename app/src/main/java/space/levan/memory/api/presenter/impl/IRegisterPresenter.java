@@ -6,7 +6,7 @@ package space.levan.memory.api.presenter.impl;
 
 public interface IRegisterPresenter
 {
-    void userRegister(String nickname, String email, String username, String password);
+    void userRegister(String email, String password);
 
     void cancelRegister();
 }

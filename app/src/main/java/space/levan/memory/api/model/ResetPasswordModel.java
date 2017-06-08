@@ -10,7 +10,7 @@ import space.levan.memory.api.model.impl.IResetPasswordModel;
 public class ResetPasswordModel implements IResetPasswordModel
 {
     @Override
-    public void userResetPwd(String email, ApiListener listener)
+    public void userResetPwd(String email, ApiListener apiListener)
     {
 
     }

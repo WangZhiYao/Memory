@@ -12,7 +12,6 @@ import space.levan.memory.api.ApiListener;
 import space.levan.memory.api.model.impl.IBookListModel;
 import space.levan.memory.api.services.ApiService;
 import space.levan.memory.api.services.ServiceFactory;
-import space.levan.memory.bean.douban.BaseResponse;
 import space.levan.memory.bean.douban.BookListResponse;
 import space.levan.memory.common.Constant;
 
@@ -24,7 +23,7 @@ public class BookListModel implements IBookListModel
 {
 
     @Override
-    public void loadBookList(String q, int start, int count, String fields, ApiListener listener)
+    public void loadBookList(String q, int start, int count, String fields, ApiListener apiListener)
     {
         ApiService apiService = ServiceFactory.createService(Constant.DOUBAN_URL, ApiService.class);
         apiService.getBookList(q, start, count, fields)
@@ -47,7 +46,7 @@ public class BookListModel implements IBookListModel
                             return;
                         }
 
-                        listener.onFailed(new BaseResponse(404, e.getMessage()));
+                        //apiListener.onFailure(new BaseResponse(404, e.getMessage()));
                     }
 
                     @Override
@@ -55,11 +54,11 @@ public class BookListModel implements IBookListModel
                     {
                         if (bookListResponseResponse.isSuccessful())
                         {
-                            listener.onComplete(bookListResponseResponse.body());
+                            apiListener.onSuccess(bookListResponseResponse.body());
                         }
                         else
                         {
-                            listener.onFailed(new BaseResponse(bookListResponseResponse.code(), bookListResponseResponse.message()));
+                            //apiListener.onFailure(new BaseResponse(bookListResponseResponse.code(), bookListResponseResponse.message()));
                         }
                     }
                 });

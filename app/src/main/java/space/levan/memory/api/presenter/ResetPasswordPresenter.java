@@ -5,7 +5,6 @@ import space.levan.memory.api.model.ResetPasswordModel;
 import space.levan.memory.api.model.impl.IResetPasswordModel;
 import space.levan.memory.api.presenter.impl.IResetPasswordPresenter;
 import space.levan.memory.api.view.IResetPasswordView;
-import space.levan.memory.bean.douban.BaseResponse;
 
 /**
  * Created by WangZhiYao on 2017/4/14.
@@ -37,16 +36,16 @@ public class ResetPasswordPresenter implements IResetPasswordPresenter, ApiListe
     }
 
     @Override
-    public void onComplete(Object result)
+    public void onSuccess(Object result)
     {
         mIResetPwdView.hideProgress();
         mIResetPwdView.showMessage(result.toString());
     }
 
     @Override
-    public void onFailed(BaseResponse msg)
+    public void onFailure(String msg)
     {
         mIResetPwdView.hideProgress();
-        mIResetPwdView.showMessage(msg.getMsg());
+        mIResetPwdView.showMessage(msg);
     }
 }

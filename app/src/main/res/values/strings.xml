@@ -45,7 +45,7 @@
     <string name="ac_register_login">我有帐号</string>
     <string name="ac_register_sign_up">注册</string>
     <string name="ac_register_loading">注册中请稍候…</string>
-    <string name="ac_register_tips">注册成功，请验证邮箱后登录</string>
+    <string name="ac_register_tips">注册成功</string>
 
     <string name="ac_reset_password_email">邮箱</string>
     <string name="ac_reset_password_cancel">放弃找回</string>

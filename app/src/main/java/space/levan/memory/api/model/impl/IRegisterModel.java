@@ -8,7 +8,7 @@ import space.levan.memory.api.ApiListener;
 
 public interface IRegisterModel
 {
-    void userRegister(String nickname, String email, String username, String password, ApiListener listener);
+    void userRegister(String email, String password, ApiListener apiListener);
 
     void cancelRegister();
 }

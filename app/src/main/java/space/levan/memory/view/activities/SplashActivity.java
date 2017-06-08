@@ -1,9 +1,11 @@
 package space.levan.memory.view.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.SyncUser;
 import me.wangyuwei.particleview.ParticleView;
 import space.levan.memory.R;
 import space.levan.memory.view.base.BaseActivity;
@@ -37,7 +39,16 @@ public class SplashActivity extends BaseActivity
         mPvLogo = (ParticleView) findViewById(R.id.pv_logo);
         mPvLogo.setOnParticleAnimListener(() ->
         {
-
+            if (SyncUser.currentUser() != null)
+            {
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                this.finish();
+            }
+            else
+            {
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                this.finish();
+            }
         });
         mPvLogo.startAnim();
     }

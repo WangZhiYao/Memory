@@ -23,8 +23,6 @@ import space.levan.memory.view.base.BaseActivity;
 
 public class RegisterActivity extends BaseActivity implements IRegisterView
 {
-    @BindView(R.id.et_register_nickname)
-    EditText mEtNickname;
     @BindView(R.id.et_register_email)
     EditText mEtEmail;
     @BindView(R.id.et_register_password)
@@ -33,8 +31,6 @@ public class RegisterActivity extends BaseActivity implements IRegisterView
     TextView mTvLogin;
     @BindView(R.id.btn_register_sign_up)
     Button mBtnSignUp;
-    private String mUsername;
-    private String mNickname;
     private String mEmail;
     private String mPassword;
     private ProgressDialog mProDialog;
@@ -57,11 +53,9 @@ public class RegisterActivity extends BaseActivity implements IRegisterView
     private void userRegister()
     {
         mRegisterPresenter = new RegisterPresenter(this);
-        mNickname = mEtNickname.getText().toString();
         mEmail = mEtEmail.getText().toString().trim();
-        mUsername = mEmail;
         mPassword = mEtPassword.getText().toString();
-        mRegisterPresenter.userRegister(mNickname, mEmail, mUsername, mPassword);
+        mRegisterPresenter.userRegister(mEmail, mPassword);
     }
 
     @Override

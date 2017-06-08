@@ -4,6 +4,9 @@ import android.text.TextUtils;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.SyncConfiguration;
+import io.realm.SyncUser;
+import space.levan.memory.BuildConfig;
 import space.levan.memory.bean.douban.BookInfoResponse;
 import space.levan.memory.bean.realm.Book;
 
@@ -13,6 +16,17 @@ import space.levan.memory.bean.realm.Book;
 
 public class RealmUtils
 {
+    public static void setActiveUser(SyncUser syncUser)
+    {
+        SyncConfiguration syncConfiguration = new SyncConfiguration.Builder(syncUser, BuildConfig.REALM_SERVER_URL).build();
+        Realm.getInstance(syncConfiguration);
+    }
+
+    public static void logoutActiveUser()
+    {
+        SyncUser.currentUser().logout();
+    }
+
     public static Boolean checkCollection(String isbn)
     {
         Realm realm = Realm.getDefaultInstance();

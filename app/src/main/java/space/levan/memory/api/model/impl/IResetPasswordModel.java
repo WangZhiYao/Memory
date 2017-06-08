@@ -8,7 +8,7 @@ import space.levan.memory.api.ApiListener;
 
 public interface IResetPasswordModel
 {
-    void userResetPwd(String email, ApiListener listener);
+    void userResetPwd(String email, ApiListener apiListener);
 
     void cancelReset();
 }
