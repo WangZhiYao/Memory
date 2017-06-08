@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -109,5 +110,6 @@ public class MainActivity extends BaseActivity
             this.finish();
             App.quiteApplication();
         }
+        Log.w("WZY", "this is a test");
     }
 }
