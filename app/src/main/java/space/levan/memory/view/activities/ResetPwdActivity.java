@@ -11,15 +11,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import space.levan.memory.R;
-import space.levan.memory.api.presenter.ResetPasswordPresenter;
-import space.levan.memory.api.view.IResetPasswordView;
+import space.levan.memory.api.presenter.ResetPwdPresenter;
+import space.levan.memory.api.view.IResetPwdView;
 import space.levan.memory.view.base.BaseActivity;
 
 /**
  * Created by WangZhiYao on 2017-04-09.
  */
 
-public class ResetPasswordActivity extends BaseActivity implements IResetPasswordView
+public class ResetPwdActivity extends BaseActivity implements IResetPwdView
 {
     @BindView(R.id.et_reset_password_email)
     EditText mEtResetPasswordEmail;
@@ -28,7 +28,7 @@ public class ResetPasswordActivity extends BaseActivity implements IResetPasswor
 
     private String mEmail;
     private ProgressDialog mProDialog;
-    private ResetPasswordPresenter mResetPwdPresenter;
+    private ResetPwdPresenter mResetPwdPresenter;
 
     @Override
     protected int getActTransitionMode()
@@ -46,7 +46,7 @@ public class ResetPasswordActivity extends BaseActivity implements IResetPasswor
 
     private void userResetPwd()
     {
-        mResetPwdPresenter = new ResetPasswordPresenter(this);
+        mResetPwdPresenter = new ResetPwdPresenter(this);
         mEmail = mEtResetPasswordEmail.getText().toString().trim();
         mResetPwdPresenter.userResetPwd(mEmail);
     }
@@ -59,7 +59,7 @@ public class ResetPasswordActivity extends BaseActivity implements IResetPasswor
     @Override
     public void showProgress()
     {
-        mProDialog = ProgressDialog.show(ResetPasswordActivity.this, null, getString(R.string.ac_reset_password_loading));
+        mProDialog = ProgressDialog.show(ResetPwdActivity.this, null, getString(R.string.ac_reset_password_loading));
         mBtnResetPasswordReset.setClickable(false);
 
     }
@@ -77,7 +77,7 @@ public class ResetPasswordActivity extends BaseActivity implements IResetPasswor
         switch (view.getId())
         {
             case R.id.tv_reset_password_cancel:
-                ResetPasswordActivity.this.finish();
+                ResetPwdActivity.this.finish();
                 break;
             case R.id.btn_reset_password_reset:
                 userResetPwd();

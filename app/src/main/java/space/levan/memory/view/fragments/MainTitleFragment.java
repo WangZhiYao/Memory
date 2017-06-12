@@ -63,9 +63,12 @@ public class MainTitleFragment extends BaseFragment
                 .setMessage(R.string.fg_main_title_dialog_message)
                 .setPositiveButton(R.string.fg_main_title_dialog_sure, (dialogInterface, i) ->
                 {
-                    RealmUtils.logoutActiveUser();
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                    getActivity().finish();
+                    if (SyncUser.currentUser() != null)
+                    {
+                        RealmUtils.logoutActiveUser();
+                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                        getActivity().finish();
+                    }
                 })
                 .setNegativeButton(R.string.fg_main_title_dialog_cancel, null)
                 .show();

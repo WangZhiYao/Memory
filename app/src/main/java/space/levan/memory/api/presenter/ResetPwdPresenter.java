@@ -1,24 +1,24 @@
 package space.levan.memory.api.presenter;
 
 import space.levan.memory.api.ApiListener;
-import space.levan.memory.api.model.ResetPasswordModel;
-import space.levan.memory.api.model.impl.IResetPasswordModel;
-import space.levan.memory.api.presenter.impl.IResetPasswordPresenter;
-import space.levan.memory.api.view.IResetPasswordView;
+import space.levan.memory.api.model.ResetPwdModel;
+import space.levan.memory.api.model.impl.IResetPwdModel;
+import space.levan.memory.api.presenter.impl.IResetPwdPresenter;
+import space.levan.memory.api.view.IResetPwdView;
 
 /**
  * Created by WangZhiYao on 2017/4/14.
  */
 
-public class ResetPasswordPresenter implements IResetPasswordPresenter, ApiListener
+public class ResetPwdPresenter implements IResetPwdPresenter, ApiListener
 {
-    private IResetPasswordModel mIResetPwdModel;
-    private IResetPasswordView mIResetPwdView;
+    private IResetPwdModel mIResetPwdModel;
+    private IResetPwdView mIResetPwdView;
 
-    public ResetPasswordPresenter(IResetPasswordView view)
+    public ResetPwdPresenter(IResetPwdView view)
     {
         mIResetPwdView = view;
-        mIResetPwdModel = new ResetPasswordModel();
+        mIResetPwdModel = new ResetPwdModel();
     }
 
     @Override

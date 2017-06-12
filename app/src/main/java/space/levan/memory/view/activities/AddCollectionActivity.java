@@ -2,16 +2,10 @@ package space.levan.memory.view.activities;
 
 import android.os.Bundle;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import space.levan.memory.R;
-import space.levan.memory.bean.douban.BookInfoResponse;
-import space.levan.memory.bean.douban.ImageBean;
-import space.levan.memory.common.Constant;
-import space.levan.memory.utils.RealmUtils;
 import space.levan.memory.view.base.BaseActivity;
 
 /**
@@ -55,6 +49,7 @@ public class AddCollectionActivity extends BaseActivity
         ButterKnife.bind(this);
     }
 
+    /*
     @OnClick(R.id.btn_add_collection_save)
     public void onViewClicked()
     {
@@ -87,5 +82,5 @@ public class AddCollectionActivity extends BaseActivity
         {
             Toast.makeText(this, getString(R.string.ac_add_collection_failed), Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 }

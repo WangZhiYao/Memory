@@ -42,7 +42,7 @@
             android:theme="@style/AppTheme.FullScreen"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".view.activities.ResetPasswordActivity"
+        <activity android:name=".view.activities.ResetPwdActivity"
             android:theme="@style/AppTheme.FullScreen"
             android:screenOrientation="portrait"/>
 

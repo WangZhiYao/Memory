@@ -1,7 +1,5 @@
 package space.levan.memory.api.model;
 
-import android.util.Log;
-
 import io.realm.ObjectServerError;
 import io.realm.SyncCredentials;
 import io.realm.SyncUser;
@@ -32,8 +30,7 @@ public class LoginModel implements ILoginModel
             @Override
             public void onError(ObjectServerError error)
             {
-                Log.w("WZY", error.toString());
-                apiListener.onFailure(error.toString());
+                apiListener.onFailure(error.getErrorCode().toString());
             }
         });
     }

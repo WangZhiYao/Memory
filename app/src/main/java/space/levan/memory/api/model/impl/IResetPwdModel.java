@@ -6,7 +6,7 @@ import space.levan.memory.api.ApiListener;
  * Created by WangZhiYao on 2017/4/14.
  */
 
-public interface IResetPasswordModel
+public interface IResetPwdModel
 {
     void userResetPwd(String email, ApiListener apiListener);
 

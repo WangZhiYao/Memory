@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 import io.realm.Realm;
+import io.realm.log.LogLevel;
+import io.realm.log.RealmLog;
 import space.levan.memory.view.base.BaseActivity;
 
 /**
@@ -19,7 +21,6 @@ public class App extends Application
     private static App mApp;
     private static int mainTid;
     private static List<BaseActivity> activities;
-    //public volatile static boolean NET_STATE;
 
     @Override
     public void onCreate()
@@ -29,6 +30,7 @@ public class App extends Application
         activities = new LinkedList<>();
         mainTid = android.os.Process.myTid();
         Realm.init(this);
+        RealmLog.setLevel(LogLevel.TRACE);
     }
 
     /**

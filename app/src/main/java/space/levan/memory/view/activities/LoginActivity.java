@@ -101,7 +101,7 @@ public class LoginActivity extends BaseActivity implements ILoginView
                 startActivityForResult(new Intent(LoginActivity.this, RegisterActivity.class), 0);
                 break;
             case R.id.tv_login_reset_password:
-                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+                startActivity(new Intent(LoginActivity.this, ResetPwdActivity.class));
                 break;
             case R.id.btn_login_login:
                 userLogin();
