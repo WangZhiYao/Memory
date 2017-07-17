@@ -12,8 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField 'String','REALM_AUTH_URL', '"http://122.114.183.170:9080/auth"'
-        buildConfigField 'String','REALM_SERVER_URL', '"realm://122.114.183.170:9080/~/Memory"'
+        buildConfigField 'String','SERVER_URL', '119.29.162.214'
     }
     buildTypes {
         release {
@@ -34,10 +33,6 @@ android {
     }
 }
 
-retrolambda {
-    javaVersion JavaVersion.VERSION_1_6
-}
-
 realm {
     syncEnabled = true;
 }
@@ -53,7 +48,7 @@ dependencies {
 
     // ZXing
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
-    // Butter Knife
+    // ButterKnife
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     // Glide
@@ -69,4 +64,6 @@ dependencies {
     compile 'me.wangyuwei:ParticleView:1.0.4'
     // JXL
     compile group: 'net.sourceforge.jexcelapi', name: 'jxl', version: '2.6.12'
+    // Realm RecyclerView Adapter
+    compile 'io.realm:android-adapters:2.0.0'
 }

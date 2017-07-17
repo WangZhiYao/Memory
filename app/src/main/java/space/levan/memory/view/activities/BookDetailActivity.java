@@ -19,10 +19,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import space.levan.memory.R;
-import space.levan.memory.api.presenter.DeletePresenter;
-import space.levan.memory.api.presenter.InsertPresenter;
-import space.levan.memory.api.presenter.SearchPresenter;
-import space.levan.memory.api.view.ISearchView;
 import space.levan.memory.bean.douban.BookInfoResponse;
 import space.levan.memory.utils.Blur;
 import space.levan.memory.utils.Reflect3DImage;
@@ -33,7 +29,7 @@ import space.levan.memory.view.base.BaseActivity;
  * Created by WangZhiYao on 2017-04-09.
  */
 
-public class BookDetailActivity extends BaseActivity implements ISearchView
+public class BookDetailActivity extends BaseActivity
 {
     @BindView(R.id.iv_book_detail_bg)
     ImageView mIvBookBg;
@@ -66,9 +62,6 @@ public class BookDetailActivity extends BaseActivity implements ISearchView
 
     private Boolean isCollect;
     private ProgressDialog mProDialog;
-    private SearchPresenter mSearchPresenter;
-    private InsertPresenter mInsertPresenter;
-    private DeletePresenter mDeletePresenter;
     private BookInfoResponse mBookInfoResponse;
 
     @Override
@@ -88,9 +81,6 @@ public class BookDetailActivity extends BaseActivity implements ISearchView
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         setContentView(R.layout.activity_book_detail);
         ButterKnife.bind(this);
-        mSearchPresenter = new SearchPresenter(this);
-        mInsertPresenter = new InsertPresenter(this);
-        mDeletePresenter = new DeletePresenter(this);
         initEvents();
     }
 
@@ -98,7 +88,6 @@ public class BookDetailActivity extends BaseActivity implements ISearchView
     {
         mBookInfoResponse = (BookInfoResponse)
                 getIntent().getSerializableExtra(BookInfoResponse.serialVersionName);
-        mSearchPresenter.searchByISBN(mBookInfoResponse.getIsbn13());
         mBookInfoResponse.setImage(mBookInfoResponse.getImages().getLarge());
         Bitmap book_img = getIntent().getParcelableExtra("book_img");
         Bitmap bitmap = Reflect3DImage.skewImage(book_img);
@@ -162,68 +151,6 @@ public class BookDetailActivity extends BaseActivity implements ISearchView
         else
         {
             mTvBookSummary.setText(UIUtils.getContext().getString(R.string.ac_book_detail_no_summary));
-        }
-    }
-
-    @Override
-    public void showMessage(String msg)
-    {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void showProgress()
-    {
-        mProDialog = ProgressDialog.show(BookDetailActivity.this, null, "请稍候");
-    }
-
-    @Override
-    public void hideProgress()
-    {
-        mProDialog.dismiss();
-    }
-
-    @Override
-    public void showResult(Boolean result)
-    {
-        isCollect = result;
-
-        if (result)
-        {
-            mTvBookAdd.setText(getString(R.string.ac_book_detail_delete));
-            Drawable drawable = getResources().getDrawable(R.mipmap.ic_like);
-            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-            mTvBookAdd.setCompoundDrawables(drawable, null, null, null);
-        }
-        else
-        {
-            mTvBookAdd.setText(getString(R.string.ac_book_detail_add));
-            Drawable drawable = getResources().getDrawable(R.mipmap.ic_dontlike);
-            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-            mTvBookAdd.setCompoundDrawables(drawable, null, null, null);
-        }
-    }
-
-    @OnClick(R.id.tv_book_detail_add)
-    public void onViewClicked()
-    {
-        if (isCollect)
-        {
-            mDeletePresenter.deleteInfo(mBookInfoResponse.getIsbn13());
-            mTvBookAdd.setText(getString(R.string.ac_book_detail_delete));
-            Drawable drawable = getResources().getDrawable(R.mipmap.ic_like);
-            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-            mTvBookAdd.setCompoundDrawables(drawable, null, null, null);
-            isCollect = false;
-        }
-        else
-        {
-            mInsertPresenter.insertInfo(mBookInfoResponse);
-            mTvBookAdd.setText(getString(R.string.ac_book_detail_add));
-            Drawable drawable = getResources().getDrawable(R.mipmap.ic_dontlike);
-            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-            mTvBookAdd.setCompoundDrawables(drawable, null, null, null);
-            isCollect = true;
         }
     }
 }

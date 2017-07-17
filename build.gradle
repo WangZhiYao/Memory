@@ -3,13 +3,10 @@
 buildscript {
     repositories {
         jcenter()
-        maven {
-            url "http://mvn.leancloud.cn/nexus/content/repositories/public"
-        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath "io.realm:realm-gradle-plugin:3.3.1"
+        classpath "io.realm:realm-gradle-plugin:3.5.0"
         classpath 'me.tatarka:gradle-retrolambda:3.6.1'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -20,9 +17,6 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven {
-            url "http://mvn.leancloud.cn/nexus/content/repositories/public"
-        }
     }
 }
 

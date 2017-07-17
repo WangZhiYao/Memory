@@ -1,6 +1,5 @@
 package space.levan.memory.view.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,21 +7,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import io.realm.OrderedRealmCollection;
+
+import io.realm.RealmRecyclerViewAdapter;
 import space.levan.memory.R;
+import space.levan.memory.bean.realm.Book;
 
 /**
  * Created by WangZhiYao on 2017/5/2.
  */
 
-public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class MainAdapter extends RealmRecyclerViewAdapter<Book, RecyclerView.ViewHolder>
 {
-    private Context mContext;
-    private static final int TYPE_EMPTY = 0;
+    private static final int TYPE_EMPTY   = 0;
     private static final int TYPE_DEFAULT = 1;
 
-    public MainAdapter(Context context)
+    public MainAdapter(OrderedRealmCollection<Book> data)
     {
-        this.mContext = context;
+        super(data, true);
     }
 
     @Override
@@ -42,16 +44,16 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public int getItemViewType(int position)
-    {
-        return TYPE_EMPTY;
-    }
-
-    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
     {
         ((EmptyHolder) holder).iv_item_logo.setImageResource(R.mipmap.img_collection);
         ((EmptyHolder) holder).tv_item_tips.setText(R.string.ac_shelf_no_collection);
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        return TYPE_EMPTY;
     }
 
     @Override
@@ -60,14 +62,14 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return 1;
     }
 
-    class MainHolder extends RecyclerView.ViewHolder
+    private class MainHolder extends RecyclerView.ViewHolder
     {
         private final ImageView iv_book_img;
         private final TextView tv_book_title;
         private final TextView tv_book_info;
         private final TextView tv_book_description;
 
-        public MainHolder(View itemView)
+        MainHolder(View itemView)
         {
             super(itemView);
             iv_book_img = (ImageView) itemView.findViewById(R.id.iv_book_img);
@@ -77,12 +79,12 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    class EmptyHolder extends RecyclerView.ViewHolder
+    private class EmptyHolder extends RecyclerView.ViewHolder
     {
         private final ImageView iv_item_logo;
         private final TextView tv_item_tips;
 
-        public EmptyHolder(View itemView)
+        EmptyHolder(View itemView)
         {
             super(itemView);
             iv_item_logo = (ImageView) itemView.findViewById(R.id.iv_item_logo);

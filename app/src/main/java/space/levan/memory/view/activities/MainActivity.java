@@ -51,9 +51,6 @@ public class MainActivity extends BaseActivity
         ButterKnife.bind(this);
         initEvents();
         mSwipeRefreshLayout.setEnabled(false);
-        realm = Realm.getDefaultInstance();
-        realmListener = (RealmChangeListener<Realm>) realm1 -> initEvents();
-        realm.addChangeListener(realmListener);
     }
 
     private void initEvents()

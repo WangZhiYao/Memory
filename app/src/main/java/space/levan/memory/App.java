@@ -22,6 +22,9 @@ public class App extends Application
     private static int mainTid;
     private static List<BaseActivity> activities;
 
+    public static String AUTH_URL  = "http://" + BuildConfig.SERVER_URL + ":9080/auth";
+    public static String REALM_URL = "realm://" + BuildConfig.SERVER_URL + ":9080/~/Memory";
+
     @Override
     public void onCreate()
     {

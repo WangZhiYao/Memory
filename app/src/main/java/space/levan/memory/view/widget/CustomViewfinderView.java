@@ -17,8 +17,8 @@ import java.util.List;
  * Created by WangZhiYao on 2017-04-09.
  */
 
-public class CustomViewfinderView extends ViewfinderView {
-
+public class CustomViewfinderView extends ViewfinderView
+{
     public int laserLinePosition=0;
     public float[] position=new float[]{0f,0.5f,1f};
     public int[] colors=new int[]{0x00ffffff,0xffffffff,0x00ffffff};
