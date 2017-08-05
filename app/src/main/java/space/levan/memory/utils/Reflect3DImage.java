@@ -10,10 +10,9 @@ import android.graphics.Paint;
  * Created by WangZhiYao on 2017/4/28.
  */
 
-public class Reflect3DImage
-{
-    public static Bitmap skewImage(Bitmap paramBitmap)
-    {
+public class Reflect3DImage {
+
+    public static Bitmap skewImage(Bitmap paramBitmap) {
         Camera localCamera = new Camera();
         localCamera.save();
         Matrix localMatrix = new Matrix();

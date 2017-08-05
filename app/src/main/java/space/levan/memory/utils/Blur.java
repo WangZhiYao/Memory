@@ -7,19 +7,15 @@ import android.graphics.Bitmap;
  * Created by WangZhiYao on 2017/4/28.
  */
 
-public class Blur
-{
-    public static Bitmap apply(Bitmap sentBitmap)
-    {
+public class Blur {
+    public static Bitmap apply(Bitmap sentBitmap) {
         return apply(sentBitmap, 10);
     }
 
     @SuppressLint("NewApi")
-    public static Bitmap apply(Bitmap sentBitmap, int radius)
-    {
+    public static Bitmap apply(Bitmap sentBitmap, int radius) {
         Bitmap bitmap = Bitmap.createScaledBitmap(sentBitmap, sentBitmap.getWidth() / 2, sentBitmap.getHeight() / 2, false);
-        if (radius < 1)
-        {
+        if (radius < 1) {
             return null;
         }
         int w = bitmap.getWidth();
@@ -38,8 +34,7 @@ public class Blur
         int divsum = (div + 1) >> 1;
         divsum *= divsum;
         int dv[] = new int[256 * divsum];
-        for (i = 0; i < 256 * divsum; i++)
-        {
+        for (i = 0; i < 256 * divsum; i++) {
             dv[i] = (i / divsum);
         }
         yw = yi = 0;
@@ -51,11 +46,9 @@ public class Blur
         int r1 = radius + 1;
         int routsum, goutsum, boutsum;
         int rinsum, ginsum, binsum;
-        for (y = 0; y < h; y++)
-        {
+        for (y = 0; y < h; y++) {
             rinsum = ginsum = binsum = routsum = goutsum = boutsum = rsum = gsum = bsum = 0;
-            for (i = -radius; i <= radius; i++)
-            {
+            for (i = -radius; i <= radius; i++) {
                 p = pix[yi + Math.min(wm, Math.max(i, 0))];
                 sir = stack[i + radius];
                 sir[0] = (p & 0xff0000) >> 16;
@@ -65,22 +58,18 @@ public class Blur
                 rsum += sir[0] * rbs;
                 gsum += sir[1] * rbs;
                 bsum += sir[2] * rbs;
-                if (i > 0)
-                {
+                if (i > 0) {
                     rinsum += sir[0];
                     ginsum += sir[1];
                     binsum += sir[2];
-                }
-                else
-                {
+                } else {
                     routsum += sir[0];
                     goutsum += sir[1];
                     boutsum += sir[2];
                 }
             }
             stackpointer = radius;
-            for (x = 0; x < w; x++)
-            {
+            for (x = 0; x < w; x++) {
                 r[yi] = dv[rsum];
                 g[yi] = dv[gsum];
                 b[yi] = dv[bsum];
@@ -92,8 +81,7 @@ public class Blur
                 routsum -= sir[0];
                 goutsum -= sir[1];
                 boutsum -= sir[2];
-                if (y == 0)
-                {
+                if (y == 0) {
                     vmin[x] = Math.min(x + radius + 1, wm);
                 }
                 p = pix[yw + vmin[x]];
@@ -118,12 +106,10 @@ public class Blur
             }
             yw += w;
         }
-        for (x = 0; x < w; x++)
-        {
+        for (x = 0; x < w; x++) {
             rinsum = ginsum = binsum = routsum = goutsum = boutsum = rsum = gsum = bsum = 0;
             yp = -radius * w;
-            for (i = -radius; i <= radius; i++)
-            {
+            for (i = -radius; i <= radius; i++) {
                 yi = Math.max(0, yp) + x;
                 sir = stack[i + radius];
                 sir[0] = r[yi];
@@ -133,27 +119,22 @@ public class Blur
                 rsum += r[yi] * rbs;
                 gsum += g[yi] * rbs;
                 bsum += b[yi] * rbs;
-                if (i > 0)
-                {
+                if (i > 0) {
                     rinsum += sir[0];
                     ginsum += sir[1];
                     binsum += sir[2];
-                }
-                else
-                {
+                } else {
                     routsum += sir[0];
                     goutsum += sir[1];
                     boutsum += sir[2];
                 }
-                if (i < hm)
-                {
+                if (i < hm) {
                     yp += w;
                 }
             }
             yi = x;
             stackpointer = radius;
-            for (y = 0; y < h; y++)
-            {
+            for (y = 0; y < h; y++) {
                 pix[yi] = (0xff000000 & pix[yi]) | (dv[rsum] << 16) | (dv[gsum] << 8) | dv[bsum];
                 rsum -= routsum;
                 gsum -= goutsum;
@@ -163,8 +144,7 @@ public class Blur
                 routsum -= sir[0];
                 goutsum -= sir[1];
                 boutsum -= sir[2];
-                if (x == 0)
-                {
+                if (x == 0) {
                     vmin[y] = Math.min(y + r1, hm) * w;
                 }
                 p = x + vmin[y];

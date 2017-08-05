@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite">
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -12,22 +12,22 @@
 
         <ImageView
             android:id="@+id/iv_book_detail_bg"
-            android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="228dp" />
-        
+            android:layout_height="228dp"
+            android:scaleType="centerCrop" />
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="23dp">
+            android:layout_marginTop="23dp"
+            android:orientation="vertical">
 
             <fragment
                 android:id="@+id/fg_book_detail_title"
                 android:name="space.levan.memory.view.fragments.BookDetailTitleFragment"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                tools:layout="@layout/fragment_book_detail_title"/>
+                tools:layout="@layout/fragment_book_detail_title" />
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -36,15 +36,15 @@
                 android:layout_marginTop="24dp">
 
                 <ImageView
-                    android:src="@mipmap/img_book"
                     android:layout_width="96dp"
-                    android:layout_height="160dp" />
+                    android:layout_height="160dp"
+                    android:src="@mipmap/img_book" />
 
                 <ImageView
                     android:id="@+id/iv_book_detail_img"
-                    android:layout_marginTop="3dp"
                     android:layout_width="87dp"
-                    android:layout_height="152dp" />
+                    android:layout_height="152dp"
+                    android:layout_marginTop="3dp" />
 
             </FrameLayout>
 
@@ -52,144 +52,144 @@
 
         <TextView
             android:id="@+id/tv_book_detail_add"
-            android:text="@string/ac_book_detail_add"
-            android:textSize="13sp"
-            android:textColor="@color/colorAccent"
-            android:drawableStart="@mipmap/ic_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginEnd="16dp" />
+            android:layout_marginEnd="16dp"
+            android:drawableStart="@mipmap/ic_like"
+            android:text="@string/ac_book_detail_add"
+            android:textColor="@color/colorAccent"
+            android:textSize="13sp" />
 
     </FrameLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp">
+        android:layout_margin="16dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_book_detail_title"
-            android:text="百年独孤"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="百年独孤"
+            android:textSize="16sp" />
+
         <TextView
             android:id="@+id/tv_book_detail_info"
-            android:text="[日]某某/某某出版社/2015-4[日]某某/某某出版社/2015-4[日]某某/某某出版社/2015-4"
-            android:textSize="10sp"
-            android:maxEms="20"
-            android:ellipsize="end"
-            android:textColor="@color/colorTips"
-            android:maxLines="1"
-            android:gravity="center"
-            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxEms="20"
+            android:maxLines="1"
+            android:text="[日]某某/某某出版社/2015-4[日]某某/某某出版社/2015-4[日]某某/某某出版社/2015-4"
+            android:textColor="@color/colorTips"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_book_detail_author"
-            android:text="作者:XXX"
-            android:textSize="10sp"
-            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:ellipsize="end"
             android:gravity="center"
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:maxLines="1"
+            android:text="作者:XXX"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_book_detail_subtitle"
-            android:text="副标题:xxx"
-            android:textSize="10sp"
-            android:maxLines="1"
-            android:maxEms="18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:gravity="center"
-            android:layout_marginTop="2dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:maxEms="18"
+            android:maxLines="1"
+            android:text="副标题:xxx"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_book_detail_origin_title"
-            android:text="原作名:xxx"
-            android:textSize="10sp"
-            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:gravity="center"
-            android:layout_marginTop="2dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:maxLines="1"
+            android:text="原作名:xxx"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_book_detail_publisher"
-            android:text="出版社:xxx"
-            android:textSize="10sp"
-            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:gravity="center"
-            android:layout_marginTop="2dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:maxLines="1"
+            android:text="出版社:xxx"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_book_detail_translator"
-            android:text="译者:xxx"
-            android:textSize="10sp"
-            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:gravity="center"
-            android:layout_marginTop="2dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:maxLines="1"
+            android:text="译者:xxx"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_book_detail_publish_date"
-            android:text="出版年:2016-1"
-            android:textSize="10sp"
-            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:gravity="center"
-            android:layout_marginTop="2dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:maxLines="1"
+            android:text="出版年:2016-1"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_book_detail_pages"
-            android:text="页数:333"
-            android:textSize="10sp"
-            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:gravity="center"
-            android:layout_marginTop="2dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:maxLines="1"
+            android:text="页数:333"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_book_detail_isbn"
-            android:text="isbn:78921793717"
-            android:textSize="10sp"
-            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:gravity="center"
-            android:layout_marginTop="2dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:maxLines="1"
+            android:text="isbn:78921793717"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_book_detail_summary"
-            android:text="简介：XXXXXXXXXXXX"
-            android:textSize="10sp"
-            android:maxLines="4"
-            android:ellipsize="end"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="32dp"
+            android:ellipsize="end"
+            android:maxLines="4"
+            android:text="简介：XXXXXXXXXXXX"
+            android:textSize="10sp" />
 
     </LinearLayout>
 

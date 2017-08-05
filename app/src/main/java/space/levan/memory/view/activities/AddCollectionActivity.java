@@ -12,8 +12,7 @@ import space.levan.memory.view.base.BaseActivity;
  * Created by WangZhiYao on 2017/5/3.
  */
 
-public class AddCollectionActivity extends BaseActivity
-{
+public class AddCollectionActivity extends BaseActivity {
     @BindView(R.id.et_add_collection_author)
     EditText mEtAuthor;
     @BindView(R.id.et_add_collection_title)
@@ -36,14 +35,12 @@ public class AddCollectionActivity extends BaseActivity
     EditText mEtSummary;
 
     @Override
-    protected int getActTransitionMode()
-    {
+    protected int getActTransitionMode() {
         return 1;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_add_collection);
         ButterKnife.bind(this);

@@ -25,54 +25,42 @@ import space.levan.memory.view.activities.BookDetailActivity;
  * Created by WangZhiYao on 2017/4/28.
  */
 
-public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
-{
+public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_EMPTY = 0;
     private static final int TYPE_DEFAULT = 1;
     private final List<BookInfoResponse> bookInfoResponses;
     private Context mContext;
     private int columns;
 
-    public SearchAdapter(Context context, List<BookInfoResponse> responses, int columns)
-    {
+    public SearchAdapter(Context context, List<BookInfoResponse> responses, int columns) {
         this.bookInfoResponses = responses;
         this.columns = columns;
         this.mContext = context;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
-        if (viewType == TYPE_DEFAULT)
-        {
+        if (viewType == TYPE_DEFAULT) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book_list, parent, false);
             return new SearchHolder(view);
-        }
-        else
-        {
+        } else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_empty, parent, false);
             return new EmptyHolder(view);
         }
     }
 
     @Override
-    public int getItemViewType(int position)
-    {
-        if (bookInfoResponses == null || bookInfoResponses.isEmpty())
-        {
+    public int getItemViewType(int position) {
+        if (bookInfoResponses == null || bookInfoResponses.isEmpty()) {
             return TYPE_EMPTY;
-        }
-        else
-        {
+        } else {
             return TYPE_DEFAULT;
         }
     }
 
-    public int getItemColumnSpan(int position)
-    {
-        switch (getItemViewType(position))
-        {
+    public int getItemColumnSpan(int position) {
+        switch (getItemViewType(position)) {
             case TYPE_DEFAULT:
                 return 1;
             default:
@@ -81,10 +69,8 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
-    {
-        if (holder instanceof SearchHolder)
-        {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof SearchHolder) {
             final BookInfoResponse bookInfo = bookInfoResponses.get(position);
             Glide.with(mContext)
                     .load(bookInfo.getImages().getLarge())
@@ -98,8 +84,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 b.putSerializable(BookInfoResponse.serialVersionName, bookInfo);
                 Bitmap bitmap;
                 GlideBitmapDrawable imageDrawable = (GlideBitmapDrawable) ((SearchHolder) holder).iv_book_img.getDrawable();
-                if (imageDrawable != null)
-                {
+                if (imageDrawable != null) {
                     bitmap = imageDrawable.getBitmap();
                     b.putParcelable("book_img", bitmap);
                 }
@@ -107,28 +92,24 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 intent.putExtras(b);
                 UIUtils.startActivity(intent);
             });
-        }
-        else
-        {
+        } else {
             ((EmptyHolder) holder).iv_item_logo.setImageResource(R.mipmap.img_search);
             ((EmptyHolder) holder).tv_item_tips.setText(R.string.ac_search_no_result);
         }
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return bookInfoResponses.isEmpty() ? 1 : bookInfoResponses.size();
     }
 
-    class SearchHolder extends RecyclerView.ViewHolder
-    {
+    class SearchHolder extends RecyclerView.ViewHolder {
         private final ImageView iv_book_img;
         private final TextView tv_book_title;
         private final TextView tv_book_info;
         private final TextView tv_book_description;
-        public SearchHolder(View itemView)
-        {
+
+        public SearchHolder(View itemView) {
             super(itemView);
             iv_book_img = (ImageView) itemView.findViewById(R.id.iv_book_img);
             tv_book_title = (TextView) itemView.findViewById(R.id.tv_book_title);
@@ -136,12 +117,12 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             tv_book_description = (TextView) itemView.findViewById(R.id.tv_book_description);
         }
     }
-    class EmptyHolder extends RecyclerView.ViewHolder
-    {
+
+    class EmptyHolder extends RecyclerView.ViewHolder {
         private final ImageView iv_item_logo;
         private final TextView tv_item_tips;
-        public EmptyHolder(View itemView)
-        {
+
+        public EmptyHolder(View itemView) {
             super(itemView);
             iv_item_logo = (ImageView) itemView.findViewById(R.id.iv_item_logo);
             tv_item_tips = (TextView) itemView.findViewById(R.id.tv_item_tips);

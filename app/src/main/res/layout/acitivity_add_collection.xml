@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
     <fragment
         android:id="@+id/fg_add_collection_title"
@@ -17,303 +16,293 @@
         tools:layout="@layout/fragment_add_collection_title" />
 
     <ScrollView
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <FrameLayout
-                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
 
                     <ImageView
-                        android:layout_gravity="center"
                         android:layout_width="80dp"
                         android:layout_height="112dp"
-                        android:background="@color/colorAccent"/>
+                        android:layout_gravity="center"
+                        android:background="@color/colorAccent" />
 
                     <ImageView
-                        android:layout_gravity="center"
-                        android:src="@mipmap/ic_addpic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:scaleType="center"/>
+                        android:layout_gravity="center"
+                        android:scaleType="center"
+                        android:src="@mipmap/ic_addpic" />
 
                 </FrameLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:text="@string/ac_add_collection_author"
                         android:layout_width="72dp"
                         android:layout_height="32dp"
-                        android:gravity="center|end">
-                    </TextView>
+                        android:gravity="center|end"
+                        android:text="@string/ac_add_collection_author"></TextView>
 
                     <EditText
                         android:id="@+id/et_add_collection_author"
-                        android:textSize="16sp"
-                        android:singleLine="true"
                         android:layout_width="222dp"
                         android:layout_height="32dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="16dp"
                         android:layout_marginEnd="32dp"
-                        android:background="@color/colorSplit" />
+                        android:layout_marginStart="16dp"
+                        android:background="@color/colorSplit"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:text="@string/ac_add_collection_title"
                         android:layout_width="72dp"
                         android:layout_height="32dp"
-                        android:gravity="center|end">
-                    </TextView>
+                        android:gravity="center|end"
+                        android:text="@string/ac_add_collection_title"></TextView>
 
                     <EditText
                         android:id="@+id/et_add_collection_title"
-                        android:textSize="16sp"
-                        android:singleLine="true"
                         android:layout_width="222dp"
                         android:layout_height="32dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="16dp"
                         android:layout_marginEnd="32dp"
-                        android:background="@color/colorSplit" />
+                        android:layout_marginStart="16dp"
+                        android:background="@color/colorSplit"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:text="@string/ac_add_collection_origin_title"
                         android:layout_width="72dp"
                         android:layout_height="32dp"
-                        android:gravity="center|end">
-                    </TextView>
+                        android:gravity="center|end"
+                        android:text="@string/ac_add_collection_origin_title"></TextView>
 
                     <EditText
                         android:id="@+id/et_add_collection_origin_title"
-                        android:textSize="16sp"
-                        android:singleLine="true"
                         android:layout_width="222dp"
                         android:layout_height="32dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="16dp"
                         android:layout_marginEnd="32dp"
-                        android:background="@color/colorSplit" />
+                        android:layout_marginStart="16dp"
+                        android:background="@color/colorSplit"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:text="@string/ac_add_collection_publisher"
                         android:layout_width="72dp"
                         android:layout_height="32dp"
-                        android:gravity="center|end">
-                    </TextView>
+                        android:gravity="center|end"
+                        android:text="@string/ac_add_collection_publisher"></TextView>
 
                     <EditText
                         android:id="@+id/et_add_collection_publisher"
-                        android:textSize="16sp"
-                        android:singleLine="true"
                         android:layout_width="222dp"
                         android:layout_height="32dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="16dp"
                         android:layout_marginEnd="32dp"
-                        android:background="@color/colorSplit" />
+                        android:layout_marginStart="16dp"
+                        android:background="@color/colorSplit"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:text="@string/ac_add_collection_pubdate"
                         android:layout_width="72dp"
                         android:layout_height="32dp"
-                        android:gravity="center|end">
-                    </TextView>
+                        android:gravity="center|end"
+                        android:text="@string/ac_add_collection_pubdate"></TextView>
 
                     <EditText
                         android:id="@+id/et_add_collection_pubdate"
-                        android:textSize="16sp"
-                        android:singleLine="true"
                         android:layout_width="222dp"
                         android:layout_height="32dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="16dp"
                         android:layout_marginEnd="32dp"
-                        android:background="@color/colorSplit" />
+                        android:layout_marginStart="16dp"
+                        android:background="@color/colorSplit"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:text="@string/ac_add_collection_subtitle"
                         android:layout_width="72dp"
                         android:layout_height="32dp"
-                        android:gravity="center|end">
-                    </TextView>
+                        android:gravity="center|end"
+                        android:text="@string/ac_add_collection_subtitle"></TextView>
 
                     <EditText
                         android:id="@+id/et_add_collection_subtitle"
-                        android:textSize="16sp"
-                        android:singleLine="true"
                         android:layout_width="222dp"
                         android:layout_height="32dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="16dp"
                         android:layout_marginEnd="32dp"
-                        android:background="@color/colorSplit" />
+                        android:layout_marginStart="16dp"
+                        android:background="@color/colorSplit"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:text="@string/ac_add_collection_translator"
                         android:layout_width="72dp"
                         android:layout_height="32dp"
-                        android:gravity="center|end">
-                    </TextView>
+                        android:gravity="center|end"
+                        android:text="@string/ac_add_collection_translator"></TextView>
 
                     <EditText
                         android:id="@+id/et_add_collection_translator"
-                        android:textSize="16sp"
-                        android:singleLine="true"
                         android:layout_width="222dp"
                         android:layout_height="32dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="16dp"
                         android:layout_marginEnd="32dp"
-                        android:background="@color/colorSplit" />
+                        android:layout_marginStart="16dp"
+                        android:background="@color/colorSplit"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:text="@string/ac_add_collection_pages"
                         android:layout_width="72dp"
                         android:layout_height="32dp"
-                        android:gravity="center|end">
-                    </TextView>
+                        android:gravity="center|end"
+                        android:text="@string/ac_add_collection_pages"></TextView>
 
                     <EditText
                         android:id="@+id/et_add_collection_pages"
-                        android:textSize="16sp"
-                        android:singleLine="true"
                         android:layout_width="222dp"
                         android:layout_height="32dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="16dp"
                         android:layout_marginEnd="32dp"
-                        android:background="@color/colorSplit" />
+                        android:layout_marginStart="16dp"
+                        android:background="@color/colorSplit"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:text="@string/ac_add_collection_ISBN"
                         android:layout_width="72dp"
                         android:layout_height="32dp"
-                        android:gravity="center|end">
-                    </TextView>
+                        android:gravity="center|end"
+                        android:text="@string/ac_add_collection_ISBN"></TextView>
 
                     <EditText
                         android:id="@+id/et_add_collection_isbn"
-                        android:textSize="16sp"
-                        android:singleLine="true"
                         android:layout_width="222dp"
                         android:layout_height="32dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="16dp"
                         android:layout_marginEnd="32dp"
-                        android:background="@color/colorSplit" />
+                        android:layout_marginStart="16dp"
+                        android:background="@color/colorSplit"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:text="@string/ac_add_collection_summary"
                         android:layout_width="72dp"
                         android:layout_height="32dp"
-                        android:gravity="center|end">
-                    </TextView>
+                        android:gravity="center|end"
+                        android:text="@string/ac_add_collection_summary"></TextView>
 
                     <EditText
                         android:id="@+id/et_add_collection_summary"
-                        android:gravity="top"
-                        android:textSize="16sp"
-                        android:maxLines="2"
                         android:layout_width="222dp"
                         android:layout_height="64dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="16dp"
                         android:layout_marginEnd="32dp"
-                        android:background="@color/colorSplit" />
+                        android:layout_marginStart="16dp"
+                        android:background="@color/colorSplit"
+                        android:gravity="top"
+                        android:maxLines="2"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -321,14 +310,14 @@
 
             <Button
                 android:id="@+id/btn_add_collection_save"
-                android:text="@string/ac_add_collection_save"
-                android:textColor="@color/colorWhite"
                 android:layout_width="240dp"
                 android:layout_height="56dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="24dp"
                 android:layout_marginBottom="30dp"
-                android:background="@drawable/ic_btn_ripple"/>
+                android:layout_marginTop="24dp"
+                android:background="@drawable/ic_btn_ripple"
+                android:text="@string/ac_add_collection_save"
+                android:textColor="@color/colorWhite" />
 
         </LinearLayout>
 

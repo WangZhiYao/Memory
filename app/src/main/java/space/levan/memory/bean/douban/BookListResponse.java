@@ -7,7 +7,6 @@ import java.util.List;
  */
 
 public class BookListResponse extends BaseResponse {
-
     private int count;
     private int start;
     private int total;

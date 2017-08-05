@@ -10,10 +10,9 @@ import space.levan.memory.view.base.BaseActivity;
  * Created by WangZhiYao on 2017/4/27.
  */
 
-public class UIUtils
-{
-    public static Context getContext()
-    {
+public class UIUtils {
+
+    public static Context getContext() {
         return App.getApplication();
     }
 
@@ -22,16 +21,12 @@ public class UIUtils
      *
      * @param intent
      */
-    public static void startActivity(Intent intent)
-    {
+    public static void startActivity(Intent intent) {
         // 如果不在activity里去打开activity  需要指定任务栈  需要设置标签
-        if (BaseActivity.activity == null)
-        {
+        if (BaseActivity.activity == null) {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getContext().startActivity(intent);
-        }
-        else
-        {
+        } else {
             BaseActivity.activity.startActivity(intent);
         }
     }

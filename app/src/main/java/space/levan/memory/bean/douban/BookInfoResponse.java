@@ -7,8 +7,7 @@ import java.util.Arrays;
  * Created by WangZhiYao on 2017/4/27.
  */
 
-public class BookInfoResponse implements Serializable
-{
+public class BookInfoResponse implements Serializable {
     public static final long serialVersionUID = 7060254125600464481L;
     public static final String serialVersionName = "bookInfo";
     private String title;
@@ -68,7 +67,7 @@ public class BookInfoResponse implements Serializable
     }
 
     public String getAuthors() {
-        return Arrays.toString(author).replace("[","").replace("]","");
+        return Arrays.toString(author).replace("[", "").replace("]", "");
     }
 
     public void setAuthors(String authors) {
@@ -76,7 +75,7 @@ public class BookInfoResponse implements Serializable
     }
 
     public String getTranslators() {
-        return Arrays.toString(translator).replace("[","").replace("]","");
+        return Arrays.toString(translator).replace("[", "").replace("]", "");
     }
 
     public String[] getTranslator() {
@@ -143,23 +142,20 @@ public class BookInfoResponse implements Serializable
         this.summary = summary;
     }
 
-    public String getInfoString()
-    {
-        if (this.author.length > 0)
-        {
+    public String getInfoString() {
+        if (this.author.length > 0) {
             return this.author[0].split("、")[0] + "/" + this.publisher + "/" + this.pubdate;
         }
 
         return "-/" + this.publisher + "/" + this.pubdate;
     }
 
-    public void setInfoString(String[] author, String publisher, String pubdate ) {
+    public void setInfoString(String[] author, String publisher, String pubdate) {
         this.infoString = author[0].split("、")[0] + "/" + publisher + "/" + pubdate;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "BookInfoResponse{" +
                 ", title='" + title + '\'' +
                 ", subtitle='" + subtitle + '\'' +

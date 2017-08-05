@@ -30,20 +30,17 @@ import space.levan.memory.bean.realm.Book;
  * Created by WangZhiYao on 2017/5/4.
  */
 
-public class JxlUtils
-{
-    public static void exportExcel(Context context)
-    {
+public class JxlUtils {
+    public static void exportExcel(Context context) {
         /* 创建文件 */
         WritableWorkbook mWorkbook;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         Date curDate = new Date(System.currentTimeMillis());
         String fileName = "Memory" + "_" + dateFormat.format(curDate) + ".xls";
-        try
-        {
+        try {
             mWorkbook = Workbook.createWorkbook(new File(context.getFilesDir()
-                    +"/"
-                    +fileName));
+                    + "/"
+                    + fileName));
 
             WritableSheet mSheet = mWorkbook.createSheet("书籍", 0);
 
@@ -57,8 +54,7 @@ public class JxlUtils
             //cellView.setAutosize(true);
 
             /* 设置标题栏 */
-            for (int i = 0; i < strTitle.length; i++)
-            {
+            for (int i = 0; i < strTitle.length; i++) {
                 Label titleLabel = new Label(i, 0, strTitle[i], getTitleFormat());
                 mSheet.addCell(titleLabel);
                 //mSheet.setColumnView(i, cellView);
@@ -70,8 +66,7 @@ public class JxlUtils
             RealmResults<Book> bookRealmResults = bookRealmQuery.findAll();
             ArrayList<String> resultList;
 
-            for (int x = 0; x < bookRealmResults.size(); x++)
-            {
+            for (int x = 0; x < bookRealmResults.size(); x++) {
                 Book mBook = bookRealmResults.get(x);
                 resultList = new ArrayList<>();
                 resultList.add(mBook.title);
@@ -87,11 +82,10 @@ public class JxlUtils
                 resultList.add(mBook.summary);
                 int k = 0;
 
-                for (String bookInfo : resultList)
-                {
+                for (String bookInfo : resultList) {
                     Label contentLabel = new Label(k, x + 1, bookInfo, getContentFormat());
                     mSheet.addCell(contentLabel);
-                    mSheet.setColumnView(k, bookInfo.length()+8);
+                    mSheet.setColumnView(k, bookInfo.length() + 8);
                     k++;
                 }
             }
@@ -100,23 +94,18 @@ public class JxlUtils
             mWorkbook.close();
             Toast.makeText(context, "导出Excel成功",
                     Toast.LENGTH_SHORT).show();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(context, "导出Excel失败",
                     Toast.LENGTH_SHORT).show();
-        }
-        catch (WriteException e)
-        {
+        } catch (WriteException e) {
             e.printStackTrace();
             Toast.makeText(context, "导出Excel失败",
                     Toast.LENGTH_SHORT).show();
         }
     }
 
-    private static WritableCellFormat getTitleFormat() throws WriteException
-    {
+    private static WritableCellFormat getTitleFormat() throws WriteException {
         /* 标题栏字体，大小，加粗，边框，背景色，居中，自动换行 */
         WritableFont mFont = new WritableFont(WritableFont
                 .createFont("宋体"), 10, WritableFont.BOLD);
@@ -130,8 +119,7 @@ public class JxlUtils
         return mCellFormat;
     }
 
-    private static WritableCellFormat getContentFormat() throws WriteException
-    {
+    private static WritableCellFormat getContentFormat() throws WriteException {
         WritableFont mFont = new WritableFont(WritableFont
                 .createFont("宋体"), 10);
         WritableCellFormat mCellFormat = new WritableCellFormat(mFont);

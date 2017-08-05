@@ -19,8 +19,7 @@ import space.levan.memory.view.base.BaseActivity;
  * Created by WangZhiYao on 2017-04-09.
  */
 
-public class ResetPwdActivity extends BaseActivity implements IResetPwdView
-{
+public class ResetPwdActivity extends BaseActivity implements IResetPwdView {
     @BindView(R.id.et_reset_password_email)
     EditText mEtResetPasswordEmail;
     @BindView(R.id.btn_reset_password_reset)
@@ -31,21 +30,18 @@ public class ResetPwdActivity extends BaseActivity implements IResetPwdView
     private ResetPwdPresenter mResetPwdPresenter;
 
     @Override
-    protected int getActTransitionMode()
-    {
+    protected int getActTransitionMode() {
         return 2;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
         ButterKnife.bind(this);
     }
 
-    private void userResetPwd()
-    {
+    private void userResetPwd() {
         mResetPwdPresenter = new ResetPwdPresenter(this);
         mEmail = mEtResetPasswordEmail.getText().toString().trim();
         mResetPwdPresenter.userResetPwd(mEmail);
@@ -57,25 +53,21 @@ public class ResetPwdActivity extends BaseActivity implements IResetPwdView
     }
 
     @Override
-    public void showProgress()
-    {
+    public void showProgress() {
         mProDialog = ProgressDialog.show(ResetPwdActivity.this, null, getString(R.string.ac_reset_password_loading));
         mBtnResetPasswordReset.setClickable(false);
 
     }
 
     @Override
-    public void hideProgress()
-    {
+    public void hideProgress() {
         mProDialog.dismiss();
         mBtnResetPasswordReset.setClickable(true);
     }
 
     @OnClick({R.id.tv_reset_password_cancel, R.id.btn_reset_password_reset})
-    public void onViewClicked(View view)
-    {
-        switch (view.getId())
-        {
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
             case R.id.tv_reset_password_cancel:
                 ResetPwdActivity.this.finish();
                 break;

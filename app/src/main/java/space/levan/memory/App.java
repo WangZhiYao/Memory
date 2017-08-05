@@ -16,18 +16,16 @@ import space.levan.memory.view.base.BaseActivity;
  * Created by WangZhiYao on 2017-04-09.
  */
 
-public class App extends Application
-{
+public class App extends Application {
     private static App mApp;
     private static int mainTid;
     private static List<BaseActivity> activities;
 
-    public static String AUTH_URL  = "http://" + BuildConfig.SERVER_URL + ":9080/auth";
+    public static String AUTH_URL = "http://" + BuildConfig.SERVER_URL + ":9080/auth";
     public static String REALM_URL = "realm://" + BuildConfig.SERVER_URL + ":9080/~/Memory";
 
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
         super.onCreate();
         mApp = this;
         activities = new LinkedList<>();
@@ -41,8 +39,7 @@ public class App extends Application
      *
      * @return
      */
-    public static Context getApplication()
-    {
+    public static Context getApplication() {
         return mApp;
     }
 
@@ -51,8 +48,7 @@ public class App extends Application
      *
      * @return
      */
-    public static int getMainTid()
-    {
+    public static int getMainTid() {
         return mainTid;
     }
 
@@ -61,8 +57,7 @@ public class App extends Application
      *
      * @param activity
      */
-    public void addActivity(BaseActivity activity)
-    {
+    public void addActivity(BaseActivity activity) {
         activities.add(activity);
     }
 
@@ -71,23 +66,19 @@ public class App extends Application
      *
      * @param activity
      */
-    public void removeActivity(BaseActivity activity)
-    {
+    public void removeActivity(BaseActivity activity) {
         activities.remove(activity);
     }
 
     /**
      * 结束当前所有Activity
      */
-    public static void clearActivities()
-    {
+    public static void clearActivities() {
         ListIterator<BaseActivity> iterator = activities.listIterator();
         BaseActivity activity;
-        while (iterator.hasNext())
-        {
+        while (iterator.hasNext()) {
             activity = iterator.next();
-            if (activity != null)
-            {
+            if (activity != null) {
                 activity.finish();
             }
         }
@@ -96,8 +87,7 @@ public class App extends Application
     /**
      * 退出应运程序
      */
-    public static void quiteApplication()
-    {
+    public static void quiteApplication() {
         clearActivities();
         System.exit(0);
     }

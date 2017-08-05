@@ -2,14 +2,12 @@ package space.levan.memory.view.activities;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -17,7 +15,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import space.levan.memory.R;
 import space.levan.memory.bean.douban.BookInfoResponse;
 import space.levan.memory.utils.Blur;

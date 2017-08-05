@@ -1,72 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="@color/colorWhite"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
 
     <ImageView
-        android:src="@drawable/ic_logo"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_gravity="center"
-        android:layout_marginTop="64dp"/>
+        android:layout_marginTop="64dp"
+        android:src="@drawable/ic_logo" />
 
     <EditText
         android:id="@+id/et_register_email"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:hint="@string/ac_register_email"
-        android:textColorHint="@color/colorTips"
-        android:maxLines="1"
         android:layout_width="240dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginTop="48dp"
         android:background="@color/colorSplit"
-        android:inputType="textEmailAddress"/>
+        android:gravity="center"
+        android:hint="@string/ac_register_email"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:textColorHint="@color/colorTips"
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/et_register_password"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:hint="@string/ac_register_password"
-        android:textColorHint="@color/colorTips"
-        android:maxLines="1"
         android:layout_width="240dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:background="@color/colorSplit"
-        android:inputType="textPassword"/>
+        android:gravity="center"
+        android:hint="@string/ac_register_password"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:textColorHint="@color/colorTips"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:gravity="end"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:gravity="end">
 
         <TextView
             android:id="@+id/tv_register_login"
-            android:text="@string/ac_register_login"
-            android:textSize="12sp"
-            android:textColor="@color/colorAccent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/ac_register_login"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_register_sign_up"
-        android:text="@string/ac_register_sign_up"
-        android:textSize="16sp"
-        android:textColor="@color/colorWhite"
         android:layout_width="240dp"
         android:layout_height="56dp"
         android:layout_gravity="center"
         android:layout_marginTop="88dp"
-        android:background="@drawable/ic_btn_ripple"/>
+        android:background="@drawable/ic_btn_ripple"
+        android:text="@string/ac_register_sign_up"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp" />
 
 </LinearLayout>

@@ -20,7 +20,7 @@
     <string name="fg_shelf_title">收藏</string>
     <string name="fg_shelf_title_back">返回</string>
     <string name="fg_shelf_title_add">添加</string>
-    
+
     <string name="fg_add_collection_title_add">添加收藏</string>
     <string name="fg_add_collection_title_back">返回</string>
     <string name="fg_add_collection_title_excel">导出Excel</string>
@@ -55,7 +55,7 @@
 
     <string name="ac_search_no_result">没有符合条件的结果</string>
     <string name="ac_search_no_more">已经没有更多了</string>
-    
+
     <string name="ac_book_detail_no_summary">暂无简介</string>
 
     <string name="ac_shelf_no_collection">还没有收藏哦</string>

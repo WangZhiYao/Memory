@@ -12,26 +12,21 @@ import space.levan.memory.view.base.BaseFragment;
  * Created by WangZhiYao on 2017/5/3.
  */
 
-public class AddCollectionTitleFragment extends BaseFragment
-{
+public class AddCollectionTitleFragment extends BaseFragment {
     @Override
-    protected void initView(View view, Bundle savedInstanceState)
-    {
+    protected void initView(View view, Bundle savedInstanceState) {
         view.findViewById(R.id.iv_add_collection_back).setOnClickListener(this);
         view.findViewById(R.id.iv_add_collection_excel).setOnClickListener(this);
     }
 
     @Override
-    protected int getLayoutId()
-    {
+    protected int getLayoutId() {
         return R.layout.fragment_add_collection_title;
     }
 
     @Override
-    public void onClick(View view)
-    {
-        switch (view.getId())
-        {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.iv_add_collection_back:
                 getActivity().finish();
                 break;
@@ -41,8 +36,7 @@ public class AddCollectionTitleFragment extends BaseFragment
         }
     }
 
-    private void showExportDialog()
-    {
+    private void showExportDialog() {
         new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.fg_add_collection_title_dialog_title)
                 .setMessage(R.string.fg_add_collection_title_dialog_message)

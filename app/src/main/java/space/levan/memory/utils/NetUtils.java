@@ -8,26 +8,21 @@ import android.net.NetworkInfo;
  * Created by WangZhiYao on 2017/4/13.
  */
 
-public class NetUtils
-{
+public class NetUtils {
     /**
      * 判断网络是否连接
      *
      * @param context
      * @return
      */
-    public static boolean isConnected(Context context)
-    {
+    public static boolean isConnected(Context context) {
         ConnectivityManager connectivity = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        if (null != connectivity)
-        {
+        if (null != connectivity) {
             NetworkInfo info = connectivity.getActiveNetworkInfo();
-            if (null != info && info.isConnected())
-            {
-                if (info.getState() == NetworkInfo.State.CONNECTED)
-                {
+            if (null != info && info.isConnected()) {
+                if (info.getState() == NetworkInfo.State.CONNECTED) {
                     return true;
                 }
             }

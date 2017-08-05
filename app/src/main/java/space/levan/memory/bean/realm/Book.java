@@ -6,8 +6,7 @@ import io.realm.RealmObject;
  * Created by WangZhiYao on 2017/5/2.
  */
 
-public class Book extends RealmObject
-{
+public class Book extends RealmObject {
     public String isbn13;
     public String title;
     public String subtitle;

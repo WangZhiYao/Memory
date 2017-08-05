@@ -12,7 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField 'String','SERVER_URL', '119.29.162.214'
+        buildConfigField 'String','SERVER_URL', '192.168.199.149'
     }
     buildTypes {
         release {

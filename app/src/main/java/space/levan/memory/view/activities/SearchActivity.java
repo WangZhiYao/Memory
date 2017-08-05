@@ -35,8 +35,7 @@ import static space.levan.memory.common.Constant.fields;
  * Created by WangZhiYao on 2017-04-09.
  */
 
-public class SearchActivity extends BaseActivity implements IBookListView, SwipeRefreshLayout.OnRefreshListener
-{
+public class SearchActivity extends BaseActivity implements IBookListView, SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.et_search_keywords)
     EditText mEtKeywords;
     @BindView(R.id.recyclerView)
@@ -56,16 +55,13 @@ public class SearchActivity extends BaseActivity implements IBookListView, Swipe
 
 
     @Override
-    protected int getActTransitionMode()
-    {
+    protected int getActTransitionMode() {
         return 2;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        if (savedInstanceState != null)
-        {
+    protected void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
             isLoadAll = savedInstanceState.getBoolean("isLoadAll");
         }
         super.onCreate(savedInstanceState);
@@ -75,14 +71,12 @@ public class SearchActivity extends BaseActivity implements IBookListView, Swipe
         mSwipeRefreshLayout.setEnabled(false);
 
         Intent intent = getIntent();
-        if (intent.getStringExtra("q") != null)
-        {
+        if (intent.getStringExtra("q") != null) {
             q = intent.getStringExtra("q");
             startSearch(q);
             mEtKeywords.setText(q);
         }
-        if (TextUtils.equals(mEtKeywords.getText(),""))
-        {
+        if (TextUtils.equals(mEtKeywords.getText(), "")) {
             mEtKeywords.setFocusable(true);
             mEtKeywords.setFocusableInTouchMode(true);
             mEtKeywords.requestFocus();
@@ -91,8 +85,7 @@ public class SearchActivity extends BaseActivity implements IBookListView, Swipe
         }
     }
 
-    public void customScan()
-    {
+    public void customScan() {
         new IntentIntegrator(this)
                 .setBeepEnabled(false)
                 .setOrientationLocked(false)
@@ -100,40 +93,30 @@ public class SearchActivity extends BaseActivity implements IBookListView, Swipe
                 .initiateScan();
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (intentResult != null)
-        {
-            if (intentResult.getContents() == null)
-            {
+        if (intentResult != null) {
+            if (intentResult.getContents() == null) {
                 //ScanResult is Empty
-            }
-            else
-            {
+            } else {
                 q = intentResult.getContents();
                 startSearch(q);
             }
-        }
-        else
-        {
+        } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
-    public void startSearch(String q)
-    {
+    public void startSearch(String q) {
         mSwipeRefreshLayout.setEnabled(true);
         spanCount = getResources().getInteger(R.integer.home_span_count);
         bookListPresenter = new BookListPresenter(this);
         bookInfoResponses = new ArrayList<>();
         bookListPresenter.loadBooks(q, 0, count, fields);
         mLayoutManager = new GridLayoutManager(SearchActivity.this, spanCount);
-        mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup()
-        {
+        mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
-            public int getSpanSize(int position)
-            {
+            public int getSpanSize(int position) {
                 return mSearchAdapter.getItemColumnSpan(position);
             }
         });
@@ -146,21 +129,19 @@ public class SearchActivity extends BaseActivity implements IBookListView, Swipe
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         //设置Item增加、移除动画
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
-        {
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private int lastVisibleItem;
+
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
-            {
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mSearchAdapter.getItemCount())
-                {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mSearchAdapter.getItemCount()) {
                     onLoadMore();
                 }
             }
+
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
-            {
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
             }
@@ -170,49 +151,39 @@ public class SearchActivity extends BaseActivity implements IBookListView, Swipe
         //onRefresh();
     }
 
-    private void onLoadMore()
-    {
-        if (!isLoadAll)
-        {
-            if (!mSwipeRefreshLayout.isRefreshing())
-            {
+    private void onLoadMore() {
+        if (!isLoadAll) {
+            if (!mSwipeRefreshLayout.isRefreshing()) {
                 bookListPresenter.loadBooks(q, page * count, count, fields);
             }
-        }
-        else
-        {
+        } else {
             showMessage(getResources().getString(R.string.ac_search_no_more));
         }
     }
 
     @Override
-    public void onRefresh()
-    {
+    public void onRefresh() {
         page = 1;
         bookListPresenter.loadBooks(q, 0, count, fields);
     }
 
     @Override
-    public void showMessage(String msg)
-    {
+    public void showMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void showProgress()
-    {
+    public void showProgress() {
         mSwipeRefreshLayout.post(() -> mSwipeRefreshLayout.setRefreshing(true));
     }
 
     @Override
-    public void hideProgress()
-    {
+    public void hideProgress() {
         mSwipeRefreshLayout.post(() -> mSwipeRefreshLayout.setRefreshing(false));
     }
 
     @Override
-    public void refreshData(Object result)
-    {
+    public void refreshData(Object result) {
         bookInfoResponses.clear();
         bookInfoResponses.addAll(((BookListResponse) result).getBooks());
         mSearchAdapter.notifyDataSetChanged();
@@ -221,30 +192,25 @@ public class SearchActivity extends BaseActivity implements IBookListView, Swipe
     }
 
     @Override
-    public void addData(Object result)
-    {
+    public void addData(Object result) {
         bookInfoResponses.addAll(((BookListResponse) result).getBooks());
         mSearchAdapter.notifyDataSetChanged();
-        if (((BookListResponse) result).getTotal() > page * count)
-        {
+        if (((BookListResponse) result).getTotal() > page * count) {
             page++;
             isLoadAll = false;
-        }
-        else
-        {
+        } else {
             isLoadAll = true;
         }
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState)
-    {
+    protected void onSaveInstanceState(Bundle outState) {
         outState.putBoolean("isLoadAll", isLoadAll);
         super.onSaveInstanceState(outState);
     }
+
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         //bookListPresenter.cancelLoading();
         super.onDestroy();
     }

@@ -20,8 +20,7 @@ import space.levan.memory.view.base.BaseActivity;
  * Created by WangZhiYao on 2017-04-09.
  */
 
-public class ScanActivity extends BaseActivity implements DecoratedBarcodeView.TorchListener
-{
+public class ScanActivity extends BaseActivity implements DecoratedBarcodeView.TorchListener {
     @BindView(R.id.dbv_custom)
     DecoratedBarcodeView mDBV;
     @BindView(R.id.btn_scan_switch)
@@ -32,35 +31,28 @@ public class ScanActivity extends BaseActivity implements DecoratedBarcodeView.T
 
     // 点击切换闪光灯
     @OnClick(R.id.btn_scan_switch)
-    public void switchLight()
-    {
-        if(isLightOn)
-        {
+    public void switchLight() {
+        if (isLightOn) {
             mDBV.setTorchOff();
-        }
-        else
-        {
+        } else {
             mDBV.setTorchOn();
         }
     }
 
     @Override
-    protected int getActTransitionMode()
-    {
+    protected int getActTransitionMode() {
         return 2;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
         ButterKnife.bind(this);
 
         mDBV.setTorchListener(this);
 
-        if (!hasFlash())
-        {
+        if (!hasFlash()) {
             mSwitchLight.setVisibility(View.GONE);
         }
 
@@ -72,56 +64,48 @@ public class ScanActivity extends BaseActivity implements DecoratedBarcodeView.T
         captureManager.decode();
     }
 
-    private boolean hasFlash()
-    {
+    private boolean hasFlash() {
         return getApplicationContext().getPackageManager()
                 .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState)
-    {
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
         captureManager.onSaveInstanceState(outState);
     }
 
     @Override
-    public void onTorchOn()
-    {
+    public void onTorchOn() {
         mSwitchLight.setBackgroundResource(R.drawable.ic_action_flash_open);
         isLightOn = true;
     }
 
     @Override
-    public void onTorchOff()
-    {
+    public void onTorchOff() {
         mSwitchLight.setBackgroundResource(R.drawable.ic_action_flash_close);
         isLightOn = false;
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         return mDBV.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
         captureManager.onPause();
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         captureManager.onResume();
     }
 
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
         captureManager.onDestroy();
     }

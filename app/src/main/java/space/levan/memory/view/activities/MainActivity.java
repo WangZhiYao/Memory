@@ -24,8 +24,8 @@ import space.levan.memory.view.base.BaseActivity;
  * Created by WangZhiYao on 2017-04-09.
  */
 
-public class MainActivity extends BaseActivity
-{
+public class MainActivity extends BaseActivity {
+
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.swipe_refresh_widget)
@@ -38,14 +38,12 @@ public class MainActivity extends BaseActivity
     private long exitTime = 0;
 
     @Override
-    protected int getActTransitionMode()
-    {
+    protected int getActTransitionMode() {
         return 2;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -53,8 +51,7 @@ public class MainActivity extends BaseActivity
         mSwipeRefreshLayout.setEnabled(false);
     }
 
-    private void initEvents()
-    {
+    private void initEvents() {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         final MainAdapter mAdapter = new MainAdapter(this);
@@ -62,8 +59,7 @@ public class MainActivity extends BaseActivity
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    public void customScan()
-    {
+    public void customScan() {
         new IntentIntegrator(this)
                 .setBeepEnabled(false)
                 .setOrientationLocked(false)
@@ -71,38 +67,27 @@ public class MainActivity extends BaseActivity
                 .initiateScan();
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (intentResult != null)
-        {
-            if (intentResult.getContents() == null)
-            {
+        if (intentResult != null) {
+            if (intentResult.getContents() == null) {
                 //ScanResult is Empty
-            }
-            else
-            {
+            } else {
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                 intent.putExtra("q", intentResult.getContents());
                 startActivity(intent);
             }
-        }
-        else
-        {
+        } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
     @Override
-    public void onBackPressed()
-    {
-        if ((System.currentTimeMillis() - exitTime) > 2000)
-        {
+    public void onBackPressed() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
             Snackbar.make(mSwipeRefreshLayout, getString(R.string.app_exit), Snackbar.LENGTH_SHORT).show();
             exitTime = System.currentTimeMillis();
-        }
-        else
-        {
+        } else {
             this.finish();
             App.quiteApplication();
         }

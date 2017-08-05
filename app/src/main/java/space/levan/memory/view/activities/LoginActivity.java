@@ -74,7 +74,8 @@ public class LoginActivity extends BaseActivity implements ILoginView
     }
 
     @Override
-    public void showMessage(String msg) {
+    public void showMessage(String msg)
+    {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
