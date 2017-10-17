@@ -1,5 +1,8 @@
 package space.levan.memory.model.http;
 
+import io.reactivex.Flowable;
+import space.levan.memory.model.bean.SplashBean;
+
 /**
  * File description
  *
@@ -8,4 +11,6 @@ package space.levan.memory.model.http;
  */
 
 public interface HttpHelper {
+
+    Flowable<SplashBean> getSplashData(int scrWidth, int scrHeight);
 }

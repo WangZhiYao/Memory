@@ -6,6 +6,8 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.avos.avoscloud.AVOSCloud;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -53,7 +55,7 @@ public class App extends Application {
     }
 
     private void initLeanCloud() {
-        //AVOSCloud.initialize(this, Constants.LEAN_CLOUD_APP_ID, Constants.LEAN_CLOUD_APP_KEY);
+        AVOSCloud.initialize(this, Constants.LC_APPID, Constants.LC_APPKEY);
     }
 
     public void addActivity(Activity act) {

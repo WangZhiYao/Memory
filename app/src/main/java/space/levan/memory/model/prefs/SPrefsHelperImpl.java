@@ -17,10 +17,21 @@ import space.levan.memory.app.App;
 public class SPrefsHelperImpl implements SPrefsHelper {
 
     private static final String SP_NAME = "Memory";
+    private static final String SPLASH_PIC_PATH = "splash_pic_path";
     private SharedPreferences mSPrefs;
 
     @Inject
     public SPrefsHelperImpl() {
         mSPrefs = App.getInstance().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+    }
+
+    @Override
+    public String getSplashPicPath() {
+        return mSPrefs.getString(SPLASH_PIC_PATH, "");
+    }
+
+    @Override
+    public void setSplashPicPath(String picPath) {
+        mSPrefs.edit().putString(SPLASH_PIC_PATH, picPath).apply();
     }
 }

@@ -17,6 +17,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import space.levan.memory.app.Constants;
+import space.levan.memory.di.qualifier.SplashUrl;
+import space.levan.memory.model.http.api.SplashApi;
 import space.levan.memory.utils.NetUtils;
 
 /**
@@ -87,11 +89,24 @@ public class HttpModule {
                 .build();
     }
 
-    private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String url) {
-        return builder.baseUrl(url)
+    private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String baseUrl) {
+        return builder.baseUrl(baseUrl)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
+    }
+
+    @Provides
+    @Singleton
+    @SplashUrl
+    Retrofit provideSplashRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, SplashApi.HOST);
+    }
+
+    @Provides
+    @Singleton
+    SplashApi provideSplashService(@SplashUrl Retrofit retrofit) {
+        return retrofit.create(SplashApi.class);
     }
 }

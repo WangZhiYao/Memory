@@ -8,4 +8,8 @@ package space.levan.memory.model.prefs;
  */
 
 public interface SPrefsHelper {
+
+    String getSplashPicPath();
+
+    void setSplashPicPath(String picPath);
 }
