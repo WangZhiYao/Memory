@@ -1,5 +1,7 @@
 package space.levan.memory.presenter;
 
+import android.util.Log;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -8,10 +10,12 @@ import java.io.File;
 
 import javax.inject.Inject;
 
+import io.reactivex.functions.Consumer;
 import space.levan.memory.app.App;
 import space.levan.memory.base.RxPresenter;
 import space.levan.memory.contract.MainContract;
 import space.levan.memory.model.DataManager;
+import space.levan.memory.model.bean.SplashBean;
 import space.levan.memory.utils.RxUtils;
 
 /**
@@ -41,6 +45,6 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
                             public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
                                 mDataManager.setSplashPicPath(resource.getAbsolutePath());
                             }
-                        })));
+                        }), Throwable::printStackTrace));
     }
 }

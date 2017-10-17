@@ -28,7 +28,7 @@ public interface AppComponent {
 
     RealmHelperImpl getRealmHelper();
 
-    HttpHelperImpl getRetrofitHelper();
+    HttpHelperImpl getHttpHelper();
 
     SPrefsHelperImpl getSPrefsHelper();
 }

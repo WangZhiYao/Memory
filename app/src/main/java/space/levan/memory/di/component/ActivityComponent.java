@@ -6,6 +6,7 @@ import dagger.Component;
 import space.levan.memory.di.module.ActivityModule;
 import space.levan.memory.di.scope.ActivityScope;
 import space.levan.memory.ui.activities.MainActivity;
+import space.levan.memory.ui.activities.SplashActivity;
 
 /**
  * File description
@@ -21,4 +22,6 @@ public interface ActivityComponent {
     Activity getActivity();
 
     void Inject(MainActivity mainActivity);
+
+    void Inject(SplashActivity splashActivity);
 }

@@ -14,7 +14,7 @@ public interface SplashContract {
 
     interface View extends BaseView {
 
-        void setSplashData(String picUrl);
+        void setSplashData(String picPath);
 
         void jumpToMain();
     }
