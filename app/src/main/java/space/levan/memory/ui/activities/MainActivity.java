@@ -1,7 +1,9 @@
-package space.levan.memory;
+package space.levan.memory.ui.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import space.levan.memory.R;
 
 public class MainActivity extends AppCompatActivity {
 
