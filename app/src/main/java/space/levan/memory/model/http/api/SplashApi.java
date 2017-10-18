@@ -3,7 +3,7 @@ package space.levan.memory.model.http.api;
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import space.levan.memory.model.bean.SplashBean;
+import space.levan.memory.model.bean.splash.SplashBean;
 
 /**
  * File description

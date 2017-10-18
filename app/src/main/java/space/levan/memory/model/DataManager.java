@@ -1,7 +1,8 @@
 package space.levan.memory.model;
 
 import io.reactivex.Flowable;
-import space.levan.memory.model.bean.SplashBean;
+import space.levan.memory.model.bean.douban.BookResultBean;
+import space.levan.memory.model.bean.splash.SplashBean;
 import space.levan.memory.model.db.RealmHelper;
 import space.levan.memory.model.http.HttpHelper;
 import space.levan.memory.model.prefs.SPrefsHelper;
@@ -28,6 +29,11 @@ public class DataManager implements RealmHelper, HttpHelper, SPrefsHelper {
     @Override
     public Flowable<SplashBean> getSplashData(int scrWidth, int scrHeight) {
         return mHttpHelper.getSplashData(scrWidth, scrHeight);
+    }
+
+    @Override
+    public Flowable<BookResultBean> getBookData(String q, int start, int count) {
+        return mHttpHelper.getBookData(q, start, count);
     }
 
     @Override

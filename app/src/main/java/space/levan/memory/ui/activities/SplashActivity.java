@@ -34,7 +34,8 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
         Glide.with(this)
                 .load(picPath)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                //.animate(R.anim.shrink_to_middle)
+                .crossFade()
+                .animate(R.anim.shrink_to_middle)
                 .into(mSplashImg);
     }
 
@@ -46,7 +47,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
 
     @Override
     protected void initInject() {
-        getActivityComponent().Inject(this);
+        getActivityComponent().inject(this);
     }
 
     @Override

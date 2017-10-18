@@ -21,7 +21,7 @@ public interface ActivityComponent {
 
     Activity getActivity();
 
-    void Inject(MainActivity mainActivity);
+    void inject(MainActivity mainActivity);
 
-    void Inject(SplashActivity splashActivity);
+    void inject(SplashActivity splashActivity);
 }
