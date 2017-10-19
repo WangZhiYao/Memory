@@ -2,6 +2,8 @@ package space.levan.memory.model.bean.douban;
 
 import java.util.List;
 
+import space.levan.memory.utils.StringUtils;
+
 /**
  * File description
  *
@@ -213,8 +215,8 @@ public class BookItemBean {
         this.price = price;
     }
 
-    public List<String> getAuthor() {
-        return author;
+    public String getAuthor() {
+        return StringUtils.listToString(author);
     }
 
     public void setAuthor(List<String> author) {

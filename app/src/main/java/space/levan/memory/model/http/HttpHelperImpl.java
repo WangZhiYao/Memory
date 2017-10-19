@@ -1,11 +1,8 @@
 package space.levan.memory.model.http;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
-import space.levan.memory.model.bean.douban.BookItemBean;
 import space.levan.memory.model.bean.douban.BookResultBean;
 import space.levan.memory.model.bean.splash.SplashBean;
 import space.levan.memory.model.http.api.DouBanApi;

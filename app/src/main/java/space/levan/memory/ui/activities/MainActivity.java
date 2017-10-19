@@ -5,6 +5,12 @@ import space.levan.memory.base.BaseActivity;
 import space.levan.memory.contract.MainContract;
 import space.levan.memory.presenter.MainPresenter;
 
+/**
+ * File description
+ *
+ * @author WangZhiYao
+ * @date 2017/10/17
+ */
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
 
     @Override
