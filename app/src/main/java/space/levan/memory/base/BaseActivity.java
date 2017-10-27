@@ -1,6 +1,7 @@
 package space.levan.memory.base;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +41,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         mContext = this;
         mUnBinder = ButterKnife.bind(this);
         onViewCreate();
