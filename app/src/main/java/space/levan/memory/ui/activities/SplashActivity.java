@@ -1,6 +1,8 @@
 package space.levan.memory.ui.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -16,13 +18,19 @@ import space.levan.memory.presenter.SplashPresenter;
  * File description
  *
  * @author WangZhiYao
- * @date 2017/10/17
+ * @date 2017/11/13
  */
 
 public class SplashActivity extends BaseActivity<SplashPresenter> implements SplashContract.View {
 
     @BindView(R.id.iv_splash_img)
     ImageView mSplashImg;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mPresenter.fetchSplashData();
+    }
 
     @Override
     public void showMessage(String msg) {
@@ -34,7 +42,6 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
         Glide.with(this)
                 .load(picPath)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .crossFade()
                 .animate(R.anim.shrink_to_middle)
                 .into(mSplashImg);
     }
@@ -46,22 +53,12 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     }
 
     @Override
-    protected void initInject() {
-        getActivityComponent().inject(this);
-    }
-
-    @Override
-    protected int getLayoutId() {
+    protected int getContentViewId() {
         return R.layout.activity_splash;
     }
 
     @Override
-    protected void initEvent() {
-        mPresenter.fetchSplashData();
-    }
-
-    @Override
-    protected void initData() {
-
+    protected void initInject() {
+        getActivityComponent().inject(this);
     }
 }
