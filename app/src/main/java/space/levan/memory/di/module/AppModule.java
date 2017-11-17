@@ -6,8 +6,8 @@ import dagger.Module;
 import dagger.Provides;
 import space.levan.memory.app.App;
 import space.levan.memory.model.DataManager;
-import space.levan.memory.model.db.RealmHelper;
-import space.levan.memory.model.db.RealmHelperImpl;
+import space.levan.memory.model.db.DBHelper;
+import space.levan.memory.model.db.DBHelperImpl;
 import space.levan.memory.model.http.HttpHelper;
 import space.levan.memory.model.http.HttpHelperImpl;
 import space.levan.memory.model.prefs.SPrefsHelper;
@@ -37,7 +37,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    RealmHelper provideRealmHelperImpl(RealmHelperImpl realmHelper) {
+    DBHelper provideRealmHelperImpl(DBHelperImpl realmHelper) {
         return realmHelper;
     }
 
@@ -55,7 +55,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    DataManager provideDataManager(RealmHelperImpl realmHelper, HttpHelperImpl httpHelper, SPrefsHelperImpl sPrefsHelper) {
+    DataManager provideDataManager(DBHelperImpl realmHelper, HttpHelperImpl httpHelper, SPrefsHelperImpl sPrefsHelper) {
         return new DataManager(realmHelper, httpHelper, sPrefsHelper);
     }
 }

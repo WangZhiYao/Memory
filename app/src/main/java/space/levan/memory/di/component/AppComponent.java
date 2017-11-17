@@ -7,7 +7,7 @@ import space.levan.memory.app.App;
 import space.levan.memory.di.module.AppModule;
 import space.levan.memory.di.module.HttpModule;
 import space.levan.memory.model.DataManager;
-import space.levan.memory.model.db.RealmHelperImpl;
+import space.levan.memory.model.db.DBHelperImpl;
 import space.levan.memory.model.http.HttpHelperImpl;
 import space.levan.memory.model.prefs.SPrefsHelperImpl;
 
@@ -26,7 +26,7 @@ public interface AppComponent {
 
     DataManager getDataManager();
 
-    RealmHelperImpl getRealmHelper();
+    DBHelperImpl getRealmHelper();
 
     HttpHelperImpl getHttpHelper();
 

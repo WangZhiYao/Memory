@@ -12,14 +12,14 @@ import io.realm.RealmConfiguration;
  * @date 2017/10/17
  */
 
-public class RealmHelperImpl implements RealmHelper {
+public class DBHelperImpl implements DBHelper {
 
     public static final String DB_NAME = "Memory.realm";
 
     private Realm mRealm;
 
     @Inject
-    public RealmHelperImpl() {
+    public DBHelperImpl() {
         mRealm = Realm.getInstance(new RealmConfiguration.Builder()
                 .deleteRealmIfMigrationNeeded()
                 .name(DB_NAME)

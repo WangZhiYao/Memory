@@ -3,7 +3,7 @@ package space.levan.memory.model;
 import io.reactivex.Flowable;
 import space.levan.memory.model.bean.douban.BookResultBean;
 import space.levan.memory.model.bean.splash.SplashBean;
-import space.levan.memory.model.db.RealmHelper;
+import space.levan.memory.model.db.DBHelper;
 import space.levan.memory.model.http.HttpHelper;
 import space.levan.memory.model.prefs.SPrefsHelper;
 
@@ -14,14 +14,14 @@ import space.levan.memory.model.prefs.SPrefsHelper;
  * @date 2017/10/17
  */
 
-public class DataManager implements RealmHelper, HttpHelper, SPrefsHelper {
+public class DataManager implements DBHelper, HttpHelper, SPrefsHelper {
 
-    private RealmHelper mRealmHelper;
+    private DBHelper mDBHelper;
     private HttpHelper mHttpHelper;
     private SPrefsHelper mSPrefsHelper;
 
-    public DataManager(RealmHelper realmHelper, HttpHelper httpHelper, SPrefsHelper sPrefsHelper) {
-        this.mRealmHelper = realmHelper;
+    public DataManager(DBHelper DBHelper, HttpHelper httpHelper, SPrefsHelper sPrefsHelper) {
+        this.mDBHelper = DBHelper;
         this.mHttpHelper = httpHelper;
         this.mSPrefsHelper = sPrefsHelper;
     }

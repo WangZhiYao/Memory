@@ -7,5 +7,5 @@ package space.levan.memory.model.db;
  * @date 2017/10/17
  */
 
-public interface RealmHelper {
+public interface DBHelper {
 }
