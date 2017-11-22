@@ -19,7 +19,7 @@
         android:id="@+id/et_sign_in_email"
         android:layout_width="248dp"
         android:layout_height="48dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="48dp"
         android:background="@color/colorInputBackground"
         android:gravity="center"
         android:hint="@string/sign_in_hint_email"

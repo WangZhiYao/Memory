@@ -13,5 +13,9 @@
     <string name="sign_up_hint_login">我有帐号</string>
     <string name="sign_up_hint_register">注册</string>
 
+    <string name="reset_password_email">邮箱</string>
+    <string name="reset_password_back">放弃找回</string>
+    <string name="reset_password">找回密码</string>
+
     <string name="toolbar_main_title">首页</string>
 </resources>

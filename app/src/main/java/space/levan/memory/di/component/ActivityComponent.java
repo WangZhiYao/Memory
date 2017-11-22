@@ -7,6 +7,7 @@ import space.levan.memory.di.module.ActivityModule;
 import space.levan.memory.di.scope.ActivityScope;
 import space.levan.memory.ui.activities.MainActivity;
 import space.levan.memory.ui.activities.SignInActivity;
+import space.levan.memory.ui.activities.SignUpActivity;
 import space.levan.memory.ui.activities.SplashActivity;
 
 /**
@@ -27,4 +28,6 @@ public interface ActivityComponent {
     void inject(SplashActivity splashActivity);
 
     void inject(SignInActivity signInActivity);
+
+    void inject(SignUpActivity signUpActivity);
 }

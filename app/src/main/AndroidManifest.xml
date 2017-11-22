@@ -44,6 +44,10 @@
             android:name=".ui.activities.SignInActivity"
             android:theme="@style/AppTheme.FullScreen" />
 
+        <activity
+            android:name=".ui.activities.SignUpActivity"
+            android:theme="@style/AppTheme.FullScreen" />
+
     </application>
 
 </manifest>
