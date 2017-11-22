@@ -5,22 +5,21 @@ import android.support.annotation.Nullable;
 
 import space.levan.memory.R;
 import space.levan.memory.base.BaseActivity;
-import space.levan.memory.contract.MainContract;
-import space.levan.memory.presenter.MainPresenter;
+import space.levan.memory.contract.SignInContract;
+import space.levan.memory.presenter.SignInPresenter;
 
 /**
  * File description
  *
  * @author WangZhiYao
- * @date 2017/11/13
+ * @date 2017/11/22
  */
 
-public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
+public class SignInActivity extends BaseActivity<SignInPresenter> implements SignInContract.View {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter.getSplashData();
     }
 
     @Override
@@ -30,7 +29,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_main;
+        return R.layout.activity_sign_in;
     }
 
     @Override

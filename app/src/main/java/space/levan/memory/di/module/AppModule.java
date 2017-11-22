@@ -37,14 +37,14 @@ public class AppModule {
 
     @Provides
     @Singleton
-    DBHelper provideRealmHelperImpl(DBHelperImpl realmHelper) {
-        return realmHelper;
+    DBHelper provideDBHelperImpl(DBHelperImpl dbHelper) {
+        return dbHelper;
     }
 
     @Provides
     @Singleton
-    HttpHelper provideRetrofitHelperImpl(HttpHelperImpl retrofitHelper) {
-        return retrofitHelper;
+    HttpHelper provideHttpHelperImpl(HttpHelperImpl httpHelper) {
+        return httpHelper;
     }
 
     @Provides
@@ -55,7 +55,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    DataManager provideDataManager(DBHelperImpl realmHelper, HttpHelperImpl httpHelper, SPrefsHelperImpl sPrefsHelper) {
-        return new DataManager(realmHelper, httpHelper, sPrefsHelper);
+    DataManager provideDataManager(DBHelperImpl dbHelper, HttpHelperImpl httpHelper, SPrefsHelperImpl sPrefsHelper) {
+        return new DataManager(dbHelper, httpHelper, sPrefsHelper);
     }
 }

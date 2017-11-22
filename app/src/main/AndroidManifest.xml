@@ -40,6 +40,10 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.activities.SignInActivity"
+            android:theme="@style/AppTheme.FullScreen" />
+
     </application>
 
 </manifest>
