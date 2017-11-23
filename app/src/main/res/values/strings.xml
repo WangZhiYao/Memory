@@ -18,4 +18,7 @@
     <string name="reset_password">找回密码</string>
 
     <string name="toolbar_main_title">首页</string>
+    <string name="toolbar_shelf_title">收藏</string>
+
+    <string name="test_book_detail">本书为经典畅销书《为何家会伤人》的全新升级版。该书出版七年来，在读者中引起持久的震荡，好评如潮。在本书中，作者作了全新的修订，并新增六万字内容，细致入微地揭示出中国家庭的运行机理。作者用最温暖有力的文字贴着当下读者的心，凭借十年行业经验，带领为家庭关系所困的万千读者一起踏上自我治愈与寻求幸福和自由的旅程。</string>
 </resources>

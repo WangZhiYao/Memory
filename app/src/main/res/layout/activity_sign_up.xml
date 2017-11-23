@@ -71,7 +71,7 @@
         android:layout_width="248dp"
         android:layout_height="56dp"
         android:layout_marginTop="56dp"
-        android:background="@drawable/shape_btn_sign_in"
+        android:background="@drawable/shape_btn_green"
         android:foreground="?attr/selectableItemBackground"
         android:text="@string/sign_up_hint_register"
         android:textColor="@color/colorWhite"
