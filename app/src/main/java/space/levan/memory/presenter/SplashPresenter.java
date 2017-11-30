@@ -1,5 +1,7 @@
 package space.levan.memory.presenter;
 
+import com.avos.avoscloud.AVUser;
+
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -31,12 +33,19 @@ public class SplashPresenter extends RxPresenter<SplashContract.View> implements
     @Override
     public void fetchSplashData() {
         mView.setSplashData(mDataManager.getSplashPicPath());
-        startCountDown();
     }
 
-    private void startCountDown() {
+    @Override
+    public void isUserSignIn() {
         addSubscribe(Flowable.timer(COUNT_DOWN_TIME, TimeUnit.MILLISECONDS)
                 .compose(RxUtils.rxSchedulerHelper())
-                .subscribe(aLong -> mView.jumpToMain()));
+                .subscribe(aLong -> {
+                    AVUser user = AVUser.getCurrentUser();
+                    if (user != null) {
+                        mView.jumpToMain();
+                    } else {
+                        mView.jumpToSignIn();
+                    }
+                }));
     }
 }

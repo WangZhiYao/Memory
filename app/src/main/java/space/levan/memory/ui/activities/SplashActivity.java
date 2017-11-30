@@ -30,6 +30,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter.fetchSplashData();
+        mPresenter.isUserSignIn();
     }
 
     @Override
@@ -49,6 +50,12 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     @Override
     public void jumpToMain() {
         startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        finish();
+    }
+
+    @Override
+    public void jumpToSignIn() {
+        startActivity(new Intent(SplashActivity.this, SignInActivity.class));
         finish();
     }
 

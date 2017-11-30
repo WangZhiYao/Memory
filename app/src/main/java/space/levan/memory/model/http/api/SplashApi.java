@@ -18,10 +18,10 @@ public interface SplashApi {
     String CLIENT_ID = "e14a9d2f95c57d0e1312e50919dcc935a8723ef94ee9ed029de48ca77b2cd342";
 
     /**
-     * get a random Splash Image from UnSplash.com depends on screen width and height
+     * get a random SplashBean Image from UnSplash.com depends on screen width and height
      *
-     * @param cid client id from UnSplash.com
-     * @param width screen width
+     * @param cid    client id from UnSplash.com
+     * @param width  screen width
      * @param height screen height
      * @return
      */

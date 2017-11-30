@@ -1,5 +1,7 @@
 package space.levan.memory.model.bean.douban;
 
+import io.realm.RealmObject;
+
 /**
  * File description
  *
@@ -7,39 +9,33 @@ package space.levan.memory.model.bean.douban;
  * @date 2017/10/18
  */
 
-public class ImagesBean {
-
-    /**
-     * small : https://img3.doubanio.com/spic/s5890592.jpg
-     * large : https://img3.doubanio.com/lpic/s5890592.jpg
-     * medium : https://img3.doubanio.com/mpic/s5890592.jpg
-     */
+public class ImagesBean extends RealmObject {
 
     private String small;
     private String large;
     private String medium;
 
-    public String getSmall() {
-        return small;
-    }
-
     public void setSmall(String small) {
         this.small = small;
     }
 
-    public String getLarge() {
-        return large;
+    public String getSmall() {
+        return small;
     }
 
     public void setLarge(String large) {
         this.large = large;
     }
 
-    public String getMedium() {
-        return medium;
+    public String getLarge() {
+        return large;
     }
 
     public void setMedium(String medium) {
         this.medium = medium;
+    }
+
+    public String getMedium() {
+        return medium;
     }
 }

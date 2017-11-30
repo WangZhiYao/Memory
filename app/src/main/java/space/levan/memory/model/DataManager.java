@@ -45,4 +45,14 @@ public class DataManager implements DBHelper, HttpHelper, SPrefsHelper {
     public void setSplashPicPath(String picPath) {
         mSPrefsHelper.setSplashPicPath(picPath);
     }
+
+    @Override
+    public String getUserEmail() {
+        return mSPrefsHelper.getUserEmail();
+    }
+
+    @Override
+    public void setUserEmail(String userEmail) {
+        mSPrefsHelper.setUserEmail(userEmail);
+    }
 }

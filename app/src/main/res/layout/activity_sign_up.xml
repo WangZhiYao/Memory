@@ -24,6 +24,8 @@
         android:gravity="center"
         android:hint="@string/sign_up_hint_username"
         android:textSize="16sp"
+        android:imeOptions="actionNext"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_sign_up_logo" />
@@ -36,8 +38,10 @@
         android:background="@color/colorInputBackground"
         android:gravity="center"
         android:hint="@string/sign_up_hint_email"
+        android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
         android:textSize="16sp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_sign_up_username" />
@@ -50,14 +54,16 @@
         android:background="@color/colorInputBackground"
         android:gravity="center"
         android:hint="@string/sign_up_hint_password"
+        android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:textSize="16sp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_sign_up_email" />
 
     <TextView
-        android:id="@+id/tv_sign_in_reset_password"
+        android:id="@+id/tv_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

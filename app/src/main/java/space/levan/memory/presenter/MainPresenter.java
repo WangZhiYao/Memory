@@ -35,7 +35,7 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
         addSubscribe(mDataManager.getSplashData(App.SCREEN_WIDTH, App.SCREEN_HEIGHT)
                 .compose(RxUtils.rxSchedulerHelper())
                 .subscribe(splashBean -> Glide.with(App.getInstance())
-                        .load(splashBean.getUrls().getCustom())
+                        .load(splashBean.getUrlsBean().getCustom())
                         .downloadOnly(new SimpleTarget<File>() {
                             @Override
                             public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {

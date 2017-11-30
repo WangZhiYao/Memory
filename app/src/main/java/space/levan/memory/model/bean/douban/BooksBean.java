@@ -2,6 +2,8 @@ package space.levan.memory.model.bean.douban;
 
 import java.util.List;
 
+import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 import space.levan.memory.utils.StringUtils;
 
 /**
@@ -11,7 +13,7 @@ import space.levan.memory.utils.StringUtils;
  * @date 2017/10/18
  */
 
-public class BookItemBean {
+public class BooksBean extends RealmObject {
 
     /**
      * rating : {"max":10,"numRaters":1,"average":"0.0","min":0}
@@ -25,7 +27,7 @@ public class BookItemBean {
      * translator : []
      * catalog :
      * pages : 142
-     * images : {"small":"https://img3.doubanio.com/spic/s5890592.jpg","large":"https://img3.doubanio.com/lpic/s5890592.jpg","medium":"https://img3.doubanio.com/mpic/s5890592.jpg"}
+     * imagesBean : {"small":"https://img3.doubanio.com/spic/s5890592.jpg","large":"https://img3.doubanio.com/lpic/s5890592.jpg","medium":"https://img3.doubanio.com/mpic/s5890592.jpg"}
      * alt : https://book.douban.com/subject/3049219/
      * id : 3049219
      * publisher : 吉林出版集团有限责任公司
@@ -47,7 +49,7 @@ public class BookItemBean {
     private String binding;
     private String catalog;
     private String pages;
-    private ImagesBean images;
+    private ImagesBean imagesBean;
     private String alt;
     private String id;
     private String publisher;
@@ -59,8 +61,13 @@ public class BookItemBean {
     private String author_intro;
     private String summary;
     private String price;
+    private String authors;
+    private String translators;
+    @Ignore
     private List<String> author;
+    @Ignore
     private List<String> tags;
+    @Ignore
     private List<String> translator;
 
     public String getSubtitle() {
@@ -119,12 +126,12 @@ public class BookItemBean {
         this.pages = pages;
     }
 
-    public ImagesBean getImages() {
-        return images;
+    public ImagesBean getImagesBean() {
+        return imagesBean;
     }
 
-    public void setImages(ImagesBean images) {
-        this.images = images;
+    public void setImagesBean(ImagesBean imagesBean) {
+        this.imagesBean = imagesBean;
     }
 
     public String getAlt() {
@@ -215,8 +222,24 @@ public class BookItemBean {
         this.price = price;
     }
 
-    public String getAuthor() {
-        return StringUtils.listToString(author);
+    public String getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<String> authors) {
+        this.authors = StringUtils.listToString(authors);
+    }
+
+    public String getTranslators() {
+        return translators;
+    }
+
+    public void setTranslators(List<String> translators) {
+        this.translators = StringUtils.listToString(translators);
+    }
+
+    public List<String> getAuthor() {
+        return author;
     }
 
     public void setAuthor(List<String> author) {

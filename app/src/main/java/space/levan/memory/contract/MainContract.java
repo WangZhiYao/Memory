@@ -18,6 +18,9 @@ public interface MainContract {
 
     interface Presenter extends BasePresenter<View> {
 
+        /**
+         * 从网上去获取下次启动界面的图片地址
+         */
         void getSplashData();
     }
 }

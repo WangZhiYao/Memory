@@ -3,25 +3,18 @@ package space.levan.memory.model.bean.douban;
 import java.util.List;
 
 /**
- * File description
+ * 佛祖保佑 不出BUG
  *
  * @author WangZhiYao
- * @date 2017/10/18
+ * @date 2017/11/30
  */
 
 public class BookResultBean {
 
-    /**
-     * count : 0
-     * start : 0
-     * total : 0
-     * books : []
-     */
-
     private int count;
     private int start;
     private int total;
-    private List<BookItemBean> books;
+    private List<BooksBean> books;
 
     public int getCount() {
         return count;
@@ -47,11 +40,11 @@ public class BookResultBean {
         this.total = total;
     }
 
-    public List<BookItemBean> getBooks() {
+    public List<BooksBean> getBooks() {
         return books;
     }
 
-    public void setBooks(List<BookItemBean> books) {
+    public void setBooks(List<BooksBean> books) {
         this.books = books;
     }
 }
