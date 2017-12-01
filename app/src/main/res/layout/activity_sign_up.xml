@@ -16,35 +16,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_sign_up_username"
+        android:id="@+id/et_sign_up_email"
         android:layout_width="248dp"
         android:layout_height="48dp"
         android:layout_marginTop="48dp"
         android:background="@color/colorInputBackground"
         android:gravity="center"
-        android:hint="@string/sign_up_hint_username"
-        android:textSize="16sp"
-        android:imeOptions="actionNext"
-        android:singleLine="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_sign_up_logo" />
-
-    <EditText
-        android:id="@+id/et_sign_up_email"
-        android:layout_width="248dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorInputBackground"
-        android:gravity="center"
         android:hint="@string/sign_up_hint_email"
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
-        android:textSize="16sp"
         android:singleLine="true"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_sign_up_username" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_sign_up_logo" />
 
     <EditText
         android:id="@+id/et_sign_up_password"

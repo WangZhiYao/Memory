@@ -13,7 +13,7 @@ import space.levan.memory.utils.StringUtils;
  * @date 2017/10/18
  */
 
-public class BooksBean extends RealmObject {
+public class Books extends RealmObject {
 
     /**
      * rating : {"max":10,"numRaters":1,"average":"0.0","min":0}
@@ -27,7 +27,7 @@ public class BooksBean extends RealmObject {
      * translator : []
      * catalog :
      * pages : 142
-     * imagesBean : {"small":"https://img3.doubanio.com/spic/s5890592.jpg","large":"https://img3.doubanio.com/lpic/s5890592.jpg","medium":"https://img3.doubanio.com/mpic/s5890592.jpg"}
+     * images : {"small":"https://img3.doubanio.com/spic/s5890592.jpg","large":"https://img3.doubanio.com/lpic/s5890592.jpg","medium":"https://img3.doubanio.com/mpic/s5890592.jpg"}
      * alt : https://book.douban.com/subject/3049219/
      * id : 3049219
      * publisher : 吉林出版集团有限责任公司
@@ -49,7 +49,7 @@ public class BooksBean extends RealmObject {
     private String binding;
     private String catalog;
     private String pages;
-    private ImagesBean imagesBean;
+    private Images images;
     private String alt;
     private String id;
     private String publisher;
@@ -126,12 +126,12 @@ public class BooksBean extends RealmObject {
         this.pages = pages;
     }
 
-    public ImagesBean getImagesBean() {
-        return imagesBean;
+    public Images getImages() {
+        return images;
     }
 
-    public void setImagesBean(ImagesBean imagesBean) {
-        this.imagesBean = imagesBean;
+    public void setImages(Images images) {
+        this.images = images;
     }
 
     public String getAlt() {

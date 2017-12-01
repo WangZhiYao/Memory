@@ -1,5 +1,9 @@
 package space.levan.memory.model.db;
 
+import java.util.List;
+
+import space.levan.memory.model.bean.project.Project;
+
 /**
  * File description
  *
@@ -8,4 +12,8 @@ package space.levan.memory.model.db;
  */
 
 public interface DBHelper {
+
+    void insertProject(Project project);
+
+    List<Project> getAllProject();
 }

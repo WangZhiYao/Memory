@@ -32,10 +32,9 @@ public interface SignUpContract {
         /**
          * 用户注册
          *
-         * @param username  用户名
          * @param userEmail 邮箱
          * @param password  密码
          */
-        void userSignUp(String username, String userEmail, String password);
+        void userSignUp(String userEmail, String password);
     }
 }

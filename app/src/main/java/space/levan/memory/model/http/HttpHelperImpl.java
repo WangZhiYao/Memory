@@ -3,8 +3,8 @@ package space.levan.memory.model.http;
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
-import space.levan.memory.model.bean.douban.BookResultBean;
-import space.levan.memory.model.bean.splash.SplashBean;
+import space.levan.memory.model.bean.douban.BookResult;
+import space.levan.memory.model.bean.splash.Splash;
 import space.levan.memory.model.http.api.DouBanApi;
 import space.levan.memory.model.http.api.SplashApi;
 
@@ -27,12 +27,12 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Flowable<SplashBean> getSplashData(int scrWidth, int scrHeight) {
+    public Flowable<Splash> getSplashData(int scrWidth, int scrHeight) {
         return mSplashApi.getSplashData(SplashApi.CLIENT_ID, scrWidth, scrHeight);
     }
 
     @Override
-    public Flowable<BookResultBean> getBookData(String q, int start, int count) {
+    public Flowable<BookResult> getBookData(String q, int start, int count) {
         return mDouBanApi.getBookData(q, start, count);
     }
 }

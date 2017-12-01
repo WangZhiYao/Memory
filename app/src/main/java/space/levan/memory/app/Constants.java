@@ -24,4 +24,6 @@ public class Constants {
 
     public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath()
             + File.separator + "levan" + File.separator + "Memory";
+
+    public static final String REGEX_EMAIL = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
 }

@@ -1,9 +1,12 @@
 package space.levan.memory.model.db;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import space.levan.memory.model.bean.project.Project;
 
 /**
  * File description
@@ -24,5 +27,17 @@ public class DBHelperImpl implements DBHelper {
                 .deleteRealmIfMigrationNeeded()
                 .name(DB_NAME)
                 .build());
+    }
+
+    @Override
+    public void insertProject(Project project) {
+        mRealm.beginTransaction();
+        mRealm.copyToRealmOrUpdate(project);
+        mRealm.commitTransaction();
+    }
+
+    @Override
+    public List<Project> getAllProject() {
+        return mRealm.where(Project.class).findAll();
     }
 }

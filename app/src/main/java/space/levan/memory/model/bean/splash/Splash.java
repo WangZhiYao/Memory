@@ -7,7 +7,7 @@ package space.levan.memory.model.bean.splash;
  * @date 2017/10/17
  */
 
-public class SplashBean {
+public class Splash {
 
     /**
      * id : 2EFoBSXgTCM
@@ -33,7 +33,7 @@ public class SplashBean {
 
     private String color;
     private String description;
-    private UrlsBean urls;
+    private Urls urls;
 
     public String getColor() {
         return color;
@@ -51,15 +51,15 @@ public class SplashBean {
         this.description = description;
     }
 
-    public UrlsBean getUrls() {
+    public Urls getUrls() {
         return urls;
     }
 
-    public void setUrls(UrlsBean urls) {
+    public void setUrls(Urls urls) {
         this.urls = urls;
     }
 
-    public static class UrlsBean {
+    public static class Urls {
         /**
          * raw : https://images.unsplash.com/photo-1511661110100-994cc848c6ea
          * full : https://images.unsplash.com/photo-1511661110100-994cc848c6ea?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=b1b6934b1e477ed15cc188b754ac8ae7

@@ -9,7 +9,7 @@ import io.realm.RealmObject;
  * @date 2017/10/18
  */
 
-public class ImagesBean extends RealmObject {
+public class Images extends RealmObject {
 
     private String small;
     private String large;

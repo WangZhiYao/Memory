@@ -1,6 +1,5 @@
 package space.levan.memory.ui.activities;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,8 +20,6 @@ import space.levan.memory.presenter.SignUpPresenter;
 
 public class SignUpActivity extends BaseActivity<SignUpPresenter> implements SignUpContract.View {
 
-    @BindView(R.id.et_sign_up_username)
-    EditText mEtUsername;
     @BindView(R.id.et_sign_up_email)
     EditText mEtEmail;
     @BindView(R.id.et_sign_up_password)
@@ -30,7 +27,7 @@ public class SignUpActivity extends BaseActivity<SignUpPresenter> implements Sig
 
     @Override
     public void showMessage(String msg) {
-
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -60,11 +57,9 @@ public class SignUpActivity extends BaseActivity<SignUpPresenter> implements Sig
                 this.finish();
                 break;
             case R.id.btn_sign_up:
-                String username = mEtUsername.getText().toString();
-                Log.w("WZY", username);
                 String userEmail = mEtEmail.getText().toString();
                 String password = mEtPassword.getText().toString();
-                mPresenter.userSignUp(username, userEmail, password);
+                mPresenter.userSignUp(userEmail, password);
                 break;
             default:
                 break;

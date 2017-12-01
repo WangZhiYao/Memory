@@ -9,12 +9,12 @@ import java.util.List;
  * @date 2017/11/30
  */
 
-public class BookResultBean {
+public class BookResult {
 
     private int count;
     private int start;
     private int total;
-    private List<BooksBean> books;
+    private List<Books> books;
 
     public int getCount() {
         return count;
@@ -40,11 +40,11 @@ public class BookResultBean {
         this.total = total;
     }
 
-    public List<BooksBean> getBooks() {
+    public List<Books> getBooks() {
         return books;
     }
 
-    public void setBooks(List<BooksBean> books) {
+    public void setBooks(List<Books> books) {
         this.books = books;
     }
 }

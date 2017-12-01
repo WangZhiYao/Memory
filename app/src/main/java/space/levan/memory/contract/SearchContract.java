@@ -4,7 +4,7 @@ import java.util.List;
 
 import space.levan.memory.base.BasePresenter;
 import space.levan.memory.base.BaseView;
-import space.levan.memory.model.bean.douban.BooksBean;
+import space.levan.memory.model.bean.douban.Books;
 
 /**
  * File description
@@ -17,7 +17,7 @@ public interface SearchContract {
 
     interface View extends BaseView {
 
-        void showBookData(List<BooksBean> resultBean);
+        void showBookData(List<Books> resultBean);
     }
 
     interface Presenter extends BasePresenter<View> {

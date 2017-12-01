@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import space.levan.memory.base.RxPresenter;
 import space.levan.memory.contract.SignInContract;
 import space.levan.memory.model.DataManager;
+import space.levan.memory.utils.StringUtils;
 
 /**
  * File description
@@ -38,20 +39,23 @@ public class SignInPresenter extends RxPresenter<SignInContract.View> implements
 
     @Override
     public void userSignIn(String userEmail, String password) {
-        if (!TextUtils.isEmpty(userEmail) && !TextUtils.isEmpty(password)) {
-            AVUser.logInInBackground(userEmail, password, new LogInCallback<AVUser>() {
-                @Override
-                public void done(AVUser avUser, AVException e) {
-                    if (e == null) {
-                        mView.signInSuccess();
-                    } else {
-                        mView.signInFailure(e.getMessage());
+        if (StringUtils.isEmail(userEmail)) {
+            if (!TextUtils.isEmpty(password)) {
+                AVUser.logInInBackground(userEmail, password, new LogInCallback<AVUser>() {
+                    @Override
+                    public void done(AVUser avUser, AVException e) {
+                        if (e == null) {
+                            mView.signInSuccess();
+                        } else {
+                            mView.signInFailure(e.getMessage());
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                mView.showMessage("密码不能为空！");
+            }
         } else {
-            mView.showMessage("用户名或密码不能为空！");
+            mView.showMessage("请输入正确的邮箱地址");
         }
-
     }
 }

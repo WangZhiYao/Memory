@@ -62,14 +62,13 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
 
     @Override
     public void setUserEmail(String userEmail) {
-        //mEtEmail.setText(userEmail);
-        Toast.makeText(mContext, userEmail, Toast.LENGTH_SHORT).show();
+        mEtEmail.setText(userEmail);
     }
 
     @Override
     public void signInSuccess() {
         startActivity(new Intent(SignInActivity.this, MainActivity.class));
-        finish();
+        this.finish();
     }
 
     @Override

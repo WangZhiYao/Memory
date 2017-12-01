@@ -1,8 +1,8 @@
 package space.levan.memory.model.http;
 
 import io.reactivex.Flowable;
-import space.levan.memory.model.bean.douban.BookResultBean;
-import space.levan.memory.model.bean.splash.SplashBean;
+import space.levan.memory.model.bean.douban.BookResult;
+import space.levan.memory.model.bean.splash.Splash;
 
 /**
  * File description
@@ -13,7 +13,7 @@ import space.levan.memory.model.bean.splash.SplashBean;
 
 public interface HttpHelper {
 
-    Flowable<SplashBean> getSplashData(int scrWidth, int scrHeight);
+    Flowable<Splash> getSplashData(int scrWidth, int scrHeight);
 
-    Flowable<BookResultBean> getBookData(String q, int start, int count);
+    Flowable<BookResult> getBookData(String q, int start, int count);
 }

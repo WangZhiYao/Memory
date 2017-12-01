@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import space.levan.memory.base.RxPresenter;
 import space.levan.memory.contract.SignUpContract;
 import space.levan.memory.model.DataManager;
+import space.levan.memory.utils.StringUtils;
 
 /**
  * File description
@@ -27,17 +28,25 @@ public class SignUpPresenter extends RxPresenter<SignUpContract.View> implements
     }
 
     @Override
-    public void userSignUp(String username, String userEmail, String password) {
-        AVUser user = new AVUser();
-        user.setEmail(userEmail);
-        user.setPassword(password);
-        user.setUsername(userEmail);
-        user.add("nickname", username);
-        user.signUpInBackground(new SignUpCallback() {
-            @Override
-            public void done(AVException e) {
-
-            }
-        });
+    public void userSignUp(String userEmail, String password) {
+        if (StringUtils.isEmail(userEmail)) {
+            AVUser user = new AVUser();
+            user.setEmail(userEmail);
+            user.setPassword(password);
+            user.setUsername(userEmail);
+            user.signUpInBackground(new SignUpCallback() {
+                @Override
+                public void done(AVException e) {
+                    if (e == null) {
+                        mView.signUpSuccess();
+                        mDataManager.setUserEmail(userEmail);
+                    } else {
+                        mView.signUpFailure(e.getMessage());
+                    }
+                }
+            });
+        } else {
+            mView.showMessage("请输入正确的邮箱地址");
+        }
     }
 }
