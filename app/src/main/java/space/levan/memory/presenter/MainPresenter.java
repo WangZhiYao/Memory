@@ -1,5 +1,7 @@
 package space.levan.memory.presenter;
 
+import android.util.Log;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -35,7 +37,7 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
         addSubscribe(mDataManager.getSplashData(App.SCREEN_WIDTH, App.SCREEN_HEIGHT)
                 .compose(RxUtils.rxSchedulerHelper())
                 .subscribe(splashBean -> Glide.with(App.getInstance())
-                        .load(splashBean.getUrlsBean().getCustom())
+                        .load(splashBean.getUrls().getCustom())
                         .downloadOnly(new SimpleTarget<File>() {
                             @Override
                             public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
