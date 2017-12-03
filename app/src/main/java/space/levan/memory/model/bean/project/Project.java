@@ -1,7 +1,5 @@
 package space.levan.memory.model.bean.project;
 
-import java.util.Date;
-
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -18,8 +16,8 @@ public class Project extends RealmObject {
     @PrimaryKey
     private int id;
     private String name;
-    private Date start_time;
-    private Date end_time;
+    private String start_time;
+    private String end_time;
     private String notes;
     private String member;
     private RealmList<Document> documents;
@@ -41,19 +39,19 @@ public class Project extends RealmObject {
         this.name = name;
     }
 
-    public Date getStart_time() {
+    public String getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(Date start_time) {
+    public void setStart_time(String start_time) {
         this.start_time = start_time;
     }
 
-    public Date getEnd_time() {
+    public String getEnd_time() {
         return end_time;
     }
 
-    public void setEnd_time(Date end_time) {
+    public void setEnd_time(String end_time) {
         this.end_time = end_time;
     }
 

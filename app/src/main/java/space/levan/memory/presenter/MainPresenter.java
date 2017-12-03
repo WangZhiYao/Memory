@@ -1,7 +1,5 @@
 package space.levan.memory.presenter;
 
-import android.util.Log;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -44,5 +42,14 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
                                 mDataManager.setSplashPicPath(resource.getAbsolutePath());
                             }
                         }), Throwable::printStackTrace));
+    }
+
+    @Override
+    public void getAllProject() {
+        if (mDataManager.getAllProject().isEmpty()) {
+            mView.showEmptyView();
+        } else {
+            mView.showProject(mDataManager.getAllProject());
+        }
     }
 }

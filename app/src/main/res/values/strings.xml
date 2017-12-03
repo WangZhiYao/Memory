@@ -24,4 +24,6 @@
     <string name="project_end_time_hint">完成时间：</string>
     <string name="project_member_hint">成员：</string>
     <string name="project_notes_hint">备注：</string>
+
+    <string name="main_empty_project">还没有项目</string>
 </resources>
