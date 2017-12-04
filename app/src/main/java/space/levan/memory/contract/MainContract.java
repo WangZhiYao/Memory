@@ -1,10 +1,13 @@
 package space.levan.memory.contract;
 
+import android.content.Context;
+
 import java.util.List;
 
 import space.levan.memory.base.BasePresenter;
 import space.levan.memory.base.BaseView;
 import space.levan.memory.model.bean.project.Project;
+import space.levan.memory.ui.adapters.MainAdapter;
 
 /**
  * File description
@@ -41,5 +44,7 @@ public interface MainContract {
          * 获取当前项目
          */
         void getAllProject();
+
+        void insertNewProject(Project project);
     }
 }

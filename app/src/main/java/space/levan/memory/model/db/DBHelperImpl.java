@@ -32,7 +32,7 @@ public class DBHelperImpl implements DBHelper {
     @Override
     public void insertProject(Project project) {
         mRealm.beginTransaction();
-        mRealm.copyToRealmOrUpdate(project);
+        mRealm.copyToRealm(project);
         mRealm.commitTransaction();
     }
 

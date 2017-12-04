@@ -13,23 +13,13 @@ import io.realm.annotations.PrimaryKey;
 
 public class Project extends RealmObject {
 
-    @PrimaryKey
-    private int id;
     private String name;
+    private String status;
     private String start_time;
     private String end_time;
     private String notes;
     private String member;
     private RealmList<Document> documents;
-    private int status;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -37,6 +27,14 @@ public class Project extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getStart_time() {
@@ -77,13 +75,5 @@ public class Project extends RealmObject {
 
     public void setDocuments(RealmList<Document> documents) {
         this.documents = documents;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 }
