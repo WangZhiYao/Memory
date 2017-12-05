@@ -13,7 +13,6 @@ import space.levan.memory.base.RxPresenter;
 import space.levan.memory.contract.MainContract;
 import space.levan.memory.model.DataManager;
 import space.levan.memory.model.bean.project.Project;
-import space.levan.memory.ui.adapters.MainAdapter;
 import space.levan.memory.utils.RxUtils;
 
 /**
