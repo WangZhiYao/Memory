@@ -3,7 +3,7 @@ package space.levan.memory.model.bean.douban;
 import java.util.List;
 
 /**
- * 佛祖保佑 不出BUG
+ * Book result entity
  *
  * @author WangZhiYao
  * @date 2017/11/30

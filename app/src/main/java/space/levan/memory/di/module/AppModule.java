@@ -14,7 +14,7 @@ import space.levan.memory.model.prefs.SPrefsHelper;
 import space.levan.memory.model.prefs.SPrefsHelperImpl;
 
 /**
- * File description
+ * Application Module
  *
  * @author WangZhiYao
  * @date 2017/10/17

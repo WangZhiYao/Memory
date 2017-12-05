@@ -1,7 +1,7 @@
 package space.levan.memory.base;
 
 /**
- * File description
+ * BaseView
  *
  * @author WangZhiYao
  * @date 2017/10/17
@@ -9,5 +9,10 @@ package space.levan.memory.base;
 
 public interface BaseView {
 
+    /**
+     * show prompt message
+     *
+     * @param msg message content
+     */
     void showMessage(String msg);
 }

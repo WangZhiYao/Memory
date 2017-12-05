@@ -17,7 +17,7 @@ import space.levan.memory.di.component.DaggerAppComponent;
 import space.levan.memory.di.module.AppModule;
 
 /**
- * File description
+ * Custom Application class
  *
  * @author WangZhiYao
  * @date 2017/10/17

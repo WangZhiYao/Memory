@@ -15,7 +15,7 @@ import space.levan.memory.R;
 import space.levan.memory.model.bean.project.Project;
 
 /**
- * File description
+ * MainAdapter
  *
  * @author WangZhiYao
  * @date 2017/12/2

@@ -13,7 +13,7 @@ import space.levan.memory.model.DataManager;
 import space.levan.memory.utils.RxUtils;
 
 /**
- * File description
+ * SplashPresenter
  *
  * @author WangZhiYao
  * @date 2017/10/17

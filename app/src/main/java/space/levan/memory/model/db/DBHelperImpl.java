@@ -9,7 +9,7 @@ import io.realm.RealmConfiguration;
 import space.levan.memory.model.bean.project.Project;
 
 /**
- * File description
+ * DBHelper interface implementation class
  *
  * @author WangZhiYao
  * @date 2017/10/17

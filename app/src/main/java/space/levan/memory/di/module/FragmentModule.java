@@ -8,7 +8,7 @@ import dagger.Provides;
 import space.levan.memory.di.scope.FragmentScope;
 
 /**
- * File description
+ * Fragment Module
  *
  * @author WangZhiYao
  * @date 2017/10/17

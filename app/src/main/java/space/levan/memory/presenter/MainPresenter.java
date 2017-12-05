@@ -17,7 +17,7 @@ import space.levan.memory.ui.adapters.MainAdapter;
 import space.levan.memory.utils.RxUtils;
 
 /**
- * File description
+ * MainPresenter
  *
  * @author WangZhiYao
  * @date 2017/10/17

@@ -14,7 +14,7 @@ import space.levan.memory.model.DataManager;
 import space.levan.memory.utils.StringUtils;
 
 /**
- * File description
+ * SignInPresenter
  *
  * @author WangZhiYao
  * @date 2017/11/22

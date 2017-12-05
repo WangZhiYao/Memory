@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import space.levan.memory.app.Constants;
 
 /**
- * File description
+ * String Utils class
  *
  * @author WangZhiYao
  * @date 2017/10/19

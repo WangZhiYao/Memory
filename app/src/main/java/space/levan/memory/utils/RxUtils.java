@@ -5,7 +5,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * File description
+ * RxUtils class
  *
  * @author WangZhiYao
  * @date 2017/10/17

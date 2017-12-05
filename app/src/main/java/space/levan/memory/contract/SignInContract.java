@@ -4,7 +4,7 @@ import space.levan.memory.base.BasePresenter;
 import space.levan.memory.base.BaseView;
 
 /**
- * 登录契约类
+ * Contract for SignInPresenter
  *
  * @author WangZhiYao
  * @date 2017/11/22
@@ -15,21 +15,21 @@ public interface SignInContract {
     interface View extends BaseView {
 
         /**
-         * 设置登录的邮箱
+         * set the email
          *
-         * @param userEmail 注册的邮箱
+         * @param userEmail the email address that user use to sign in
          */
         void setUserEmail(String userEmail);
 
         /**
-         * 登录成功
+         * callback when sign in success
          */
         void signInSuccess();
 
         /**
-         * 登录失败
+         * callback when sign in failure
          *
-         * @param msg 失败消息
+         * @param msg error message
          */
         void signInFailure(String msg);
     }
@@ -37,15 +37,15 @@ public interface SignInContract {
     interface Presenter extends BasePresenter<View> {
 
         /**
-         * 从本地查找用户注册时的邮箱
+         * fetch the email address that user use to sign in
          */
         void fetchUserEmail();
 
         /**
-         * 用户登录
+         * user sign in
          *
-         * @param userEmail 邮箱
-         * @param password  密码
+         * @param userEmail email address
+         * @param password  password
          */
         void userSignIn(String userEmail, String password);
     }

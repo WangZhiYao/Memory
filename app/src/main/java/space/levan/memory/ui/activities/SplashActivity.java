@@ -15,7 +15,7 @@ import space.levan.memory.contract.SplashContract;
 import space.levan.memory.presenter.SplashPresenter;
 
 /**
- * File description
+ * SplashActivity
  *
  * @author WangZhiYao
  * @date 2017/11/13

@@ -11,7 +11,7 @@ import space.levan.memory.model.http.HttpHelper;
 import space.levan.memory.model.prefs.SPrefsHelper;
 
 /**
- * File description
+ * DataManager
  *
  * @author WangZhiYao
  * @date 2017/10/17

@@ -13,7 +13,7 @@ import space.levan.memory.contract.SignInContract;
 import space.levan.memory.presenter.SignInPresenter;
 
 /**
- * File description
+ * SignInActivity
  *
  * @author WangZhiYao
  * @date 2017/11/22

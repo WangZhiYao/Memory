@@ -7,7 +7,7 @@ import space.levan.memory.base.BaseView;
 import space.levan.memory.model.bean.douban.Books;
 
 /**
- * File description
+ * Contract for SearchPresenter
  *
  * @author WangZhiYao
  * @date 2017/10/18
@@ -17,11 +17,23 @@ public interface SearchContract {
 
     interface View extends BaseView {
 
+        /**
+         * callback when get book info success
+         *
+         * @param resultBean book info
+         */
         void showBookData(List<Books> resultBean);
     }
 
     interface Presenter extends BasePresenter<View> {
 
+        /**
+         * get book info from DouBan api
+         *
+         * @param q     keywords
+         * @param start start with this number of all the result
+         * @param count how many result will be returned from the server
+         */
         void getBookData(String q, int start, int count);
     }
 }

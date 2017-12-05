@@ -4,7 +4,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
- * File description
+ * RxPresenter
  *
  * @author WangZhiYao
  * @date 2017/10/17
@@ -13,9 +13,9 @@ import io.reactivex.disposables.Disposable;
 public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
 
     protected T mView;
-    protected CompositeDisposable mCompositeDisposable;
+    private CompositeDisposable mCompositeDisposable;
 
-    protected void unSubscribe() {
+    private void unSubscribe() {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.clear();
         }

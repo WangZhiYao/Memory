@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import space.levan.memory.app.App;
 
 /**
- * File description
+ * SharedPreferences interface implementation class
  *
  * @author WangZhiYao
  * @date 2017/10/17

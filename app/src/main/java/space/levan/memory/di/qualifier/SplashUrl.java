@@ -8,7 +8,7 @@ import javax.inject.Qualifier;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * File description
+ * Splash api qualifier
  *
  * @author WangZhiYao
  * @date 2017/10/17

@@ -8,7 +8,7 @@ import space.levan.memory.model.DataManager;
 import space.levan.memory.utils.RxUtils;
 
 /**
- * File description
+ * SearchPresenter
  *
  * @author WangZhiYao
  * @date 2017/10/18

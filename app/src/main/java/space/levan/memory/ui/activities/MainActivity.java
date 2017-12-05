@@ -26,7 +26,7 @@ import space.levan.memory.presenter.MainPresenter;
 import space.levan.memory.ui.adapters.MainAdapter;
 
 /**
- * File description
+ * MainActivity
  *
  * @author WangZhiYao
  * @date 2017/11/13

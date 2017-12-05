@@ -7,7 +7,7 @@ import dagger.Provides;
 import space.levan.memory.di.scope.ActivityScope;
 
 /**
- * File description
+ * Activity Module
  *
  * @author WangZhiYao
  * @date 2017/10/17

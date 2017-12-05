@@ -11,7 +11,7 @@ import space.levan.memory.ui.activities.SignUpActivity;
 import space.levan.memory.ui.activities.SplashActivity;
 
 /**
- * File description
+ * Activity component
  *
  * @author WangZhiYao
  * @date 2017/10/17
@@ -21,13 +21,38 @@ import space.levan.memory.ui.activities.SplashActivity;
 @Component(modules = ActivityModule.class, dependencies = AppComponent.class)
 public interface ActivityComponent {
 
+    /**
+     * get Activity
+     *
+     * @return
+     */
     Activity getActivity();
 
+    /**
+     * binding MainActivity
+     *
+     * @param mainActivity MainActivity
+     */
     void inject(MainActivity mainActivity);
 
+    /**
+     * binding SplashActivity
+     *
+     * @param splashActivity SplashActivity
+     */
     void inject(SplashActivity splashActivity);
 
+    /**
+     * binding SignInActivity
+     *
+     * @param signInActivity SignInActivity
+     */
     void inject(SignInActivity signInActivity);
 
+    /**
+     * binding SignUpActivity
+     *
+     * @param signUpActivity SignUpActivity
+     */
     void inject(SignUpActivity signUpActivity);
 }

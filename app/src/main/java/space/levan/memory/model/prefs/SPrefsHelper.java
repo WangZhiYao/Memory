@@ -1,7 +1,7 @@
 package space.levan.memory.model.prefs;
 
 /**
- * File description
+ * SharedPreferences interface class
  *
  * @author WangZhiYao
  * @date 2017/10/17
@@ -10,28 +10,28 @@ package space.levan.memory.model.prefs;
 public interface SPrefsHelper {
 
     /**
-     * 获取启动图片缓存路径
+     * fetch the splash image cached path
      *
-     * @return 缓存路径
+     * @return
      */
     String getSplashPicPath();
 
     /**
-     * 设置启动图片缓存路径
+     * save the splash image cached path
      *
-     * @param picPath 缓存路径
+     * @param picPath cached path
      */
     void setSplashPicPath(String picPath);
 
     /**
-     * 获取注册时用户填写的邮箱地址
+     * fetch the email address that user use to sign in
      *
      * @return 邮箱地址
      */
     String getUserEmail();
 
     /**
-     * 设置注册时用户填写的邮箱地址
+     * save the email address that user use to sign up
      *
      * @param userEmail 邮箱地址
      */

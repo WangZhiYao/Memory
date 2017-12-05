@@ -12,7 +12,7 @@ import space.levan.memory.model.http.HttpHelperImpl;
 import space.levan.memory.model.prefs.SPrefsHelperImpl;
 
 /**
- * File description
+ * Application component
  *
  * @author WangZhiYao
  * @date 2017/10/17
@@ -22,13 +22,38 @@ import space.levan.memory.model.prefs.SPrefsHelperImpl;
 @Component(modules = {AppModule.class, HttpModule.class})
 public interface AppComponent {
 
+    /**
+     * get Context
+     *
+     * @return
+     */
     App getContext();
 
+    /**
+     * get DataManager
+     *
+     * @return
+     */
     DataManager getDataManager();
 
-    DBHelperImpl getRealmHelper();
+    /**
+     * get DBHelper
+     *
+     * @return
+     */
+    DBHelperImpl getDBHelper();
 
+    /**
+     * get HttpHelper
+     *
+     * @return
+     */
     HttpHelperImpl getHttpHelper();
 
+    /**
+     * get SPrefsHelper
+     *
+     * @return
+     */
     SPrefsHelperImpl getSPrefsHelper();
 }

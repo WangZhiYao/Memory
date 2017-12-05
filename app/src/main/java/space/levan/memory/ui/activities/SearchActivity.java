@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import space.levan.memory.R;
 
 /**
- * File description
+ * SearchActivity
  *
  * @author WangZhiYao
  * @date 2017/11/23

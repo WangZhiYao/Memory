@@ -24,7 +24,7 @@ import space.levan.memory.model.http.api.SplashApi;
 import space.levan.memory.utils.NetUtils;
 
 /**
- * File description
+ * Retrofit & OkHttp Module
  *
  * @author WangZhiYao
  * @date 2017/10/17

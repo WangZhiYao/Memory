@@ -5,7 +5,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
- * File description
+ * Project entity
  *
  * @author WangZhiYao
  * @date 2017/12/1

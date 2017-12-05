@@ -4,7 +4,7 @@ import space.levan.memory.base.BasePresenter;
 import space.levan.memory.base.BaseView;
 
 /**
- * 启动界面契约类
+ * Contract for SplashPresenter
  *
  * @author WangZhiYao
  * @date 2017/10/17
@@ -15,19 +15,19 @@ public interface SplashContract {
     interface View extends BaseView {
 
         /**
-         * 返回图片的缓存路径
+         * callback for save the splash image cached path
          *
-         * @param picPath 图片的缓存路径
+         * @param picPath cached path
          */
         void setSplashData(String picPath);
 
         /**
-         * 跳转到主界面
+         * jump to MainActivity
          */
         void jumpToMain();
 
         /**
-         * 跳转到登录界面
+         * jump to SignInActivity
          */
         void jumpToSignIn();
     }
@@ -35,12 +35,12 @@ public interface SplashContract {
     interface Presenter extends BasePresenter<View> {
 
         /**
-         * 查找缓存的图片路径
+         * fetch the splash image cached path
          */
         void fetchSplashData();
 
         /**
-         * 判断用户是否登录
+         * determine whether the user is logged in
          */
         void isUserSignIn();
     }

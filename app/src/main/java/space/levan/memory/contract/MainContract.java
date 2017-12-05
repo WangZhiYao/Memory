@@ -1,16 +1,13 @@
 package space.levan.memory.contract;
 
-import android.content.Context;
-
 import java.util.List;
 
 import space.levan.memory.base.BasePresenter;
 import space.levan.memory.base.BaseView;
 import space.levan.memory.model.bean.project.Project;
-import space.levan.memory.ui.adapters.MainAdapter;
 
 /**
- * File description
+ * Contract for MainPresenter
  *
  * @author WangZhiYao
  * @date 2017/10/17
@@ -21,14 +18,14 @@ public interface MainContract {
     interface View extends BaseView {
 
         /**
-         * 返回项目列表
+         * callback when get project list success
          *
-         * @param projects
+         * @param projects project list
          */
         void showProject(List<Project> projects);
 
         /**
-         * 没有项目时的空视图
+         * callback when project list is empty
          */
         void showEmptyView();
     }
@@ -36,15 +33,20 @@ public interface MainContract {
     interface Presenter extends BasePresenter<View> {
 
         /**
-         * 从网上去获取下次启动界面的图片地址
+         * get the splash image from UnSplash.com for next time start this app
          */
         void getSplashData();
 
         /**
-         * 获取当前项目
+         * get project
          */
         void getAllProject();
 
+        /**
+         * create a new project
+         *
+         * @param project project
+         */
         void insertNewProject(Project project);
     }
 }

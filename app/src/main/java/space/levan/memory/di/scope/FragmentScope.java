@@ -7,7 +7,7 @@ import javax.inject.Scope;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * File description
+ * Scope for fragment
  *
  * @author WangZhiYao
  * @date 2017/10/17

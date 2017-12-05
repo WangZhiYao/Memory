@@ -3,7 +3,7 @@ package space.levan.memory.model.bean.douban;
 import io.realm.RealmObject;
 
 /**
- * File description
+ * Image url entity
  *
  * @author WangZhiYao
  * @date 2017/10/18

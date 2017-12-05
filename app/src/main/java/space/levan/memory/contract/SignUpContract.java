@@ -4,7 +4,7 @@ import space.levan.memory.base.BasePresenter;
 import space.levan.memory.base.BaseView;
 
 /**
- * 注册契约类
+ * Contract for SignUpPresenter
  *
  * @author WangZhiYao
  * @date 2017/11/22
@@ -15,14 +15,14 @@ public interface SignUpContract {
     interface View extends BaseView {
 
         /**
-         * 注册成功
+         * callback when user sign up success
          */
         void signUpSuccess();
 
         /**
-         * 注册失败
+         * callback when user sign up failure
          *
-         * @param msg 失败消息
+         * @param msg error message
          */
         void signUpFailure(String msg);
     }
@@ -30,10 +30,10 @@ public interface SignUpContract {
     interface Presenter extends BasePresenter<View> {
 
         /**
-         * 用户注册
+         * user sign up
          *
-         * @param userEmail 邮箱
-         * @param password  密码
+         * @param userEmail user email address
+         * @param password  password
          */
         void userSignUp(String userEmail, String password);
     }

@@ -6,7 +6,7 @@ import android.net.ConnectivityManager;
 import space.levan.memory.app.App;
 
 /**
- * File description
+ * Network utils class
  *
  * @author WangZhiYao
  * @date 2017/10/17

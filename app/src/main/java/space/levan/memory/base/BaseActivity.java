@@ -15,7 +15,7 @@ import space.levan.memory.di.component.DaggerActivityComponent;
 import space.levan.memory.di.module.ActivityModule;
 
 /**
- * File description
+ * BaseActivity
  *
  * @author WangZhiYao
  * @date 2017/11/13
@@ -27,7 +27,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected T mPresenter;
 
     protected AppCompatActivity mContext;
-    private Unbinder mUnbinder;
+    private Unbinder mUnBinder;
 
     protected ActivityComponent getActivityComponent() {
         return DaggerActivityComponent.builder()
@@ -41,11 +41,16 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         super.onCreate(savedInstanceState);
         setContentView(getContentViewId());
         mContext = this;
-        mUnbinder = ButterKnife.bind(this);
+        mUnBinder = ButterKnife.bind(this);
         onViewCreate();
         App.getInstance().addActivity(this);
     }
 
+    /**
+     * get layout id
+     *
+     * @return layout id
+     */
     protected abstract int getContentViewId();
 
     @SuppressWarnings("unchecked")
@@ -56,6 +61,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         }
     }
 
+    /**
+     * binding with injection
+     */
     protected abstract void initInject();
 
     public void onBack(View v) {
@@ -94,6 +102,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         }
         super.onDestroy();
         App.getInstance().removeActivity(this);
-        mUnbinder.unbind();
+        mUnBinder.unbind();
     }
 }

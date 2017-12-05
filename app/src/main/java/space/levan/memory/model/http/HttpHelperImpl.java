@@ -9,7 +9,7 @@ import space.levan.memory.model.http.api.DouBanApi;
 import space.levan.memory.model.http.api.SplashApi;
 
 /**
- * File description
+ * HttpHelper interface implementation class
  *
  * @author WangZhiYao
  * @date 2017/10/17

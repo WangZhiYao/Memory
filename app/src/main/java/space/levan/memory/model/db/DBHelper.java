@@ -5,7 +5,7 @@ import java.util.List;
 import space.levan.memory.model.bean.project.Project;
 
 /**
- * File description
+ * DBHelper interface class
  *
  * @author WangZhiYao
  * @date 2017/10/17
@@ -13,7 +13,17 @@ import space.levan.memory.model.bean.project.Project;
 
 public interface DBHelper {
 
+    /**
+     * save project
+     *
+     * @param project project
+     */
     void insertProject(Project project);
 
+    /**
+     * fetch all project
+     *
+     * @return
+     */
     List<Project> getAllProject();
 }
