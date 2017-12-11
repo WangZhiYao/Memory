@@ -3,7 +3,6 @@ package space.levan.memory.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import javax.inject.Inject;
 
@@ -65,10 +64,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
      * binding with injection
      */
     protected abstract void initInject();
-
-    public void onBack(View v) {
-        super.onBackPressed();
-    }
 
     @Override
     protected void onStart() {

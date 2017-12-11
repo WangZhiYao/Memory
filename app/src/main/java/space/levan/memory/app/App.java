@@ -82,7 +82,9 @@ public class App extends Application {
     public void exitApp() {
         if (mAllActivities != null) {
             synchronized (mAllActivities) {
-                mAllActivities.forEach(Activity::finish);
+                for (Activity mAllActivity : mAllActivities) {
+                    mAllActivity.finish();
+                }
             }
         }
         android.os.Process.killProcess(android.os.Process.myPid());

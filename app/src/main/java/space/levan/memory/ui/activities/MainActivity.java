@@ -3,6 +3,7 @@ package space.levan.memory.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,6 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import space.levan.memory.R;
+import space.levan.memory.app.App;
 import space.levan.memory.base.BaseActivity;
 import space.levan.memory.contract.MainContract;
 import space.levan.memory.model.bean.project.Project;
@@ -42,6 +44,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     TextView mTvEmptyProject;
 
     private MainAdapter adapter;
+    private long exitTime = 0;
+    //private int exitTime = 2000;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -141,5 +145,21 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     public void onRefresh() {
         mPresenter.getAllProject();
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Snackbar.make(mSwipeRefreshLayout, "再按一次退出", Snackbar.LENGTH_SHORT)
+                    .setAction("立即退出", view -> finish()).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            this.finish();
+        }
+    }
+
+    @Override
+    public void finish() {
+        new App().exitApp();
     }
 }
