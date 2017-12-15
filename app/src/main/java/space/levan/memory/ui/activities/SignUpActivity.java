@@ -36,6 +36,11 @@ public class SignUpActivity extends BaseActivity<SignUpPresenter> implements Sig
     }
 
     @Override
+    protected int getActTransitionMode() {
+        return LEFT;
+    }
+
+    @Override
     protected void initInject() {
         getActivityComponent().inject(this);
     }

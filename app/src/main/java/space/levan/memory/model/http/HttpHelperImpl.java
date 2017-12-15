@@ -7,6 +7,8 @@ import space.levan.memory.model.bean.douban.BookResult;
 import space.levan.memory.model.bean.splash.Splash;
 import space.levan.memory.model.http.api.DouBanApi;
 import space.levan.memory.model.http.api.SplashApi;
+import space.levan.memory.model.http.response.DouBanResponse;
+import space.levan.memory.model.http.response.UnSplashResponse;
 
 /**
  * HttpHelper interface implementation class
@@ -27,12 +29,12 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Flowable<Splash> getSplashData(int scrWidth, int scrHeight) {
+    public Flowable<UnSplashResponse<Splash>> getSplashData(int scrWidth, int scrHeight) {
         return mSplashApi.getSplashData(SplashApi.CLIENT_ID, scrWidth, scrHeight);
     }
 
     @Override
-    public Flowable<BookResult> getBookData(String q, int start, int count) {
+    public Flowable<DouBanResponse<BookResult>> getBookData(String q, int start, int count) {
         return mDouBanApi.getBookData(q, start, count);
     }
 }

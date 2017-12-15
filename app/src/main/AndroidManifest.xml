@@ -49,6 +49,9 @@
             android:theme="@style/AppTheme.FullScreen" />
 
         <activity android:name=".ui.activities.SearchActivity" />
+        <activity
+            android:name=".ui.activities.ResetPasswordActivity"
+            android:theme="@style/AppTheme.FullScreen" />
 
     </application>
 

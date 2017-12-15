@@ -4,10 +4,13 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 import space.levan.memory.model.bean.douban.BookResult;
+import space.levan.memory.model.bean.douban.Books;
 import space.levan.memory.model.bean.project.Project;
 import space.levan.memory.model.bean.splash.Splash;
 import space.levan.memory.model.db.DBHelper;
 import space.levan.memory.model.http.HttpHelper;
+import space.levan.memory.model.http.response.DouBanResponse;
+import space.levan.memory.model.http.response.UnSplashResponse;
 import space.levan.memory.model.prefs.SPrefsHelper;
 
 /**
@@ -30,12 +33,12 @@ public class DataManager implements DBHelper, HttpHelper, SPrefsHelper {
     }
 
     @Override
-    public Flowable<Splash> getSplashData(int scrWidth, int scrHeight) {
+    public Flowable<UnSplashResponse<Splash>> getSplashData(int scrWidth, int scrHeight) {
         return mHttpHelper.getSplashData(scrWidth, scrHeight);
     }
 
     @Override
-    public Flowable<BookResult> getBookData(String q, int start, int count) {
+    public Flowable<DouBanResponse<BookResult>> getBookData(String q, int start, int count) {
         return mHttpHelper.getBookData(q, start, count);
     }
 
@@ -67,5 +70,10 @@ public class DataManager implements DBHelper, HttpHelper, SPrefsHelper {
     @Override
     public List<Project> getAllProject() {
         return mDBHelper.getAllProject();
+    }
+
+    @Override
+    public void insertBook(Books books) {
+        mDBHelper.insertBook(books);
     }
 }

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import space.levan.memory.R;
 import space.levan.memory.app.App;
 import space.levan.memory.di.component.ActivityComponent;
 import space.levan.memory.di.component.DaggerActivityComponent;
@@ -25,6 +26,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Inject
     protected T mPresenter;
 
+    public static final int LEFT = 1;
+    public static final int RIGHT = 2;
+
     protected AppCompatActivity mContext;
     private Unbinder mUnBinder;
 
@@ -37,6 +41,17 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        switch (getActTransitionMode()) {
+            case LEFT:
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                break;
+            case RIGHT:
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                break;
+            default:
+                overridePendingTransition(R.anim.center_in, R.anim.left_out);
+                break;
+        }
         super.onCreate(savedInstanceState);
         setContentView(getContentViewId());
         mContext = this;
@@ -51,6 +66,13 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
      * @return layout id
      */
     protected abstract int getContentViewId();
+
+    /**
+     * set Activity Transition Animation
+     *
+     * @return
+     */
+    protected abstract int getActTransitionMode();
 
     @SuppressWarnings("unchecked")
     protected void onViewCreate() {
@@ -88,6 +110,21 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Override
     protected void onRestart() {
         super.onRestart();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        switch (getActTransitionMode()) {
+            case LEFT:
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                break;
+            case RIGHT:
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

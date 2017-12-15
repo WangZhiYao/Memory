@@ -4,6 +4,7 @@ import io.reactivex.Flowable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import space.levan.memory.model.bean.douban.BookResult;
+import space.levan.memory.model.http.response.DouBanResponse;
 
 /**
  * DouBan api
@@ -25,7 +26,7 @@ public interface DouBanApi {
      * @return
      */
     @GET("search")
-    Flowable<BookResult> getBookData(@Query("q") String q,
-                                     @Query("start") int start,
-                                     @Query("count") int count);
+    Flowable<DouBanResponse<BookResult>> getBookData(@Query("q") String q,
+                                                     @Query("start") int start,
+                                                     @Query("count") int count);
 }

@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import space.levan.memory.model.bean.douban.Books;
 import space.levan.memory.model.bean.project.Project;
 
 /**
@@ -39,5 +40,12 @@ public class DBHelperImpl implements DBHelper {
     @Override
     public List<Project> getAllProject() {
         return mRealm.where(Project.class).findAll();
+    }
+
+    @Override
+    public void insertBook(Books books) {
+        mRealm.beginTransaction();
+        mRealm.copyToRealm(books);
+        mRealm.commitTransaction();
     }
 }

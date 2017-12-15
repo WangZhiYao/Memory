@@ -6,6 +6,8 @@ import dagger.Component;
 import space.levan.memory.di.module.ActivityModule;
 import space.levan.memory.di.scope.ActivityScope;
 import space.levan.memory.ui.activities.MainActivity;
+import space.levan.memory.ui.activities.ResetPasswordActivity;
+import space.levan.memory.ui.activities.SearchActivity;
 import space.levan.memory.ui.activities.SignInActivity;
 import space.levan.memory.ui.activities.SignUpActivity;
 import space.levan.memory.ui.activities.SplashActivity;
@@ -55,4 +57,18 @@ public interface ActivityComponent {
      * @param signUpActivity SignUpActivity
      */
     void inject(SignUpActivity signUpActivity);
+
+    /**
+     * binding SearchActivity
+     *
+     * @param searchActivity SearchActivity
+     */
+    void inject(SearchActivity searchActivity);
+
+    /**
+     * binding ResetPasswordActivity
+     *
+     * @param resetPasswordActivity ResetPasswordActivity
+     */
+    void inject(ResetPasswordActivity resetPasswordActivity);
 }

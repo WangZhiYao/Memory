@@ -65,6 +65,11 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     }
 
     @Override
+    protected int getActTransitionMode() {
+        return 0;
+    }
+
+    @Override
     protected void initInject() {
         getActivityComponent().inject(this);
     }

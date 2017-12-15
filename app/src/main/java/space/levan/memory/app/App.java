@@ -74,7 +74,9 @@ public class App extends Application {
     public void getScreenSize() {
         DisplayMetrics outMetrics = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(outMetrics);
+        if (windowManager != null) {
+            windowManager.getDefaultDisplay().getMetrics(outMetrics);
+        }
         SCREEN_WIDTH = outMetrics.widthPixels;
         SCREEN_HEIGHT = outMetrics.heightPixels;
     }

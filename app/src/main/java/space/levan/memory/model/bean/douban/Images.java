@@ -38,4 +38,13 @@ public class Images extends RealmObject {
     public void setMedium(String medium) {
         this.medium = medium;
     }
+
+    @Override
+    public String toString() {
+        return "Images{" +
+                "small='" + small + '\'' +
+                ", large='" + large + '\'' +
+                ", medium='" + medium + '\'' +
+                '}';
+    }
 }

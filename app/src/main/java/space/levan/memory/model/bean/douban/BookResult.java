@@ -47,4 +47,14 @@ public class BookResult {
     public void setBooks(List<Books> books) {
         this.books = books;
     }
+
+    @Override
+    public String toString() {
+        return "BookResult{" +
+                "count=" + count +
+                ", start=" + start +
+                ", total=" + total +
+                ", books=" + books.get(0).toString() +
+                '}';
+    }
 }

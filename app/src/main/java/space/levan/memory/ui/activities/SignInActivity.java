@@ -37,6 +37,11 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     }
 
     @Override
+    protected int getActTransitionMode() {
+        return RIGHT;
+    }
+
+    @Override
     protected void initInject() {
         getActivityComponent().inject(this);
     }
@@ -48,7 +53,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
                 startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
                 break;
             case R.id.tv_sign_in_reset_password:
-                //startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                startActivity(new Intent(SignInActivity.this, ResetPasswordActivity.class));
                 break;
             case R.id.btn_sign_in:
                 String userEmail = mEtEmail.getText().toString();

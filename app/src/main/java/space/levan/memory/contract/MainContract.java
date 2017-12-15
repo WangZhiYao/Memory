@@ -28,6 +28,11 @@ public interface MainContract {
          * callback when project list is empty
          */
         void showEmptyView();
+
+        /**
+         * callback when user sign out
+         */
+        void jumpToSignIn();
     }
 
     interface Presenter extends BasePresenter<View> {
@@ -48,5 +53,10 @@ public interface MainContract {
          * @param project project
          */
         void insertNewProject(Project project);
+
+        /**
+         * user sign out
+         */
+        void userSignOut();
     }
 }

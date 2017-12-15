@@ -1,11 +1,15 @@
 package space.levan.memory.presenter;
 
+import android.util.Log;
+
 import javax.inject.Inject;
 
 import space.levan.memory.base.RxPresenter;
 import space.levan.memory.contract.SearchContract;
 import space.levan.memory.model.DataManager;
+import space.levan.memory.model.bean.douban.BookResult;
 import space.levan.memory.utils.RxUtils;
+import space.levan.memory.utils.SubscriberUtils;
 
 /**
  * SearchPresenter
@@ -27,6 +31,12 @@ public class SearchPresenter extends RxPresenter<SearchContract.View> implements
     public void getBookData(String q, int start, int count) {
         addSubscribe(mDataManager.getBookData(q, start, count)
                 .compose(RxUtils.rxSchedulerHelper())
-                .subscribe(bookResultBean -> mView.showBookData(bookResultBean.getBooks())));
+                .compose(RxUtils.handleDouBanResult())
+                .subscribeWith(new SubscriberUtils<BookResult>(mView) {
+                    @Override
+                    public void onNext(BookResult bookResult) {
+                        Log.w("WZY", bookResult.toString());
+                    }
+                }));
     }
 }

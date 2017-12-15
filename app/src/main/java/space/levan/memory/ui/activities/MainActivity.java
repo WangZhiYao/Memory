@@ -3,6 +3,7 @@ package space.levan.memory.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -12,8 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.avos.avoscloud.AVUser;
 
 import java.util.List;
 
@@ -40,12 +39,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     RecyclerView mRecyclerView;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.fab)
+    FloatingActionButton mFab;
     @BindView(R.id.tv_main_empty_project)
     TextView mTvEmptyProject;
 
     private MainAdapter adapter;
-    private long exitTime = 0;
-    //private int exitTime = 2000;
+    private long mExitTime = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,12 +75,17 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     }
 
     @Override
+    protected int getActTransitionMode() {
+        return RIGHT;
+    }
+
+    @Override
     protected void initInject() {
         getActivityComponent().inject(this);
     }
 
     @OnClick({R.id.iv_main_logout, R.id.iv_main_shelf, R.id.iv_main_scan, R.id.iv_main_search, R.id.fab})
-    public void onViewClicked(View view) {
+    public void onClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_main_logout:
                 userSignOut();
@@ -100,24 +105,22 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     }
 
     private void addNewProject() {
-        Project project = new Project();
-        project.setName("基于文本的辅助资料提取APP");
-        project.setStatus("未完成");
-        project.setStart_time("2016-10-01");
-        project.setMember("王致尧");
-        project.setNotes("毕业设计");
-        mPresenter.insertNewProject(project);
-        mPresenter.getAllProject();
+        //Project project = new Project();
+        //project.setName("基于文本的辅助资料提取APP");
+        //project.setStatus("未完成");
+        //project.setStart_time("2016-10-01");
+        //project.setMember("王致尧");
+        //project.setNotes("毕业设计");
+        //mPresenter.insertNewProject(project);
+        //mPresenter.getAllProject();
+
+        startActivity(new Intent(MainActivity.this, SearchActivity.class));
     }
 
     private void userSignOut() {
         new AlertDialog.Builder(this).setTitle("退出确认")
                 .setMessage("确定要退出登录吗？")
-                .setPositiveButton("退出登录", (dialogInterface, i) -> {
-                    AVUser.logOut();
-                    startActivity(new Intent(MainActivity.this, SignInActivity.class));
-                    this.finish();
-                })
+                .setPositiveButton("退出登录", (dialogInterface, i) -> mPresenter.userSignOut())
                 .setNegativeButton("取消", null)
                 .show();
     }
@@ -142,6 +145,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     }
 
     @Override
+    public void jumpToSignIn() {
+        startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        this.finish();
+    }
+
+    @Override
     public void onRefresh() {
         mPresenter.getAllProject();
         adapter.notifyDataSetChanged();
@@ -149,10 +158,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void onBackPressed() {
-        if ((System.currentTimeMillis() - exitTime) > 2000) {
-            Snackbar.make(mSwipeRefreshLayout, "再按一次退出", Snackbar.LENGTH_SHORT)
+        long spaceTime = 2000;
+        if ((System.currentTimeMillis() - mExitTime) > spaceTime) {
+            Snackbar.make(mFab, "再按一次退出", Snackbar.LENGTH_SHORT)
                     .setAction("立即退出", view -> finish()).show();
-            exitTime = System.currentTimeMillis();
+            mExitTime = System.currentTimeMillis();
         } else {
             this.finish();
         }
