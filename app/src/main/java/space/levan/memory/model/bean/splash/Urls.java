@@ -63,4 +63,16 @@ public class Urls {
     public void setCustom(String custom) {
         this.custom = custom;
     }
+
+    @Override
+    public String toString() {
+        return "Urls{" +
+                "raw='" + raw + '\'' +
+                ", full='" + full + '\'' +
+                ", regular='" + regular + '\'' +
+                ", small='" + small + '\'' +
+                ", thumb='" + thumb + '\'' +
+                ", custom='" + custom + '\'' +
+                '}';
+    }
 }

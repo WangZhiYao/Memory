@@ -10,9 +10,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.List;
 
@@ -63,7 +67,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mPresenter.getAllProject();
     }
 
-
     @Override
     public void showMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
@@ -84,23 +87,47 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         getActivityComponent().inject(this);
     }
 
-    @OnClick({R.id.iv_main_logout, R.id.iv_main_shelf, R.id.iv_main_scan, R.id.iv_main_search, R.id.fab})
-    public void onClicked(View view) {
+    @OnClick({R.id.iv_main_logout, R.id.iv_main_shelf, R.id.iv_main_search, R.id.iv_main_setting, R.id.fab})
+    public void onOptionMenuClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_main_logout:
                 userSignOut();
                 break;
             case R.id.iv_main_shelf:
                 break;
-            case R.id.iv_main_scan:
-                break;
             case R.id.iv_main_search:
+                startScan();
+                break;
+            case R.id.iv_main_setting:
                 break;
             case R.id.fab:
                 addNewProject();
                 break;
             default:
                 break;
+        }
+    }
+
+    private void startScan() {
+
+        new IntentIntegrator(this)
+                .setBeepEnabled(false)
+                .setOrientationLocked(false)
+                .setCaptureActivity(ScanActivity.class)
+                .initiateScan();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (intentResult != null) {
+            if (intentResult.getContents() != null) {
+                Log.w("WWZY", "this is scan result : " + intentResult.getContents());
+            } else {
+                showMessage("未扫描到任何条形码");
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 

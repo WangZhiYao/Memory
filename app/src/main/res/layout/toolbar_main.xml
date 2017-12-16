@@ -51,27 +51,27 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/iv_main_scan"
+            android:id="@+id/iv_main_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:src="@mipmap/ic_scan"
+            android:src="@mipmap/ic_search_white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/iv_main_search"
+            app:layout_constraintEnd_toStartOf="@+id/iv_main_setting"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/iv_main_search"
+            android:id="@+id/iv_main_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:src="@mipmap/ic_search_white"
+            android:src="@mipmap/ic_setting"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

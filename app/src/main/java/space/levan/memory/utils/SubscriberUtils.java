@@ -1,6 +1,7 @@
 package space.levan.memory.utils;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import io.reactivex.subscribers.ResourceSubscriber;
 import retrofit2.HttpException;
@@ -30,7 +31,15 @@ public class SubscriberUtils<T> extends ResourceSubscriber<T> {
 
     @Override
     public void onNext(T t) {
+        //mView.showMessage("end loading");
+        Log.w("WZY", "end loading");
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //mView.showMessage("loading....");
+        Log.w("WZY", "loading...");
     }
 
     @Override
@@ -44,6 +53,7 @@ public class SubscriberUtils<T> extends ResourceSubscriber<T> {
             return;
         }
         if (mErrorMsg != null && !TextUtils.isEmpty(mErrorMsg)) {
+            Log.w("WZY", t.getMessage());
             mView.showMessage(mErrorMsg);
         } else if (t instanceof ApiException) {
             mView.showMessage(t.toString());

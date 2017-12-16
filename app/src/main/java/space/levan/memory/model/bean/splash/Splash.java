@@ -36,4 +36,13 @@ public class Splash {
     public void setUrls(Urls urls) {
         this.urls = urls;
     }
+
+    @Override
+    public String toString() {
+        return "Splash{" +
+                "color='" + color + '\'' +
+                ", description='" + description + '\'' +
+                ", urls=" + urls.toString() +
+                '}';
+    }
 }

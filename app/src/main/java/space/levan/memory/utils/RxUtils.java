@@ -38,11 +38,12 @@ public class RxUtils {
      */
     public static <T> FlowableTransformer<UnSplashResponse<T>, T> handleUnSplashResult() {
         return upstream -> upstream.flatMap((Function<UnSplashResponse<T>, Flowable<T>>) tUnSplashResponse -> {
-            if (tUnSplashResponse.getErrors().isEmpty()) {
-                return createData(tUnSplashResponse.getResult());
-            } else {
-                return Flowable.error(new ApiException(tUnSplashResponse.getErrors().get(0)));
-            }
+            //if (tUnSplashResponse.getResult() instanceof Splash) {
+            //
+            //} else {
+            //    return Flowable.error(new ApiException(tUnSplashResponse.getErrors().get(0)));
+            //}
+            return createData(tUnSplashResponse.getResult());
         });
     }
 

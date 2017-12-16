@@ -25,5 +25,5 @@
     <string name="project_member_hint">成员：</string>
     <string name="project_notes_hint">备注：</string>
 
-    <string name="main_empty_project">还没有项目</string>
+    <string name="main_empty_project">没有项目记录</string>
 </resources>
