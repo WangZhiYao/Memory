@@ -12,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -45,10 +44,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.fab)
     FloatingActionButton mFab;
-    @BindView(R.id.tv_main_empty_project)
-    TextView mTvEmptyProject;
 
-    private MainAdapter adapter;
+    private MainAdapter mAdapter;
     private long mExitTime = 0;
 
     @Override
@@ -154,21 +151,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void showProject(List<Project> projects) {
-        mSwipeRefreshLayout.setVisibility(View.VISIBLE);
-        mRecyclerView.setVisibility(View.VISIBLE);
-        mTvEmptyProject.setVisibility(View.GONE);
-
-        adapter = new MainAdapter(this, projects);
+        mAdapter = new MainAdapter(this, projects);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
-        mRecyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void showEmptyView() {
-        mSwipeRefreshLayout.setVisibility(View.GONE);
-        mRecyclerView.setVisibility(View.GONE);
-        mTvEmptyProject.setVisibility(View.VISIBLE);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -180,7 +166,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     public void onRefresh() {
         mPresenter.getAllProject();
-        adapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

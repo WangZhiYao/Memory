@@ -1,5 +1,7 @@
 package space.levan.memory.model.bean.douban;
 
+import android.util.Log;
+
 import java.util.List;
 
 import io.realm.RealmList;
@@ -211,6 +213,12 @@ public class Books extends RealmObject {
 
     public String getPrice() {
         return price;
+    }
+
+    public String getInfo() {
+        Log.w("WZY", author.toString());
+        return pubdate + "-" + author.toString() + "-" + publisher;
+        // FIXME: 2017/12/17 author.toString()
     }
 
     @Override

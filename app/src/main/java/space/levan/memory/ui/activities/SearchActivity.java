@@ -3,6 +3,8 @@ package space.levan.memory.ui.activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +19,7 @@ import space.levan.memory.base.BaseActivity;
 import space.levan.memory.contract.SearchContract;
 import space.levan.memory.model.bean.douban.Books;
 import space.levan.memory.presenter.SearchPresenter;
+import space.levan.memory.ui.adapters.SearchAdapter;
 
 /**
  * SearchActivity
@@ -33,6 +36,8 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     RecyclerView mRecyclerView;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
+
+    private SearchAdapter mAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,8 +67,11 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     }
 
     @Override
-    public void showBookData(List<Books> resultBean) {
-
+    public void showBookData(List<Books> books) {
+        mAdapter = new SearchAdapter(this, books);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @OnClick({R.id.iv_search_back, R.id.iv_search_scan})

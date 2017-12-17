@@ -1,7 +1,5 @@
 package space.levan.memory.presenter;
 
-import android.util.Log;
-
 import javax.inject.Inject;
 
 import io.reactivex.functions.Consumer;
@@ -34,7 +32,8 @@ public class SearchPresenter extends RxPresenter<SearchContract.View> implements
                 .subscribe(new Consumer<BookResult>() {
                     @Override
                     public void accept(BookResult bookResult) throws Exception {
-                        Log.w("WZY", bookResult.getBooks().get(0).toString());
+                        //Log.w("WZY", bookResult.getBooks().get(0).toString());
+                        mView.showBookData(bookResult.getBooks());
                     }
                 }));
 

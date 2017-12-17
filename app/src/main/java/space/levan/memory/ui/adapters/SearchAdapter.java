@@ -6,34 +6,37 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import space.levan.memory.R;
-import space.levan.memory.model.bean.project.Project;
+import space.levan.memory.model.bean.douban.Books;
 
 /**
- * MainAdapter
+ * File description
  *
  * @author WangZhiYao
- * @date 2017/12/2
+ * @date 2017/12/17
  */
 
-public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int EMPTY = 0;
-    private static final int PROJECT = 1;
+    private static final int BOOKS = 1;
 
     private Context mContext;
-    private List<Project> mProjects;
+    private List<Books> mBooks;
     private LayoutInflater mInflater;
 
-    public MainAdapter(Context context, List<Project> projects) {
+    public SearchAdapter(Context context, List<Books> books) {
         this.mContext = context;
-        this.mProjects = projects;
+        this.mBooks = books;
         this.mInflater = LayoutInflater.from(context);
     }
 
@@ -42,56 +45,53 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (viewType == EMPTY) {
             return new EmptyHolder(mInflater.inflate(R.layout.item_empty, parent, false));
         } else {
-            return new ItemHolder(mInflater.inflate(R.layout.item_project, parent, false));
+            return new ItemHolder(mInflater.inflate(R.layout.item_book_info, parent, false));
         }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof EmptyHolder) {
-            ((EmptyHolder) holder).mTvEmptyMsg.setText(mContext.getString(R.string.main_empty_project));
-            Drawable drawable = mContext.getDrawable(R.mipmap.img_main);
+            ((EmptyHolder) holder).mTvEmptyMsg.setText("没有符合条件的结果");
+            Drawable drawable = mContext.getDrawable(R.mipmap.img_search);
             if (drawable != null) {
                 drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
             }
             ((EmptyHolder) holder).mTvEmptyMsg.setCompoundDrawables(null, drawable, null, null);
         } else {
-            ((ItemHolder) holder).mTvName.setText(mProjects.get(position).getName());
-            ((ItemHolder) holder).mTvStatus.setText(mProjects.get(position).getStatus());
-            ((ItemHolder) holder).mTvStartTime.setText(mProjects.get(position).getStart_time());
-            ((ItemHolder) holder).mTvEndTime.setText(mProjects.get(position).getEnd_time());
-            ((ItemHolder) holder).mTvMember.setText(mProjects.get(position).getMember());
-            ((ItemHolder) holder).mTvNotes.setText(mProjects.get(position).getNotes());
+            Glide.with(mContext)
+                    .load(mBooks.get(position).getImages().getLarge())
+                    .crossFade()
+                    .into(((ItemHolder) holder).mIvBookCover);
+            ((ItemHolder) holder).mTvBookTitle.setText(mBooks.get(position).getTitle());
+            ((ItemHolder) holder).mTvBookInfo.setText(mBooks.get(position).getInfo());
+            ((ItemHolder) holder).mTvBookDetail.setText(mBooks.get(position).getSummary());
         }
     }
 
     @Override
     public int getItemCount() {
-        return mProjects.isEmpty() ? 1 : mProjects.size();
+        return mBooks.isEmpty() ? 1 : mBooks.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (mProjects.size() == 0) {
+        if (mBooks.size() == 0) {
             return EMPTY;
         } else {
-            return PROJECT;
+            return BOOKS;
         }
     }
 
     class ItemHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_project_name)
-        TextView mTvName;
-        @BindView(R.id.tv_project_status)
-        TextView mTvStatus;
-        @BindView(R.id.tv_project_start_time)
-        TextView mTvStartTime;
-        @BindView(R.id.tv_project_end_time)
-        TextView mTvEndTime;
-        @BindView(R.id.tv_project_member)
-        TextView mTvMember;
-        @BindView(R.id.tv_project_notes)
-        TextView mTvNotes;
+        @BindView(R.id.iv_book_cover)
+        ImageView mIvBookCover;
+        @BindView(R.id.tv_book_title)
+        TextView mTvBookTitle;
+        @BindView(R.id.tv_book_info)
+        TextView mTvBookInfo;
+        @BindView(R.id.tv_book_detail)
+        TextView mTvBookDetail;
 
         ItemHolder(View itemView) {
             super(itemView);

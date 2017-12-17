@@ -25,11 +25,6 @@ public interface MainContract {
         void showProject(List<Project> projects);
 
         /**
-         * callback when project list is empty
-         */
-        void showEmptyView();
-
-        /**
          * callback when user sign out
          */
         void jumpToSignIn();

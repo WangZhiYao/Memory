@@ -20,9 +20,9 @@ public interface SearchContract {
         /**
          * callback when get book info success
          *
-         * @param resultBean book info
+         * @param books book info
          */
-        void showBookData(List<Books> resultBean);
+        void showBookData(List<Books> books);
     }
 
     interface Presenter extends BasePresenter<View> {
