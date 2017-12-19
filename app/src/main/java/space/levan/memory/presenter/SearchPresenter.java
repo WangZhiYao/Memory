@@ -26,17 +26,19 @@ public class SearchPresenter extends RxPresenter<SearchContract.View> implements
     }
 
     @Override
+    public void startScan() {
+        mView.startScan();
+    }
+
+    @Override
     public void getBookData(String q, int start, int count) {
         addSubscribe(mDataManager.getBookData(q, start, count)
                 .compose(RxUtils.rxSchedulerHelper())
                 .subscribe(new Consumer<BookResult>() {
                     @Override
                     public void accept(BookResult bookResult) throws Exception {
-                        //Log.w("WZY", bookResult.getBooks().get(0).toString());
-                        mView.showBookData(bookResult.getBooks());
+                        mView.showBookData(bookResult.getTotal(), bookResult.getBooks());
                     }
                 }));
-
-        // FIXME: 2017/12/17 Can not add error handler
     }
 }

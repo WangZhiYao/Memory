@@ -108,4 +108,15 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             ButterKnife.bind(this, itemView);
         }
     }
+
+    public void onRefreshData(List<Books> books) {
+        mBooks.clear();
+        mBooks.addAll(books);
+        notifyDataSetChanged();
+    }
+
+    public void onAddData(List<Books> books) {
+        mBooks.addAll(books);
+        notifyDataSetChanged();
+    }
 }

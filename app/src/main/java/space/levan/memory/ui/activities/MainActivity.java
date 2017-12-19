@@ -10,12 +10,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 import java.util.List;
 
@@ -93,7 +89,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             case R.id.iv_main_shelf:
                 break;
             case R.id.iv_main_search:
-                startScan();
+                startActivity(new Intent(MainActivity.this, SearchActivity.class));
                 break;
             case R.id.iv_main_setting:
                 break;
@@ -102,29 +98,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 break;
             default:
                 break;
-        }
-    }
-
-    private void startScan() {
-
-        new IntentIntegrator(this)
-                .setBeepEnabled(false)
-                .setOrientationLocked(false)
-                .setCaptureActivity(ScanActivity.class)
-                .initiateScan();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (intentResult != null) {
-            if (intentResult.getContents() != null) {
-                Log.w("WWZY", "this is scan result : " + intentResult.getContents());
-            } else {
-                showMessage("未扫描到任何条形码");
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -137,8 +110,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         //project.setNotes("毕业设计");
         //mPresenter.insertNewProject(project);
         //mPresenter.getAllProject();
-
-        startActivity(new Intent(MainActivity.this, SearchActivity.class));
     }
 
     private void userSignOut() {

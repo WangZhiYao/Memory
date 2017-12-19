@@ -56,13 +56,17 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
                 startActivity(new Intent(SignInActivity.this, ResetPasswordActivity.class));
                 break;
             case R.id.btn_sign_in:
-                String userEmail = mEtEmail.getText().toString();
-                String password = mEtPassword.getText().toString();
-                mPresenter.userSignIn(userEmail, password);
+                userSignIn();
                 break;
             default:
                 break;
         }
+    }
+
+    private void userSignIn() {
+        String userEmail = mEtEmail.getText().toString();
+        String password = mEtPassword.getText().toString();
+        mPresenter.userSignIn(userEmail, password);
     }
 
     @Override

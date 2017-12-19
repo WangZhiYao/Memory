@@ -18,11 +18,11 @@ public interface SearchContract {
     interface View extends BaseView {
 
         /**
-         * callback when get book info success
-         *
-         * @param books book info
+         * callback
          */
-        void showBookData(List<Books> books);
+        void startScan();
+
+        void showBookData(int total, List<Books> books);
     }
 
     interface Presenter extends BasePresenter<View> {
@@ -35,5 +35,10 @@ public interface SearchContract {
          * @param count how many result will be returned from the server
          */
         void getBookData(String q, int start, int count);
+
+        /**
+         * start barcode scanner
+         */
+        void startScan();
     }
 }
