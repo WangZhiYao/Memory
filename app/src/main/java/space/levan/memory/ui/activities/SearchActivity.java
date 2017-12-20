@@ -118,8 +118,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH && !TextUtils.isEmpty(mKeywords)) {
-                    mPresenter.getBookData(mKeywords, mPage * mCount, mCount);
-                    mMode = SEARCH;
+
                 }
 
                 return true;
@@ -128,14 +127,6 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
 
         mSwipeRefreshLayout.setEnabled(false);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPage = 0;
-                mPresenter.getBookData(mKeywords, mPage * mCount, mCount);
-                mMode = REFRESH;
-            }
-        });
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -155,46 +146,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     @Override
     public void showBookData(int total, List<Books> books) {
         mSwipeRefreshLayout.setEnabled(true);
-        mIsLoadAll = total < mPage * mCount;
         mBooks = books;
-        setAdapter();
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && mLastVisibleItem + 1 == mAdapter.getItemCount()) {
-                    if (!mIsLoadAll) {
-                        mPage++;
-                        mPresenter.getBookData(mKeywords, mPage * mCount, mCount);
-                        mMode = LOAD_MORE;
-                    }
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                mLastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
-            }
-        });
-    }
-
-    private void setAdapter() {
-        mSwipeRefreshLayout.setRefreshing(false);
-        switch (mMode) {
-            case SEARCH:
-                mAdapter = new SearchAdapter(this, mBooks);
-                mRecyclerView.setAdapter(mAdapter);
-                break;
-            case REFRESH:
-                mAdapter.onRefreshData(mBooks);
-                break;
-            case LOAD_MORE:
-                mAdapter.onAddData(mBooks);
-                break;
-            default:
-                break;
-        }
     }
 
     @Override
