@@ -22,7 +22,7 @@ public interface SearchContract {
          */
         void startScan();
 
-        void showBookData(int total, List<Books> books);
+        void showContent(int total, List<Books> books);
     }
 
     interface Presenter extends BasePresenter<View> {

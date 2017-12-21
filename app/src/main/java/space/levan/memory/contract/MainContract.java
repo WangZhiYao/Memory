@@ -22,7 +22,7 @@ public interface MainContract {
          *
          * @param projects project list
          */
-        void showProject(List<Project> projects);
+        void showContent(List<Project> projects);
 
         /**
          * callback when user sign out

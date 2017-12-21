@@ -14,7 +14,9 @@ import space.levan.memory.base.RxPresenter;
 import space.levan.memory.contract.MainContract;
 import space.levan.memory.model.DataManager;
 import space.levan.memory.model.bean.project.Project;
+import space.levan.memory.model.bean.splash.Splash;
 import space.levan.memory.utils.RxUtils;
+import space.levan.memory.utils.SubscriberUtils;
 
 /**
  * MainPresenter
@@ -54,19 +56,27 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
 
         addSubscribe(mDataManager.getSplashData(App.SCREEN_WIDTH, App.SCREEN_HEIGHT)
                 .compose(RxUtils.rxSchedulerHelper())
-                .subscribe(splash -> Glide.with(App.getInstance())
-                        .load(splash.getUrls().getCustom())
-                        .downloadOnly(new SimpleTarget<File>() {
-                            @Override
-                            public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
-                                mDataManager.setSplashPicPath(resource.getAbsolutePath());
-                            }
-                        })));
+                .compose(RxUtils.handleUnSplashResult())
+                .subscribeWith(new SubscriberUtils<Splash>(mView){
+                    @Override
+                    public void onNext(Splash splash) {
+                        Glide.with(App.getInstance())
+                                .load(splash.getUrls().getCustom())
+                                .downloadOnly(new SimpleTarget<File>() {
+                                    @Override
+                                    public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
+                                        mDataManager.setSplashPicPath(resource.getAbsolutePath());
+                                    }
+                                });
+                    }
+                }));
+
+
     }
 
     @Override
     public void getAllProject() {
-        mView.showProject(mDataManager.getAllProject());
+        mView.showContent(mDataManager.getAllProject());
     }
 
     @Override

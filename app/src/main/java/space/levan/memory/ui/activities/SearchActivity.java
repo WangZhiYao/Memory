@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -47,33 +48,9 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private static final int SEARCH = 0;
-    private static final int REFRESH = 1;
-    private static final int LOAD_MORE = 2;
-    private String mKeywords;
-    private boolean mIsLoadAll;
-    private int mMode;
-    private int mPage = 0;
-    private int mCount = 10;
-    private int mLastVisibleItem;
-    private SearchAdapter mAdapter;
-    private List<Books> mBooks;
-    private LinearLayoutManager mLayoutManager;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            mIsLoadAll = savedInstanceState.getBoolean("isLoadAll");
-        }
         super.onCreate(savedInstanceState);
-
-        initView();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean("isLoadAll", mIsLoadAll);
-        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -96,44 +73,6 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    private void initView() {
-        mEtSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                mKeywords = mEtSearch.getText().toString().trim();
-            }
-        });
-
-        mEtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH && !TextUtils.isEmpty(mKeywords)) {
-
-                }
-
-                return true;
-            }
-        });
-
-        mSwipeRefreshLayout.setEnabled(false);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
-
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        mRecyclerView.setHasFixedSize(true);
-    }
-
     @Override
     public void startScan() {
         new IntentIntegrator(this)
@@ -144,9 +83,8 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     }
 
     @Override
-    public void showBookData(int total, List<Books> books) {
-        mSwipeRefreshLayout.setEnabled(true);
-        mBooks = books;
+    public void showContent(int total, List<Books> books) {
+
     }
 
     @Override

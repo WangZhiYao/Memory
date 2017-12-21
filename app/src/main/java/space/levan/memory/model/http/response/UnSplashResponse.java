@@ -1,7 +1,5 @@
 package space.levan.memory.model.http.response;
 
-import java.util.List;
-
 /**
  * File description
  *
@@ -11,16 +9,7 @@ import java.util.List;
 
 public class UnSplashResponse<T> {
 
-    private List<String> errors;
     private T result;
-
-    public List<String> getErrors() {
-        return errors;
-    }
-
-    public void setErrors(List<String> errors) {
-        this.errors = errors;
-    }
 
     public T getResult() {
         return result;

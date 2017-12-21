@@ -37,7 +37,7 @@ public class SearchPresenter extends RxPresenter<SearchContract.View> implements
                 .subscribe(new Consumer<BookResult>() {
                     @Override
                     public void accept(BookResult bookResult) throws Exception {
-                        mView.showBookData(bookResult.getTotal(), bookResult.getBooks());
+                        //mView.showBookData(bookResult.getTotal(), bookResult.getBooks());
                     }
                 }));
     }

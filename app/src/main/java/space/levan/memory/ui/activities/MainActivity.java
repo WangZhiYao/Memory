@@ -80,18 +80,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         getActivityComponent().inject(this);
     }
 
-    @OnClick({R.id.iv_main_logout, R.id.iv_main_shelf, R.id.iv_main_search, R.id.iv_main_setting, R.id.fab})
+    @OnClick({R.id.iv_main_logout, R.id.iv_main_search, R.id.fab})
     public void onOptionMenuClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_main_logout:
                 userSignOut();
                 break;
-            case R.id.iv_main_shelf:
-                break;
             case R.id.iv_main_search:
                 startActivity(new Intent(MainActivity.this, SearchActivity.class));
-                break;
-            case R.id.iv_main_setting:
                 break;
             case R.id.fab:
                 addNewProject();
@@ -121,7 +117,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     }
 
     @Override
-    public void showProject(List<Project> projects) {
+    public void showContent(List<Project> projects) {
         mAdapter = new MainAdapter(this, projects);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
