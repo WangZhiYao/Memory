@@ -3,7 +3,6 @@ package space.levan.memory.model.http;
 import io.reactivex.Flowable;
 import space.levan.memory.model.bean.douban.BookResult;
 import space.levan.memory.model.bean.splash.Splash;
-import space.levan.memory.model.http.response.UnSplashResponse;
 
 /**
  * HttpHelper interface class
@@ -21,7 +20,7 @@ public interface HttpHelper {
      * @param scrHeight screen height
      * @return
      */
-    Flowable<UnSplashResponse<Splash>> getSplashData(int scrWidth, int scrHeight);
+    Flowable<Splash> getSplashData(int scrWidth, int scrHeight);
 
     /**
      * get book info from DouBan api

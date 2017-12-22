@@ -66,6 +66,10 @@
             android:theme="@style/AppTheme.FullScreen"
             tools:replace="screenOrientation" />
 
+        <activity
+            android:name=".ui.activities.BookActivity"
+            android:theme="@style/AppTheme.BookInfoTheme" />
+
     </application>
 
 </manifest>

@@ -51,7 +51,7 @@ public class HttpModule {
         File cacheFile = new File(Constants.PATH_CACHE);
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 20);
 
-        Interceptor REQUEST_INTERCEPTOR = chain -> {
+        Interceptor requestInterceptor = chain -> {
             Request request = chain.request();
             int maxState = 60 * 60;
             CacheControl tempCacheControl = new CacheControl.Builder()
@@ -64,7 +64,7 @@ public class HttpModule {
             return chain.proceed(request);
         };
 
-        Interceptor RESPONSE_INTERCEPTOR = chain -> {
+        Interceptor responseInterceptor = chain -> {
             Request request = chain.request();
             Response oriResponse = chain.proceed(request);
             int maxAge;
@@ -81,8 +81,8 @@ public class HttpModule {
         };
 
         return builder
-                //.addInterceptor(REQUEST_INTERCEPTOR)
-                //.addNetworkInterceptor(RESPONSE_INTERCEPTOR)
+                .addInterceptor(requestInterceptor)
+                .addNetworkInterceptor(responseInterceptor)
                 .cache(cache)
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)

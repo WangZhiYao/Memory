@@ -106,6 +106,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         //project.setNotes("毕业设计");
         //mPresenter.insertNewProject(project);
         //mPresenter.getAllProject();
+        startActivity(new Intent(MainActivity.this, BookActivity.class));
     }
 
     private void userSignOut() {

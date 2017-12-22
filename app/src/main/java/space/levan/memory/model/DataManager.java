@@ -9,7 +9,6 @@ import space.levan.memory.model.bean.project.Project;
 import space.levan.memory.model.bean.splash.Splash;
 import space.levan.memory.model.db.DBHelper;
 import space.levan.memory.model.http.HttpHelper;
-import space.levan.memory.model.http.response.UnSplashResponse;
 import space.levan.memory.model.prefs.SPrefsHelper;
 
 /**
@@ -32,7 +31,7 @@ public class DataManager implements DBHelper, HttpHelper, SPrefsHelper {
     }
 
     @Override
-    public Flowable<UnSplashResponse<Splash>> getSplashData(int scrWidth, int scrHeight) {
+    public Flowable<Splash> getSplashData(int scrWidth, int scrHeight) {
         return mHttpHelper.getSplashData(scrWidth, scrHeight);
     }
 

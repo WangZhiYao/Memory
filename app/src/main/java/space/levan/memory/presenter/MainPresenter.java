@@ -9,6 +9,7 @@ import java.io.File;
 
 import javax.inject.Inject;
 
+import io.reactivex.functions.Consumer;
 import space.levan.memory.app.App;
 import space.levan.memory.base.RxPresenter;
 import space.levan.memory.contract.MainContract;
@@ -16,7 +17,6 @@ import space.levan.memory.model.DataManager;
 import space.levan.memory.model.bean.project.Project;
 import space.levan.memory.model.bean.splash.Splash;
 import space.levan.memory.utils.RxUtils;
-import space.levan.memory.utils.SubscriberUtils;
 
 /**
  * MainPresenter
@@ -56,10 +56,9 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
 
         addSubscribe(mDataManager.getSplashData(App.SCREEN_WIDTH, App.SCREEN_HEIGHT)
                 .compose(RxUtils.rxSchedulerHelper())
-                .compose(RxUtils.handleUnSplashResult())
-                .subscribeWith(new SubscriberUtils<Splash>(mView){
+                .subscribe(new Consumer<Splash>() {
                     @Override
-                    public void onNext(Splash splash) {
+                    public void accept(Splash splash) throws Exception {
                         Glide.with(App.getInstance())
                                 .load(splash.getUrls().getCustom())
                                 .downloadOnly(new SimpleTarget<File>() {
@@ -70,8 +69,6 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
                                 });
                     }
                 }));
-
-
     }
 
     @Override

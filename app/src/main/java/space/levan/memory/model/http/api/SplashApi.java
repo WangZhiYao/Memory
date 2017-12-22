@@ -4,7 +4,6 @@ import io.reactivex.Flowable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import space.levan.memory.model.bean.splash.Splash;
-import space.levan.memory.model.http.response.UnSplashResponse;
 
 /**
  * File description
@@ -27,7 +26,7 @@ public interface SplashApi {
      * @return
      */
     @GET("photos/random")
-    Flowable<UnSplashResponse<Splash>> getSplashData(@Query("client_id") String cid,
-                                                     @Query("w") int width,
-                                                     @Query("h") int height);
+    Flowable<Splash> getSplashData(@Query("client_id") String cid,
+                                   @Query("w") int width,
+                                   @Query("h") int height);
 }
