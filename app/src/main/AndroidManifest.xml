@@ -70,6 +70,7 @@
             android:name=".ui.activities.BookActivity"
             android:theme="@style/AppTheme.BookInfoTheme" />
 
+        <service android:name=".service.SplashService" />
     </application>
 
 </manifest>

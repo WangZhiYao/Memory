@@ -2,12 +2,12 @@ package space.levan.memory.presenter;
 
 import android.text.TextUtils;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.LogInCallback;
-
 import javax.inject.Inject;
 
+import io.realm.ObjectServerError;
+import io.realm.SyncCredentials;
+import io.realm.SyncUser;
+import space.levan.memory.app.Constants;
 import space.levan.memory.base.RxPresenter;
 import space.levan.memory.contract.SignInContract;
 import space.levan.memory.model.DataManager;
@@ -41,14 +41,16 @@ public class SignInPresenter extends RxPresenter<SignInContract.View> implements
     public void userSignIn(String userEmail, String password) {
         if (StringUtils.isEmail(userEmail)) {
             if (!TextUtils.isEmpty(password)) {
-                AVUser.logInInBackground(userEmail, password, new LogInCallback<AVUser>() {
+                SyncCredentials userCredentials = SyncCredentials.usernamePassword(userEmail, password, false);
+                SyncUser.loginAsync(userCredentials, Constants.REALM_AUTH_URL, new SyncUser.Callback<SyncUser>() {
                     @Override
-                    public void done(AVUser avUser, AVException e) {
-                        if (e == null) {
-                            mView.signInSuccess();
-                        } else {
-                            mView.signInFailure(e.getMessage());
-                        }
+                    public void onSuccess(SyncUser result) {
+                        mView.signInSuccess();
+                    }
+
+                    @Override
+                    public void onError(ObjectServerError error) {
+                        mView.signInFailure(error.getErrorMessage());
                     }
                 });
             } else {

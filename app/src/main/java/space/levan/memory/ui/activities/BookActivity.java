@@ -19,9 +19,10 @@ import space.levan.memory.R;
 
 public class BookActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
 
-    private static final int PERCENTAGE_TO_ANIMATE_AVATAR = 20;
+    private static final int PERCENTAGE_TO_ANIMATE_AVATAR = 30;
     private boolean mIsAvatarShown = true;
 
+    private Toolbar mToolbar;
     private ImageView mProfileImage;
     private int mMaxScrollSize;
 
@@ -32,8 +33,8 @@ public class BookActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
         AppBarLayout appBarLayout = findViewById(R.id.main_appbar);
         mProfileImage = findViewById(R.id.main_book);
-        Toolbar toolbar = findViewById(R.id.main_toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        mToolbar = findViewById(R.id.main_toolbar);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();

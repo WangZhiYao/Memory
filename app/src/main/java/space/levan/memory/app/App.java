@@ -6,15 +6,13 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-import com.avos.avoscloud.AVOSCloud;
-
 import java.util.HashSet;
 import java.util.Set;
 
-import io.realm.Realm;
 import space.levan.memory.di.component.AppComponent;
 import space.levan.memory.di.component.DaggerAppComponent;
 import space.levan.memory.di.module.AppModule;
+import space.levan.memory.utils.RealmUtils;
 
 /**
  * Custom Application class
@@ -50,12 +48,8 @@ public class App extends Application {
         super.onCreate();
         getScreenSize();
         mApp = this;
-        Realm.init(this);
-        initLeanCloud();
-    }
 
-    private void initLeanCloud() {
-        AVOSCloud.initialize(this, Constants.LC_APPID, Constants.LC_APPKEY);
+        RealmUtils.initRealm(this);
     }
 
     public void addActivity(Activity act) {

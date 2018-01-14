@@ -1,6 +1,5 @@
 package space.levan.memory.presenter;
 
-import com.avos.avoscloud.AVUser;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -10,6 +9,7 @@ import java.io.File;
 import javax.inject.Inject;
 
 import io.reactivex.functions.Consumer;
+import io.realm.SyncUser;
 import space.levan.memory.app.App;
 import space.levan.memory.base.RxPresenter;
 import space.levan.memory.contract.MainContract;
@@ -83,7 +83,7 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
 
     @Override
     public void userSignOut() {
-        AVUser.logOut();
+        SyncUser.currentUser().logout();
         mView.jumpToSignIn();
     }
 }

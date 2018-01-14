@@ -1,12 +1,11 @@
 package space.levan.memory.presenter;
 
-import com.avos.avoscloud.AVUser;
-
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
+import io.realm.SyncUser;
 import space.levan.memory.base.RxPresenter;
 import space.levan.memory.contract.SplashContract;
 import space.levan.memory.model.DataManager;
@@ -40,8 +39,8 @@ public class SplashPresenter extends RxPresenter<SplashContract.View> implements
         addSubscribe(Flowable.timer(COUNT_DOWN_TIME, TimeUnit.MILLISECONDS)
                 .compose(RxUtils.rxSchedulerHelper())
                 .subscribe(aLong -> {
-                    AVUser user = AVUser.getCurrentUser();
-                    if (user != null) {
+                    SyncUser syncUser = SyncUser.currentUser();
+                    if (syncUser != null) {
                         mView.jumpToMain();
                     } else {
                         mView.jumpToSignIn();

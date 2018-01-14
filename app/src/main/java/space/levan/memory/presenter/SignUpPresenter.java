@@ -1,11 +1,11 @@
 package space.levan.memory.presenter;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.SignUpCallback;
-
 import javax.inject.Inject;
 
+import io.realm.ObjectServerError;
+import io.realm.SyncCredentials;
+import io.realm.SyncUser;
+import space.levan.memory.app.Constants;
 import space.levan.memory.base.RxPresenter;
 import space.levan.memory.contract.SignUpContract;
 import space.levan.memory.model.DataManager;
@@ -30,23 +30,21 @@ public class SignUpPresenter extends RxPresenter<SignUpContract.View> implements
     @Override
     public void userSignUp(String userEmail, String password) {
         if (StringUtils.isEmail(userEmail)) {
-            AVUser user = new AVUser();
-            user.setEmail(userEmail);
-            user.setPassword(password);
-            user.setUsername(userEmail);
-            user.signUpInBackground(new SignUpCallback() {
+            SyncCredentials userCredentials = SyncCredentials.usernamePassword(userEmail, password, true);
+            SyncUser.loginAsync(userCredentials, Constants.REALM_AUTH_URL, new SyncUser.Callback<SyncUser>() {
                 @Override
-                public void done(AVException e) {
-                    if (e == null) {
-                        mView.signUpSuccess();
-                        mDataManager.setUserEmail(userEmail);
-                    } else {
-                        mView.signUpFailure(e.getMessage());
-                    }
+                public void onSuccess(SyncUser result) {
+                    mView.signUpSuccess();
+                }
+
+                @Override
+                public void onError(ObjectServerError error) {
+                    mView.signUpFailure(error.getErrorMessage());
                 }
             });
         } else {
             mView.showMessage("请输入正确的邮箱地址");
         }
+
     }
 }
