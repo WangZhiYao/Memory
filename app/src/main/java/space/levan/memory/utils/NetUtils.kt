@@ -13,10 +13,9 @@ import space.levan.memory.App
 
 object NetUtils {
 
-    val isNetConnected: Boolean
-        get() {
-            val connectivityManager = App.instance?.applicationContext?.
-                    getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            return connectivityManager.activeNetworkInfo != null
-        }
+    fun isNetConnected(): Boolean {
+        val cm = App.instance!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = cm.activeNetworkInfo
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting
+    }
 }
