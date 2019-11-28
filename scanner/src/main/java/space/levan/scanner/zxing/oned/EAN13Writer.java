@@ -24,7 +24,7 @@ import space.levan.scanner.zxing.BarcodeFormat;
 import space.levan.scanner.zxing.FormatException;
 
 /**
- * This object renders an EAN13 code as a {@link BitMatrix}.
+ * This object renders an EAN13 code as a {@link space.levan.scanner.zxing.common.BitMatrix}.
  *
  * @author aripollak@gmail.com (Ari Pollak)
  */
