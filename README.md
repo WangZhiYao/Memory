@@ -2,7 +2,7 @@
     该项目为我大学的毕业设计，该分支使用了 Retrofit2, RxJava2, ZXing, Glide, LiveData, Room, Paging 等库  
 
 ## UI(原)
-![UI](https://raw.githubusercontent.com/WangZhiYao/Memory/Dagger2/%E8%AE%B0%E5%BF%86.png)
+![UI](https://raw.githubusercontent.com/WangZhiYao/Memory/mvvm/%E8%AE%B0%E5%BF%86.png)
 
 ## Summury
 大致的功能有如下几点：  
