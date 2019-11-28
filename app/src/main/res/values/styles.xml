@@ -6,8 +6,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/AppTheme.Widget.TextView</item>
+        <item name="editTextStyle">@style/AppTheme.Widget.EditText</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Launcher" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@drawable/layer_ui_placeholder</item>
     </style>
 
     <style name="AppTheme.FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
@@ -16,17 +25,66 @@
         <item name="android:windowActionBar">false</item>
     </style>
 
-    <style name="AppTheme.BookInfoTheme">
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-
-    <style name="ToolBarWithNavigationBack">
-        <item name="navigationIcon">@drawable/abc_ic_ab_back_material</item>
-    </style>
-
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.Widget.TextView" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/p_ming_liu</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="AppTheme.Widget.EditText" parent="android:Widget.EditText">
+        <item name="android:fontFamily">@font/p_ming_liu</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:lineSpacingMultiplier">1.3</item>
+    </style>
+
+    <style name="AppTheme.Matisse" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="toolbar">@style/AppTheme.MatisseToolbar</item>
+        <item name="album.dropdown.title.color">@color/dracula_album_dropdown_title_text</item>
+        <item name="album.dropdown.count.color">@color/dracula_album_dropdown_count_text</item>
+        <item name="album.element.color">@android:color/white</item>
+        <item name="album.thumbnail.placeholder">@color/colorPrimary</item>
+        <item name="album.emptyView">@drawable/ic_empty_dracula</item>
+        <item name="album.emptyView.textColor">@color/dracula_album_empty_view</item>
+        <item name="item.placeholder">@color/colorPrimary</item>
+        <item name="item.checkCircle.backgroundColor">@color/colorAccent</item>
+        <item name="item.checkCircle.borderColor">@color/dracula_item_checkCircle_borderColor</item>
+        <item name="page.bg">@android:color/white</item>
+        <item name="bottomToolbar.bg">@color/colorPrimary</item>
+        <item name="bottomToolbar.preview.textColor">@color/dracula_bottom_toolbar_preview</item>
+        <item name="bottomToolbar.apply.textColor">@color/colorAccent</item>
+        <item name="preview.bottomToolbar.back.textColor">
+            @color/dracula_preview_bottom_toolbar_back_text
+        </item>
+        <item name="preview.bottomToolbar.apply.textColor">@color/colorAccent</item>
+        <item name="android:listPopupWindowStyle">@style/Popup.Dracula</item>
+        <item name="listPopupWindowStyle">@style/Popup.Dracula</item>
+        <item name="capture.textColor">@color/dracula_capture</item>
+        <item name="android:textViewStyle">@style/AppTheme.Widget.TextView</item>
+    </style>
+
+    <style name="AppTheme.MatisseToolbar" parent="AppTheme.AppBarOverlay">
+        <item name="navigationIcon">@drawable/ic_toolbar_back</item>
+    </style>
+
+    <style name="DialogStyle" parent="@android:style/Theme.Dialog">
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 浮于Activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog以外的区域模糊效果 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 
 </resources>

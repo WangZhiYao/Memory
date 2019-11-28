@@ -1,46 +1,49 @@
 package space.levan.memory.utils;
 
-import java.util.List;
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import space.levan.memory.app.Constants;
-
 /**
- * String Utils class
- *
  * @author WangZhiYao
- * @date 2017/10/19
+ * @date 2019/7/2
  */
-
 public class StringUtils {
 
-    private static final String SEPARATOR = ",";
+    public static SpannableString highlightKeywords(String keywords, String content) {
 
-    /**
-     * list<String> 转换为String
-     *
-     * @param strings list
-     * @return
-     */
-    public static String listToString(List<String> strings) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String str : strings) {
-            stringBuilder.append(str);
-            stringBuilder.append(SEPARATOR);
+        SpannableString highlightContent = new SpannableString(content);
+
+        if (!TextUtils.isEmpty(keywords)) {
+
+            for (char c : keywords.toCharArray()) {
+
+                Pattern p = Pattern.compile(String.valueOf(c));
+                Matcher m = p.matcher(content);
+
+                while (m.find()) {
+                    int start = m.start();
+                    int end = m.end();
+
+                    highlightContent.setSpan(new ForegroundColorSpan(Color.RED),
+                            start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+            }
         }
 
-        String str = stringBuilder.toString();
-
-        return str.substring(0, str.length() - SEPARATOR.length());
+        return highlightContent;
     }
 
-    /**
-     * 验证是否为邮箱
-     *
-     * @param email email
-     * @return
-     */
-    public static boolean isEmail(String email) {
-        return Pattern.matches(Constants.REGEX_EMAIL, email);
+    @NonNull
+    public static String nullThenEmpty(@Nullable String value) {
+        return value == null ? "" : value;
     }
 }

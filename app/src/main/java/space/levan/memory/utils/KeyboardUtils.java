@@ -5,32 +5,19 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 /**
- * 佛祖保佑 不出BUG
- *
  * @author WangZhiYao
- * @date 2017/12/18
+ * @date 2019/7/11
  */
-
 public class KeyboardUtils {
 
     /**
-     * Does the soft keyboard open
+     * 开启软键盘
      *
-     * @param context Context
-     * @return
+     * @param context
+     * @param editText
      */
-    public static boolean isKeyboardOpen(Context context) {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        return imm != null && imm.isActive();
-    }
-
-    /**
-     * Open the soft keyboard
-     *
-     * @param editText EditText
-     * @param context  Context
-     */
-    public static void openKeyboard(EditText editText, Context context) {
+    public static void openKeyboard(Context context, EditText editText) {
+        editText.requestFocus();
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
             imm.showSoftInput(editText, InputMethodManager.RESULT_SHOWN);
@@ -39,14 +26,14 @@ public class KeyboardUtils {
     }
 
     /**
-     * Close the soft keyboard
+     * 关闭软键盘
      *
-     * @param editText EditText
-     * @param context  Context
+     * @param context
+     * @param editText
      */
-    public static void closeKeyboard(EditText editText, Context context) {
-        InputMethodManager imm = (InputMethodManager) context
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
+    public static void closeKeyboard(Context context, EditText editText) {
+        editText.clearFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
             imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
         }

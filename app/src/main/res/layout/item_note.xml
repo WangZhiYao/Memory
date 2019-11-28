@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_book_cover"
+        android:layout_width="84dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_book_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/colorText"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_book_cover"
+        app:layout_constraintTop_toTopOf="@id/iv_book_cover"
+        tools:text="我是传奇" />
+
+    <TextView
+        android:id="@+id/tv_note_create_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_book_cover"
+        app:layout_constraintTop_toBottomOf="@id/tv_book_title"
+        tools:text="[美] 理查德·马特森" />
+
+    <TextView
+        android:id="@+id/tv_book_note"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:ellipsize="end"
+        android:lineSpacingMultiplier="1.1"
+        android:maxLines="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_book_cover"
+        app:layout_constraintTop_toBottomOf="@id/tv_note_create_time"
+        tools:text="“它们”很奇怪，一到白天就躲着不敢出来，它们怕大蒜，它们会被尖木棍杀死，它们怕十字架是出了名的。而且，它们无法抵御吸食人血的渴望。\n白天，他在死寂的城市中寻找食物、供给和幸存者。天一黑，他就把自己反锁家中。\n“滚出来吧，内维尔！”此刻，它们正在屋外穿梭徘徊，窃窃私语。它们在等待·····" />
+</androidx.constraintlayout.widget.ConstraintLayout>

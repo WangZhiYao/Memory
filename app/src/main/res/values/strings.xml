@@ -1,29 +1,20 @@
 <resources>
-    <string name="app_name">记忆</string>
+    <string name="app_name">記憶</string>
+    <string name="action_search">搜索</string>
+    <string name="action_scan">扫码</string>
 
-    <string name="sign_in_hint_email">邮箱</string>
-    <string name="sign_in_hint_password">密码</string>
-    <string name="sign_in_hint_register">现在注册</string>
-    <string name="sign_in_hint_reset_password">忘记密码</string>
-    <string name="sign_in_hint_login">登录</string>
+    <string name="activity_main_title">首页</string>
+    <string name="activity_main_press_again_to_exit">再按一次退出</string>
+    <string name="activity_main_exit_now">立即退出</string>
 
-    <string name="sign_up_hint_username">用户名</string>
-    <string name="sign_up_hint_email">邮箱</string>
-    <string name="sign_up_hint_password">密码</string>
-    <string name="sign_up_hint_login">我有帐号</string>
-    <string name="sign_up_hint_register">注册</string>
+    <string name="activity_new_note_title">新建笔记</string>
+    <string name="activity_new_note_identifying">识别中...</string>
+    <string name="activity_new_note_invalid_book">书籍无效</string>
+    <string name="activity_new_note_saving">保存中...</string>
+    <string name="activity_new_note_save_failed">保存失败，请重试</string>
 
-    <string name="reset_password_email">邮箱</string>
-    <string name="reset_password_back">放弃找回</string>
-    <string name="reset_password">找回密码</string>
+    <string name="activity_search_searching">搜索中</string>
+    <string name="activity_search_please_enter_the_correct_keyword_or_isbn">请输入正确的关键词或ISBN</string>
+    <string name="activity_search_scan_result_is_empty">什么都没扫描到，请重试</string>
 
-    <string name="toolbar_main_title">首页</string>
-    <string name="toolbar_shelf_title">收藏</string>
-
-    <string name="project_start_time_hint">开始时间：</string>
-    <string name="project_end_time_hint">完成时间：</string>
-    <string name="project_member_hint">成员：</string>
-    <string name="project_notes_hint">备注：</string>
-
-    <string name="main_empty_project">没有项目记录</string>
 </resources>

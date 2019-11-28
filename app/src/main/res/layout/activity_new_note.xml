@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <space.levan.memory.biz.widgets.CenterTitleToolbar
+        android:id="@+id/ct_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rightMenu="@drawable/ic_menu_check"
+        app:showBack="true"
+        app:title="@string/activity_new_note_title" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_new_note_book_cover"
+        android:layout_width="72dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_background_edit_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ct_toolbar">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_new_book_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_new_note_book_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_new_note_add_book_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="请选择书籍"
+        android:textColor="@color/colorText"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_new_note_book_page_prefix"
+        app:layout_constraintStart_toEndOf="@id/cl_new_note_book_cover"
+        app:layout_constraintTop_toTopOf="@id/cl_new_note_book_cover" />
+
+    <TextView
+        android:id="@+id/tv_new_note_add_book_summary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="5"
+        android:text="选择一本书做笔记"
+        android:textColor="@color/colorTextHint"
+        app:layout_constraintEnd_toStartOf="@+id/tv_new_note_book_page_prefix"
+        app:layout_constraintStart_toEndOf="@id/cl_new_note_book_cover"
+        app:layout_constraintTop_toBottomOf="@id/tv_new_note_add_book_title" />
+
+    <TextView
+        android:id="@+id/tv_new_note_book_page_prefix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="第"
+        android:textColor="@color/colorText"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/et_new_note_book_page"
+        app:layout_constraintEnd_toStartOf="@+id/et_new_note_book_page" />
+
+    <EditText
+        android:id="@+id/et_new_note_book_page"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/shape_background_edit_text"
+        android:digits="1234567890"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:padding="4dp"
+        android:singleLine="true"
+        android:textColor="@color/colorText"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_new_note_book_page_suffix"
+        app:layout_constraintEnd_toStartOf="@+id/tv_new_note_book_page_suffix"
+        tools:layout_editor_absoluteY="64dp" />
+
+    <TextView
+        android:id="@+id/tv_new_note_book_page_suffix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="页"
+        android:textColor="@color/colorText"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/cl_new_note_book_cover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cl_new_note_book_cover" />
+
+    <EditText
+        android:id="@+id/et_new_note_book_quotation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/shape_background_edit_text"
+        android:freezesText="true"
+        android:gravity="start|top"
+        android:hint="输入引用原文"
+        android:inputType="textMultiLine"
+        android:maxLines="5"
+        android:minLines="5"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_new_note_book_cover" />
+
+    <TextView
+        android:id="@+id/tv_new_note_start_ocr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/shape_background_text_view"
+        android:drawableStart="@drawable/ic_new_note_ocr"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="选择或拍摄图片识别原文"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/et_new_note_book_quotation"
+        app:layout_constraintEnd_toEndOf="@id/et_new_note_book_quotation" />
+
+    <EditText
+        android:id="@+id/et_new_note_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/shape_background_edit_text"
+        android:freezesText="true"
+        android:gravity="top"
+        android:hint="输入你的感悟或疑问"
+        android:inputType="textMultiLine"
+        android:maxLines="7"
+        android:minLines="7"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:scrollbars="vertical"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_new_note_book_quotation"
+        tools:text="你总有一天要跟所有的记忆相安无事握手言和，那里面有她也有你，有她的青春也有你的年华。那个人永远活在时间里了，你把她拉不出来，自己也回不去，就这样吧，让她安静的留在那里。她不会发福不会老去不会穿着职业套装高跟鞋不会带着家长里短柴油米醋的气息，她永远年轻永远漂亮穿着鲜艳长裙站在回忆里，对着你笑靥如花。" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
